@@ -419,6 +419,7 @@
     :root {
       --a11y-font-scale: 1;
     }
+
     html {
       font-size: calc(1rem * var(--a11y-font-scale));
     }
@@ -443,6 +444,7 @@
       mix-blend-mode: difference;
       pointer-events: none;
     }
+
     /* Rasmlarni oldindan invert qilish — overlay ikki marta
        invert qiladi va natijada tabiiy rang qaytadi.       */
     body.hc-mode img,
@@ -484,6 +486,7 @@
       text-decoration: underline !important;
       text-decoration-thickness: 2px !important;
     }
+
     /* Exempt the toolbar itself from link highlighting */
     body.highlight-links #a11y-toolbar a,
     body.highlight-links #a11y-toolbar button {
@@ -506,6 +509,7 @@
       pointer-events: none;
       transition: opacity 0.2s ease, transform 0.2s ease;
     }
+
     #a11y-panel.open {
       opacity: 1;
       transform: translateY(0) scale(1);
@@ -522,10 +526,10 @@
 
   <!-- Anti-FOUC: apply saved font scale before first paint -->
   <script>
-    (function () {
-      var s = localStorage.getItem('a11y-font');
-      if (s) document.documentElement.style.setProperty('--a11y-font-scale', s);
-    })();
+      (function () {
+        var s = localStorage.getItem('a11y-font');
+        if (s) document.documentElement.style.setProperty('--a11y-font-scale', s);
+      })();
   </script>
 </head>
 
@@ -560,21 +564,18 @@
 ════════════════════════════════════════════════════ -->
   <!-- Panel only (button is inside navbar below) -->
   <div id="a11y-toolbar" role="region" aria-label="Maxsus imkoniyatlar paneli" style="display:contents">
-    <div
-      id="a11y-panel"
-      role="dialog"
-      aria-modal="false"
-      aria-label="Maxsus imkoniyatlar sozlamalari"
+    <div id="a11y-panel" role="dialog" aria-modal="false" aria-label="Maxsus imkoniyatlar sozlamalari"
       aria-hidden="true"
-      class="fixed top-[68px] right-6 z-[9997] w-72 bg-white border border-slate-200 rounded-2xl shadow-2xl overflow-hidden"
-    >
+      class="fixed top-[68px] right-6 z-[9997] w-72 bg-white border border-slate-200 rounded-2xl shadow-2xl overflow-hidden">
       <!-- Panel header -->
       <div class="flex items-center justify-between px-5 py-4 border-b border-slate-100">
         <div class="flex items-center gap-2.5">
-          <div class="w-8 h-8 bg-brand-50 border border-brand-100 rounded-lg flex items-center justify-center flex-shrink-0">
-            <svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 text-brand-600" aria-hidden="true">
-              <circle cx="12" cy="4.5" r="2.5"/>
-              <path d="M19.5 9.5h-6L12 8l-1.5 1.5h-6a.75.75 0 000 1.5h5l-.75 8.5H11v-4h2v4h1.25l-.75-8.5h5a.75.75 0 000-1.5z"/>
+          <div
+            class="w-8 h-8 bg-brand-50 border border-brand-100 rounded-lg flex items-center justify-center flex-shrink-0">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+              stroke-linejoin="round" class="w-4 h-4 text-brand-600" aria-hidden="true">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+              <circle cx="12" cy="12" r="3" />
             </svg>
           </div>
           <div>
@@ -582,45 +583,36 @@
             <p class="text-[10px] text-slate-400 font-medium">WCAG 2.1 AA</p>
           </div>
         </div>
-        <button
-          id="a11y-close"
-          aria-label="Panelni yopish"
-          class="w-8 h-8 flex items-center justify-center rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition-colors"
-        >
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+        <button id="a11y-close" aria-label="Panelni yopish"
+          class="w-8 h-8 flex items-center justify-center rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition-colors">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"
+            aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
       </div>
 
       <!-- Font size controls -->
       <div class="px-4 pt-4 pb-3.5 border-b border-slate-100">
-        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-[0.1em] mb-2.5" id="a11y-font-group-label">Shrift o'lchami</p>
+        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-[0.1em] mb-2.5" id="a11y-font-group-label">
+          Shrift o'lchami</p>
         <div class="flex items-center gap-2" role="group" aria-labelledby="a11y-font-group-label">
-          <button
-            id="a11y-font-decrease"
-            aria-label="Shriftni kichiklashtirish"
-            class="flex-1 h-11 flex items-center justify-center gap-1.5 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl text-slate-700 text-sm font-semibold transition-all duration-150"
-          >
-            <svg class="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true">
-              <path stroke-linecap="round" d="M5 12h14"/>
+          <button id="a11y-font-decrease" aria-label="Shriftni kichiklashtirish"
+            class="flex-1 h-11 flex items-center justify-center gap-1.5 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl text-slate-700 text-sm font-semibold transition-all duration-150">
+            <svg class="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2.5"
+              viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" d="M5 12h14" />
             </svg>
             Kichik
           </button>
-          <span
-            id="a11y-font-label"
-            class="w-12 text-center text-sm font-bold text-slate-700 flex-shrink-0 tabular-nums"
-            aria-live="polite"
-            aria-atomic="true"
-            aria-label="Joriy shrift o'lchami"
-          >100%</span>
-          <button
-            id="a11y-font-increase"
-            aria-label="Shriftni kattalshtirish"
-            class="flex-1 h-11 flex items-center justify-center gap-1.5 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl text-slate-700 text-sm font-semibold transition-all duration-150"
-          >
-            <svg class="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true">
-              <path stroke-linecap="round" d="M12 5v14M5 12h14"/>
+          <span id="a11y-font-label"
+            class="w-12 text-center text-sm font-bold text-slate-700 flex-shrink-0 tabular-nums" aria-live="polite"
+            aria-atomic="true" aria-label="Joriy shrift o'lchami">100%</span>
+          <button id="a11y-font-increase" aria-label="Shriftni kattalshtirish"
+            class="flex-1 h-11 flex items-center justify-center gap-1.5 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl text-slate-700 text-sm font-semibold transition-all duration-150">
+            <svg class="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2.5"
+              viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" d="M12 5v14M5 12h14" />
             </svg>
             Katta
           </button>
@@ -632,78 +624,74 @@
         <p class="text-[10px] font-bold text-slate-400 uppercase tracking-[0.1em] mb-2.5">Ko'rinish</p>
 
         <!-- High Contrast toggle -->
-        <button
-          id="a11y-contrast"
-          role="switch"
-          aria-checked="false"
+        <button id="a11y-contrast" role="switch" aria-checked="false"
           aria-label="Yuqori kontrastni yoqish yoki o'chirish"
-          class="a11y-opt-btn w-full h-11 flex items-center gap-3 px-3.5 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl transition-all duration-150"
-        >
-          <span class="a11y-opt-icon w-7 h-7 flex items-center justify-center rounded-lg bg-white border border-slate-200 flex-shrink-0 transition-all duration-200">
-            <svg class="w-[15px] h-[15px] text-slate-500 transition-colors duration-200" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M12 3a9 9 0 100 18A9 9 0 0012 3zm0 2v14a7 7 0 010-14z"/>
+          class="a11y-opt-btn w-full h-11 flex items-center gap-3 px-3.5 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl transition-all duration-150">
+          <span
+            class="a11y-opt-icon w-7 h-7 flex items-center justify-center rounded-lg bg-white border border-slate-200 flex-shrink-0 transition-all duration-200">
+            <svg class="w-[15px] h-[15px] text-slate-500 transition-colors duration-200" fill="currentColor"
+              viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 3a9 9 0 100 18A9 9 0 0012 3zm0 2v14a7 7 0 010-14z" />
             </svg>
           </span>
           <span class="text-sm font-medium text-slate-700 text-left flex-1">Yuqori kontrast</span>
-          <span class="a11y-opt-dot w-5 h-5 rounded-full border-2 border-slate-300 flex items-center justify-center flex-shrink-0 transition-all duration-200">
+          <span
+            class="a11y-opt-dot w-5 h-5 rounded-full border-2 border-slate-300 flex items-center justify-center flex-shrink-0 transition-all duration-200">
             <span class="w-2 h-2 rounded-full bg-transparent transition-all duration-200"></span>
           </span>
         </button>
 
         <!-- Monochrome toggle -->
-        <button
-          id="a11y-mono"
-          role="switch"
-          aria-checked="false"
-          aria-label="Oq-qora rejimni yoqish yoki o'chirish"
-          class="a11y-opt-btn w-full h-11 flex items-center gap-3 px-3.5 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl transition-all duration-150"
-        >
-          <span class="a11y-opt-icon w-7 h-7 flex items-center justify-center rounded-lg bg-white border border-slate-200 flex-shrink-0 transition-all duration-200">
-            <svg class="w-[15px] h-[15px] text-slate-500 transition-colors duration-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
-              <circle cx="12" cy="12" r="9"/>
-              <path d="M12 3a9 9 0 010 18z" fill="currentColor" stroke="none"/>
+        <button id="a11y-mono" role="switch" aria-checked="false" aria-label="Oq-qora rejimni yoqish yoki o'chirish"
+          class="a11y-opt-btn w-full h-11 flex items-center gap-3 px-3.5 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl transition-all duration-150">
+          <span
+            class="a11y-opt-icon w-7 h-7 flex items-center justify-center rounded-lg bg-white border border-slate-200 flex-shrink-0 transition-all duration-200">
+            <svg class="w-[15px] h-[15px] text-slate-500 transition-colors duration-200" fill="none"
+              stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="9" />
+              <path d="M12 3a9 9 0 010 18z" fill="currentColor" stroke="none" />
             </svg>
           </span>
           <span class="text-sm font-medium text-slate-700 text-left flex-1">Oq-qora rejim</span>
-          <span class="a11y-opt-dot w-5 h-5 rounded-full border-2 border-slate-300 flex items-center justify-center flex-shrink-0 transition-all duration-200">
+          <span
+            class="a11y-opt-dot w-5 h-5 rounded-full border-2 border-slate-300 flex items-center justify-center flex-shrink-0 transition-all duration-200">
             <span class="w-2 h-2 rounded-full bg-transparent transition-all duration-200"></span>
           </span>
         </button>
 
         <!-- Link highlighting toggle -->
-        <button
-          id="a11y-links"
-          role="switch"
-          aria-checked="false"
+        <button id="a11y-links" role="switch" aria-checked="false"
           aria-label="Havolalarni ajratib ko'rsatishni yoqish yoki o'chirish"
-          class="a11y-opt-btn w-full h-11 flex items-center gap-3 px-3.5 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl transition-all duration-150"
-        >
-          <span class="a11y-opt-icon w-7 h-7 flex items-center justify-center rounded-lg bg-white border border-slate-200 flex-shrink-0 transition-all duration-200">
-            <svg class="w-[15px] h-[15px] text-slate-500 transition-colors duration-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/>
+          class="a11y-opt-btn w-full h-11 flex items-center gap-3 px-3.5 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl transition-all duration-150">
+          <span
+            class="a11y-opt-icon w-7 h-7 flex items-center justify-center rounded-lg bg-white border border-slate-200 flex-shrink-0 transition-all duration-200">
+            <svg class="w-[15px] h-[15px] text-slate-500 transition-colors duration-200" fill="none"
+              stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
             </svg>
           </span>
           <span class="text-sm font-medium text-slate-700 text-left flex-1">Havolalarni ajratish</span>
-          <span class="a11y-opt-dot w-5 h-5 rounded-full border-2 border-slate-300 flex items-center justify-center flex-shrink-0 transition-all duration-200">
+          <span
+            class="a11y-opt-dot w-5 h-5 rounded-full border-2 border-slate-300 flex items-center justify-center flex-shrink-0 transition-all duration-200">
             <span class="w-2 h-2 rounded-full bg-transparent transition-all duration-200"></span>
           </span>
         </button>
 
         <!-- Readable font toggle -->
-        <button
-          id="a11y-readable"
-          role="switch"
-          aria-checked="false"
+        <button id="a11y-readable" role="switch" aria-checked="false"
           aria-label="O'qilishi oson shriftni yoqish yoki o'chirish"
-          class="a11y-opt-btn w-full h-11 flex items-center gap-3 px-3.5 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl transition-all duration-150"
-        >
-          <span class="a11y-opt-icon w-7 h-7 flex items-center justify-center rounded-lg bg-white border border-slate-200 flex-shrink-0 transition-all duration-200">
-            <svg class="w-[15px] h-[15px] text-slate-500 transition-colors duration-200" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M9 4v3h5v12h3V7h5V4H9zm-6 8h3v8h3v-8h3V9H3v3z"/>
+          class="a11y-opt-btn w-full h-11 flex items-center gap-3 px-3.5 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl transition-all duration-150">
+          <span
+            class="a11y-opt-icon w-7 h-7 flex items-center justify-center rounded-lg bg-white border border-slate-200 flex-shrink-0 transition-all duration-200">
+            <svg class="w-[15px] h-[15px] text-slate-500 transition-colors duration-200" fill="currentColor"
+              viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M9 4v3h5v12h3V7h5V4H9zm-6 8h3v8h3v-8h3V9H3v3z" />
             </svg>
           </span>
           <span class="text-sm font-medium text-slate-700 text-left flex-1">O'qilishi oson shrift</span>
-          <span class="a11y-opt-dot w-5 h-5 rounded-full border-2 border-slate-300 flex items-center justify-center flex-shrink-0 transition-all duration-200">
+          <span
+            class="a11y-opt-dot w-5 h-5 rounded-full border-2 border-slate-300 flex items-center justify-center flex-shrink-0 transition-all duration-200">
             <span class="w-2 h-2 rounded-full bg-transparent transition-all duration-200"></span>
           </span>
         </button>
@@ -711,13 +699,12 @@
 
       <!-- Reset footer -->
       <div class="px-4 pb-4 pt-1">
-        <button
-          id="a11y-reset"
-          aria-label="Barcha maxsus imkoniyat sozlamalarini standartga qaytarish"
-          class="w-full h-9 flex items-center justify-center gap-1.5 text-xs font-semibold text-slate-400 hover:text-brand-600 hover:bg-brand-50 rounded-xl transition-all duration-150"
-        >
-          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+        <button id="a11y-reset" aria-label="Barcha maxsus imkoniyat sozlamalarini standartga qaytarish"
+          class="w-full h-9 flex items-center justify-center gap-1.5 text-xs font-semibold text-slate-400 hover:text-brand-600 hover:bg-brand-50 rounded-xl transition-all duration-150">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"
+            aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
           </svg>
           Standartga qaytarish
         </button>
@@ -770,32 +757,11 @@
           <a href="#pricing"
             class="nav-link text-sm font-medium text-slate-600 hover:text-brand-600 transition-colors">Stipendiyalar</a>
 
-          <!-- Filiallar dropdown -->
-          <div class="relative nav-dropdown" id="dd-filial">
-            <button onclick="toggleDropdown('dd-filial')"
-              class="nav-link text-sm font-medium text-slate-600 hover:text-brand-600 transition-colors flex items-center gap-1">
-              Filiallar
-              <svg class="w-3.5 h-3.5 transition-transform" id="dd-filial-chevron" fill="none" stroke="currentColor"
-                stroke-width="2.5" viewBox="0 0 24 24">
-                <path d="M19 9l-7 7-7-7" />
-              </svg>
-            </button>
-            <div id="dd-filial-panel"
-              class="dd-panel absolute top-full left-0 mt-2 w-56 bg-white border border-slate-100 rounded-2xl shadow-lg py-1.5 hidden z-50">
-              <a href="#contact"
-                class="block px-4 py-2.5 text-sm text-slate-600 hover:text-brand-600 hover:bg-brand-50 transition-colors">Toshkent
-                — Lokomotiv</a>
-              <a href="#contact"
-                class="block px-4 py-2.5 text-sm text-slate-600 hover:text-brand-600 hover:bg-brand-50 transition-colors">Toshkent
-                — Ibn Sino</a>
-              <a href="#contact"
-                class="flex items-center justify-between px-4 py-2.5 text-sm text-slate-600 hover:text-brand-600 hover:bg-brand-50 transition-colors">
-                Farg'ona filiali
-                <span
-                  class="text-[10px] font-bold text-brand-600 bg-brand-50 border border-brand-100 px-1.5 py-0.5 rounded-full">Yangi</span>
-              </a>
-            </div>
-          </div>
+          <!-- Farg'ona filiali link -->
+          <a href="https://rakhimovschool.uz/fergana"
+            class="nav-link text-sm font-medium text-slate-600 hover:text-brand-600 transition-colors">
+            Farg'ona filiali
+          </a>
 
           <a href="contact.html"
             class="inline-flex items-center px-4 py-2 border-2 border-slate-200 hover:border-brand-500 text-sm font-semibold text-slate-600 hover:text-brand-600 rounded-xl transition-all">Ota-onalar
@@ -805,17 +771,13 @@
         <!-- CTA -->
         <div class="hidden lg:flex items-center gap-2.5">
           <!-- Accessibility toggle — lan'dan oldin -->
-          <button
-            id="a11y-toggle"
-            aria-expanded="false"
-            aria-controls="a11y-panel"
-            aria-label="Maxsus imkoniyatlar menyusini ochish"
-            title="Maxsus imkoniyatlar"
-            class="w-9 h-9 flex items-center justify-center rounded-xl text-slate-500 hover:text-brand-600 bg-slate-100 hover:bg-brand-50 border border-transparent transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500"
-          >
-            <svg viewBox="0 0 24 24" fill="currentColor" class="w-[18px] h-[18px]" aria-hidden="true">
-              <circle cx="12" cy="5" r="2.2"/>
-              <path d="M17.5 9.5h-11a.65.65 0 000 1.3H10l-.9 7.7H11l.5-5h1l.5 5h1.9L14 10.8h3.5a.65.65 0 000-1.3z"/>
+          <button id="a11y-toggle" aria-expanded="false" aria-controls="a11y-panel"
+            aria-label="Maxsus imkoniyatlar menyusini ochish" title="Maxsus imkoniyatlar"
+            class="w-9 h-9 flex items-center justify-center rounded-xl text-slate-500 hover:text-brand-600 bg-slate-100 hover:bg-brand-50 border border-transparent transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" class="w-[18px] h-[18px]" aria-hidden="true">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+              <circle cx="12" cy="12" r="3" />
             </svg>
           </button>
 
@@ -830,9 +792,11 @@
               </svg>
             </button>
             <div id="lang-panel"
-              class="dd-panel hidden absolute top-full right-0 mt-2 w-32 bg-white border border-slate-200 rounded-xl shadow-lg shadow-slate-900/10 overflow-hidden z-50">
+              class="dd-panel hidden absolute top-full right-0 mt-2 w-36 bg-white border border-slate-200 rounded-xl shadow-lg shadow-slate-900/10 overflow-hidden z-50">
               <button onclick="setLang('uz')"
                 class="lang-option w-full text-left px-4 py-2.5 text-sm font-medium text-brand-600 bg-brand-50 hover:bg-brand-50 transition-colors">O'zbekcha</button>
+              <button onclick="setLang('uz-cyrl')"
+                class="lang-option w-full text-left px-4 py-2.5 text-sm font-medium text-slate-500 hover:bg-slate-50 hover:text-slate-700 transition-colors">Ўзбекча</button>
               <button onclick="setLang('ru')"
                 class="lang-option w-full text-left px-4 py-2.5 text-sm font-medium text-slate-500 hover:bg-slate-50 hover:text-slate-700 transition-colors">Русский</button>
               <button onclick="setLang('en')"
@@ -844,9 +808,11 @@
           <a href="tel:+998781130005"
             class="group relative inline-flex items-center h-9 w-9 hover:w-[148px] overflow-hidden bg-slate-100 hover:bg-brand-500 rounded-xl transition-all duration-300 ease-in-out text-slate-500 hover:text-white">
             <span class="flex-shrink-0 w-9 h-full flex items-center justify-center">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4">
                 <path
-                  d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.02 1.18a2 2 0 012-2.18h3a2 2 0 012 1.72c.13 1 .36 1.98.7 2.91a2 2 0 01-.45 2.11L6.91 6.5a16 16 0 006.59 6.59l.77-.77a2 2 0 012.11-.45c.93.34 1.91.57 2.91.7A2 2 0 0122 16.92z" />
+                  d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.79a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.887.339 1.83.573 2.79.7a2 2 0 0 1 1.73 2.01z">
+                </path>
               </svg>
             </span>
             <span
@@ -900,26 +866,11 @@
 
       <a href="#pricing" class="block py-2.5 text-sm font-medium text-slate-700 hover:text-brand-600">Stipendiyalar</a>
 
-      <!-- Mobile: Filiallar -->
-      <div>
-        <button onclick="toggleMobileDD('mob-filial')"
-          class="w-full flex items-center justify-between py-2.5 text-sm font-medium text-slate-700 hover:text-brand-600 transition-colors">
-          Filiallar
-          <svg id="mob-filial-icon" class="w-4 h-4 text-slate-400 transition-transform" fill="none"
-            stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path d="M19 9l-7 7-7-7" />
-          </svg>
-        </button>
-        <div id="mob-filial" class="hidden pl-4 space-y-0.5 pb-1">
-          <a href="#contact" class="block py-2 text-sm text-slate-500 hover:text-brand-600">Toshkent — Lokomotiv</a>
-          <a href="#contact" class="block py-2 text-sm text-slate-500 hover:text-brand-600">Toshkent — Ibn Sino</a>
-          <a href="#contact" class="flex items-center gap-2 py-2 text-sm text-slate-500 hover:text-brand-600">
-            Farg'ona filiali
-            <span
-              class="text-[10px] font-bold text-brand-600 bg-brand-50 border border-brand-100 px-1.5 py-0.5 rounded-full">Yangi</span>
-          </a>
-        </div>
-      </div>
+      <!-- Mobile: Farg'ona filiali -->
+      <a href="contact.html#branches"
+        class="block py-2.5 text-sm font-medium text-slate-700 hover:text-brand-600 transition-colors">
+        Farg'ona filiali
+      </a>
 
       <a href="contact.html" class="block py-2.5 text-sm font-medium text-slate-700 hover:text-brand-600">Ota-onalar
         uchun</a>
@@ -959,7 +910,7 @@
           <div
             class="badge-pop inline-flex items-center gap-2 px-4 py-1.5 bg-brand-50 border border-brand-100 rounded-full">
             <div class="w-2 h-2 bg-brand-500 rounded-full animate-pulse"></div>
-            <span class="text-xs font-semibold text-brand-700 tracking-wide">Yangi qabul 2025–2026</span>
+            <span class="text-xs font-semibold text-brand-700 tracking-wide">Yangi qabul 2026–2027</span>
           </div>
 
           <!-- Sarlavha -->
@@ -1397,8 +1348,8 @@
 
         <!-- Qadam 2 -->
         <div
-          class="relative reveal-scale bg-white border border-brand-200 rounded-2xl p-8 text-center shadow-md shadow-brand-500/10"
-          style="transition-delay:120ms">
+          class="relative reveal-scale bg-white border border-slate-200 rounded-2xl p-8 text-center hover:border-brand-200 hover:shadow-md transition-all"
+          style="transition-delay:0ms">
           <div
             class="w-14 h-14 bg-brand-500 rounded-2xl flex items-center justify-center mx-auto mb-5 shadow-md shadow-brand-500/25">
             <span class="text-xl font-extrabold text-white">02</span>
@@ -2063,9 +2014,11 @@
         </a>
         <a href="tel:+998781130005"
           class="inline-flex items-center gap-2.5 px-8 py-3.5 bg-white/10 hover:bg-white/20 border border-white/20 text-white text-sm font-semibold rounded-xl transition-colors">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4">
             <path
-              d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.02 1.18a2 2 0 012-2.18h3a2 2 0 012 1.72c.13 1 .36 1.98.7 2.91a2 2 0 01-.45 2.11L6.91 6.5a16 16 0 006.59 6.59l.77-.77a2 2 0 012.11-.45c.93.34 1.91.57 2.91.7A2 2 0 0122 16.92z" />
+              d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.79a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.887.339 1.83.573 2.79.7a2 2 0 0 1 1.73 2.01z">
+            </path>
           </svg>
           Qo'ng'iroq qilish
         </a>
@@ -2097,10 +2050,11 @@
 
             <div class="flex items-start gap-4">
               <div class="w-11 h-11 bg-brand-50 rounded-xl flex items-center justify-center flex-shrink-0">
-                <svg class="w-5 h-5 text-brand-600" fill="none" stroke="currentColor" stroke-width="2"
-                  viewBox="0 0 24 24">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4">
                   <path
-                    d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.02 1.18a2 2 0 012-2.18h3a2 2 0 012 1.72c.13 1 .36 1.98.7 2.91a2 2 0 01-.45 2.11L6.91 6.5a16 16 0 006.59 6.59l.77-.77a2 2 0 012.11-.45c.93.34 1.91.57 2.91.7A2 2 0 0122 16.92z" />
+                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.79a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.887.339 1.83.573 2.79.7a2 2 0 0 1 1.73 2.01z">
+                  </path>
                 </svg>
               </div>
               <div>
@@ -2618,9 +2572,11 @@
             <div class="flex items-center justify-between pt-3.5 border-t border-slate-100">
               <a href="tel:+998781130005"
                 class="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-600 hover:text-brand-700 transition-colors">
-                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4">
                   <path
-                    d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.02 1.18a2 2 0 012-2.18h3a2 2 0 012 1.72c.13 1 .36 1.98.7 2.91a2 2 0 01-.45 2.11L6.91 6.5a16 16 0 006.59 6.59l.77-.77a2 2 0 012.11-.45c.93.34 1.91.57 2.91.7A2 2 0 0122 16.92z" />
+                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.79a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.887.339 1.83.573 2.79.7a2 2 0 0 1 1.73 2.01z">
+                  </path>
                 </svg>
                 78 113 0005
               </a>
@@ -2700,9 +2656,11 @@
             <div class="flex items-center justify-between pt-3.5 border-t border-slate-100">
               <a href="tel:+998781130005"
                 class="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-600 hover:text-brand-700 transition-colors">
-                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4">
                   <path
-                    d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.02 1.18a2 2 0 012-2.18h3a2 2 0 012 1.72c.13 1 .36 1.98.7 2.91a2 2 0 01-.45 2.11L6.91 6.5a16 16 0 006.59 6.59l.77-.77a2 2 0 012.11-.45c.93.34 1.91.57 2.91.7A2 2 0 0122 16.92z" />
+                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.79a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.887.339 1.83.573 2.79.7a2 2 0 0 1 1.73 2.01z">
+                  </path>
                 </svg>
                 78 113 0005
               </a>
@@ -2788,10 +2746,11 @@
           <p class="text-sm font-semibold text-white mb-4">Aloqa</p>
           <ul class="space-y-3.5">
             <li class="flex items-start gap-2.5">
-              <svg class="w-4 h-4 text-brand-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor"
-                stroke-width="2" viewBox="0 0 24 24">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4">
                 <path
-                  d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.02 1.18a2 2 0 012-2.18h3a2 2 0 012 1.72c.13 1 .36 1.98.7 2.91a2 2 0 01-.45 2.11L6.91 6.5a16 16 0 006.59 6.59l.77-.77a2 2 0 012.11-.45c.93.34 1.91.57 2.91.7A2 2 0 0122 16.92z" />
+                  d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.79a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.887.339 1.83.573 2.79.7a2 2 0 0 1 1.73 2.01z">
+                </path>
               </svg>
               <a href="tel:+998781130005" class="text-sm hover:text-brand-400 transition-colors">+998 78 113 0005</a>
             </li>
@@ -2817,7 +2776,7 @@
                 stroke-width="2" viewBox="0 0 24 24">
                 <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
-              <span class="text-sm leading-snug">Du–Shan: 8:00–18:00<br>Shanba: 9:00–14:00</span>
+              <span class="text-sm leading-snug">Du–Shan: 8:00–18:00</span>
             </li>
           </ul>
         </div>
@@ -2974,11 +2933,11 @@
 
     // ── Lang Switcher ─────────────────────────────────────────────
     function setLang(lang) {
-      const labels = { uz: 'Uz', ru: 'Ru', en: 'EN' };
+      const labels = { uz: 'Uz', 'uz-cyrl': 'Ўз', ru: 'Ru', en: 'EN' };
       const current = document.getElementById('lang-current');
       if (current) current.textContent = labels[lang] || lang;
       document.querySelectorAll('.lang-option').forEach((btn, i) => {
-        const isActive = ['uz', 'ru', 'en'][i] === lang;
+        const isActive = ['uz', 'uz-cyrl', 'ru', 'en'][i] === lang;
         btn.classList.toggle('text-brand-600', isActive);
         btn.classList.toggle('bg-brand-50', isActive);
         btn.classList.toggle('text-slate-500', !isActive);
@@ -3054,31 +3013,31 @@
     // ── Accessibility Toolbar ─────────────────────────────────────
     (function () {
       const FONT_STEP = 0.1;
-      const FONT_MIN  = 0.8;   // 80%
-      const FONT_MAX  = 1.5;   // 150%
+      const FONT_MIN = 0.8;   // 80%
+      const FONT_MAX = 1.5;   // 150%
 
       // Restore state from localStorage
       const state = {
         fontScale: parseFloat(localStorage.getItem('a11y-font') || '1'),
-        contrast:  localStorage.getItem('a11y-contrast') === '1',
-        mono:      localStorage.getItem('a11y-mono')     === '1',
-        links:     localStorage.getItem('a11y-links')    === '1',
-        readable:  localStorage.getItem('a11y-readable') === '1',
+        contrast: localStorage.getItem('a11y-contrast') === '1',
+        mono: localStorage.getItem('a11y-mono') === '1',
+        links: localStorage.getItem('a11y-links') === '1',
+        readable: localStorage.getItem('a11y-readable') === '1',
         panelOpen: false,
       };
 
       // DOM refs
-      const toggleBtn  = document.getElementById('a11y-toggle');
-      const panel      = document.getElementById('a11y-panel');
-      const closeBtn   = document.getElementById('a11y-close');
+      const toggleBtn = document.getElementById('a11y-toggle');
+      const panel = document.getElementById('a11y-panel');
+      const closeBtn = document.getElementById('a11y-close');
       const fontDecBtn = document.getElementById('a11y-font-decrease');
       const fontIncBtn = document.getElementById('a11y-font-increase');
-      const fontLabel  = document.getElementById('a11y-font-label');
-      const contrastBtn  = document.getElementById('a11y-contrast');
-      const monoBtn      = document.getElementById('a11y-mono');
-      const linksBtn     = document.getElementById('a11y-links');
-      const readableBtn  = document.getElementById('a11y-readable');
-      const resetBtn     = document.getElementById('a11y-reset');
+      const fontLabel = document.getElementById('a11y-font-label');
+      const contrastBtn = document.getElementById('a11y-contrast');
+      const monoBtn = document.getElementById('a11y-mono');
+      const linksBtn = document.getElementById('a11y-links');
+      const readableBtn = document.getElementById('a11y-readable');
+      const resetBtn = document.getElementById('a11y-reset');
 
       // ── Helpers ──────────────────────────────────────────────────
       function setBodyClass(cls, on) {
@@ -3089,23 +3048,23 @@
       // (avoids dependency on dynamically-generated Tailwind classes)
       function syncBtn(btn, active) {
         btn.setAttribute('aria-checked', active ? 'true' : 'false');
-        const icon     = btn.querySelector('.a11y-opt-icon');
+        const icon = btn.querySelector('.a11y-opt-icon');
         const dotOuter = btn.querySelector('.a11y-opt-dot');
         const dotInner = dotOuter && dotOuter.querySelector('span');
-        const svg      = icon && icon.querySelector('svg');
+        const svg = icon && icon.querySelector('svg');
 
         if (active) {
-          btn.style.borderColor     = '#07CA68';
+          btn.style.borderColor = '#07CA68';
           btn.style.backgroundColor = '#f0fdf4';
-          if (icon)     { icon.style.backgroundColor = '#07CA68'; icon.style.borderColor = 'transparent'; }
-          if (svg)      { svg.style.color = '#fff'; }
+          if (icon) { icon.style.backgroundColor = '#07CA68'; icon.style.borderColor = 'transparent'; }
+          if (svg) { svg.style.color = '#fff'; }
           if (dotOuter) { dotOuter.style.borderColor = '#07CA68'; }
           if (dotInner) { dotInner.style.backgroundColor = '#07CA68'; }
         } else {
-          btn.style.borderColor     = '';
+          btn.style.borderColor = '';
           btn.style.backgroundColor = '';
-          if (icon)     { icon.style.backgroundColor = ''; icon.style.borderColor = ''; }
-          if (svg)      { svg.style.color = ''; }
+          if (icon) { icon.style.backgroundColor = ''; icon.style.borderColor = ''; }
+          if (svg) { svg.style.color = ''; }
           if (dotOuter) { dotOuter.style.borderColor = ''; }
           if (dotInner) { dotInner.style.backgroundColor = ''; }
         }
@@ -3116,15 +3075,15 @@
         document.documentElement.style.setProperty('--a11y-font-scale', state.fontScale);
         fontLabel.textContent = Math.round(state.fontScale * 100) + '%';
         // Disable buttons at limits
-        fontDecBtn.disabled      = state.fontScale <= FONT_MIN;
-        fontIncBtn.disabled      = state.fontScale >= FONT_MAX;
+        fontDecBtn.disabled = state.fontScale <= FONT_MIN;
+        fontIncBtn.disabled = state.fontScale >= FONT_MAX;
         fontDecBtn.style.opacity = state.fontScale <= FONT_MIN ? '0.38' : '';
         fontIncBtn.style.opacity = state.fontScale >= FONT_MAX ? '0.38' : '';
       }
 
       function changeFont(delta) {
-        const next       = Math.round((state.fontScale + delta) * 10) / 10;
-        state.fontScale  = Math.min(FONT_MAX, Math.max(FONT_MIN, next));
+        const next = Math.round((state.fontScale + delta) * 10) / 10;
+        state.fontScale = Math.min(FONT_MAX, Math.max(FONT_MIN, next));
         applyFontScale();
         localStorage.setItem('a11y-font', state.fontScale);
       }
@@ -3140,23 +3099,23 @@
       // ── Apply full state (used on init and reset) ─────────────────
       function applyAll() {
         applyFontScale();
-        setBodyClass('hc-mode',        state.contrast);
-        setBodyClass('mono-mode',      state.mono);
+        setBodyClass('hc-mode', state.contrast);
+        setBodyClass('mono-mode', state.mono);
         setBodyClass('highlight-links', state.links);
-        setBodyClass('readable-font',  state.readable);
+        setBodyClass('readable-font', state.readable);
         syncBtn(contrastBtn, state.contrast);
-        syncBtn(monoBtn,     state.mono);
-        syncBtn(linksBtn,    state.links);
+        syncBtn(monoBtn, state.mono);
+        syncBtn(linksBtn, state.links);
         syncBtn(readableBtn, state.readable);
       }
 
       // ── Reset all ────────────────────────────────────────────────
       function resetAll() {
         state.fontScale = 1;
-        state.contrast  = false;
-        state.mono      = false;
-        state.links     = false;
-        state.readable  = false;
+        state.contrast = false;
+        state.mono = false;
+        state.links = false;
+        state.readable = false;
         ['a11y-font', 'a11y-contrast', 'a11y-mono', 'a11y-links', 'a11y-readable']
           .forEach(k => localStorage.removeItem(k));
         applyAll();
@@ -3187,7 +3146,7 @@
           'button:not([disabled]), [href], input, select, [tabindex]:not([tabindex="-1"])'
         );
         const first = focusable[0];
-        const last  = focusable[focusable.length - 1];
+        const last = focusable[focusable.length - 1];
 
         if (e.key === 'Tab') {
           if (e.shiftKey && document.activeElement === first) {
@@ -3201,9 +3160,9 @@
         if (e.key === 'Escape') closePanel(true);
       });
 
-      // Close when clicking outside the toolbar
+      // Close when clicking outside the toolbar (toggle button is excluded too)
       document.addEventListener('click', function (e) {
-        if (state.panelOpen && !e.target.closest('#a11y-toolbar')) closePanel(false);
+        if (state.panelOpen && !e.target.closest('#a11y-toolbar') && !e.target.closest('#a11y-toggle')) closePanel(false);
       });
 
       // ── Wire up events ───────────────────────────────────────────
@@ -3215,11 +3174,11 @@
       fontDecBtn.addEventListener('click', function () { changeFont(-FONT_STEP); });
       fontIncBtn.addEventListener('click', function () { changeFont(FONT_STEP); });
 
-      contrastBtn.addEventListener('click',  function () { toggleFeature('contrast',  'hc-mode',         contrastBtn,  'a11y-contrast'); });
-      monoBtn.addEventListener('click',      function () { toggleFeature('mono',      'mono-mode',       monoBtn,      'a11y-mono'); });
-      linksBtn.addEventListener('click',     function () { toggleFeature('links',     'highlight-links', linksBtn,     'a11y-links'); });
-      readableBtn.addEventListener('click',  function () { toggleFeature('readable',  'readable-font',   readableBtn,  'a11y-readable'); });
-      resetBtn.addEventListener('click',     resetAll);
+      contrastBtn.addEventListener('click', function () { toggleFeature('contrast', 'hc-mode', contrastBtn, 'a11y-contrast'); });
+      monoBtn.addEventListener('click', function () { toggleFeature('mono', 'mono-mode', monoBtn, 'a11y-mono'); });
+      linksBtn.addEventListener('click', function () { toggleFeature('links', 'highlight-links', linksBtn, 'a11y-links'); });
+      readableBtn.addEventListener('click', function () { toggleFeature('readable', 'readable-font', readableBtn, 'a11y-readable'); });
+      resetBtn.addEventListener('click', resetAll);
 
       // ── Initialize ───────────────────────────────────────────────
       applyAll();
