@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bog'lanish — Rahimov School</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            heading: ['HelveticaNeueCyr', 'Helvetica Neue', 'Arial', 'sans-serif'],
+            body: ['HelveticaNeueCyr', 'Helvetica Neue', 'Arial', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#f0fdf4', 100: '#dcfce7', 400: '#4ade80',
+              500: '#07CA68', 600: '#05b35b', 700: '#04924a',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'HelveticaNeueCyr', 'Helvetica Neue', Arial, sans-serif;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-family: 'HelveticaNeueCyr', 'Helvetica Neue', Arial, sans-serif;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+    }
+
+    .nav-link {
+      position: relative;
+      transition: color 0.2s;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #07CA68;
+      transition: width 0.25s;
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .nav-link:hover {
+      color: #07CA68;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-32px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal-left.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(32px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal-right.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    .reveal-scale {
+      opacity: 0;
+      transform: scale(0.94) translateY(16px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+
+    .reveal-scale.visible {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+    /* ── Accessibility Toolbar (WCAG 2.1) ─────────────────── */
+    :root { --a11y-font-scale: 1; }
+    html { font-size: calc(1rem * var(--a11y-font-scale)); }
+    *:focus-visible { outline: 3px solid #07CA68 !important; outline-offset: 3px !important; border-radius: 4px; }
+    body.hc-mode::after { content:''; position:fixed; inset:0; z-index:9990; background:white; mix-blend-mode:difference; pointer-events:none; }
+    body.hc-mode img, body.hc-mode video, body.hc-mode canvas, body.hc-mode iframe { filter:invert(1); }
+    body.mono-mode::after { content:''; position:fixed; inset:0; z-index:9990; pointer-events:none; backdrop-filter:grayscale(1); -webkit-backdrop-filter:grayscale(1); }
+    body.hc-mode.mono-mode::after { content:''; position:fixed; inset:0; z-index:9990; background:white; mix-blend-mode:difference; backdrop-filter:grayscale(1); -webkit-backdrop-filter:grayscale(1); pointer-events:none; }
+    body.highlight-links a, body.highlight-links button { outline: 2px solid #07CA68 !important; outline-offset: 2px !important; text-decoration: underline !important; text-decoration-thickness: 2px !important; }
+    body.highlight-links #a11y-toolbar a, body.highlight-links #a11y-toolbar button { outline: none !important; text-decoration: none !important; }
+    body.readable-font, body.readable-font * { font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif !important; letter-spacing: 0.025em !important; line-height: 1.78 !important; }
+    #a11y-panel { opacity:0; transform:translateY(10px) scale(0.97); pointer-events:none; transition:opacity 0.2s ease,transform 0.2s ease; }
+    #a11y-panel.open { opacity:1; transform:translateY(0) scale(1); pointer-events:auto; }
+    #a11y-toggle[aria-expanded="true"] { background-color:#f0fdf4; color:#05b35b; border-color:#bbf7d0; }
+  </style>
+  <script>(function(){var s=localStorage.getItem('a11y-font');if(s)document.documentElement.style.setProperty('--a11y-font-scale',s);})();</script>
+</head>
+
+<body class="bg-white text-slate-900 antialiased">
+
+  <!-- ACCESSIBILITY TOOLBAR -->
+  <div id="a11y-toolbar" role="region" aria-label="Maxsus imkoniyatlar paneli">
+    <div id="a11y-panel" role="dialog" aria-modal="false" aria-label="Maxsus imkoniyatlar sozlamalari" aria-hidden="true" class="fixed top-[68px] right-6 z-[9997] w-72 bg-white border border-slate-200 rounded-2xl shadow-2xl overflow-hidden">
+      <div class="flex items-center justify-between px-5 py-4 border-b border-slate-100">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 bg-brand-50 border border-brand-100 rounded-lg flex items-center justify-center flex-shrink-0">
+            <svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 text-brand-600" aria-hidden="true"><circle cx="12" cy="4.5" r="2.5"/><path d="M19.5 9.5h-6L12 8l-1.5 1.5h-6a.75.75 0 000 1.5h5l-.75 8.5H11v-4h2v4h1.25l-.75-8.5h5a.75.75 0 000-1.5z"/></svg>
+          </div>
+          <div><p class="text-sm font-semibold text-slate-800 leading-tight">Maxsus imkoniyatlar</p><p class="text-[10px] text-slate-400 font-medium">WCAG 2.1 AA</p></div>
+        </div>
+        <button id="a11y-close" aria-label="Panelni yopish" class="w-8 h-8 flex items-center justify-center rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition-colors">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="px-4 pt-4 pb-3.5 border-b border-slate-100">
+        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-[0.1em] mb-2.5" id="a11y-font-group-label">Shrift o'lchami</p>
+        <div class="flex items-center gap-2" role="group" aria-labelledby="a11y-font-group-label">
+          <button id="a11y-font-decrease" aria-label="Shriftni kichiklashtirish" class="flex-1 h-11 flex items-center justify-center gap-1.5 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl text-slate-700 text-sm font-semibold transition-all duration-150">
+            <svg class="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" d="M5 12h14"/></svg>Kichik
+          </button>
+          <span id="a11y-font-label" class="w-12 text-center text-sm font-bold text-slate-700 flex-shrink-0 tabular-nums" aria-live="polite" aria-atomic="true" aria-label="Joriy shrift o'lchami">100%</span>
+          <button id="a11y-font-increase" aria-label="Shriftni kattalshtirish" class="flex-1 h-11 flex items-center justify-center gap-1.5 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl text-slate-700 text-sm font-semibold transition-all duration-150">
+            <svg class="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" d="M12 5v14M5 12h14"/></svg>Katta
+          </button>
+        </div>
+      </div>
+      <div class="px-4 py-3.5 space-y-2">
+        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-[0.1em] mb-2.5">Ko'rinish</p>
+        <button id="a11y-contrast" role="switch" aria-checked="false" aria-label="Yuqori kontrastni yoqish yoki o'chirish" class="a11y-opt-btn w-full h-11 flex items-center gap-3 px-3.5 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl transition-all duration-150">
+          <span class="a11y-opt-icon w-7 h-7 flex items-center justify-center rounded-lg bg-white border border-slate-200 flex-shrink-0 transition-all duration-200"><svg class="w-[15px] h-[15px] text-slate-500 transition-colors duration-200" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 100 18A9 9 0 0012 3zm0 2v14a7 7 0 010-14z"/></svg></span>
+          <span class="text-sm font-medium text-slate-700 text-left flex-1">Yuqori kontrast</span>
+          <span class="a11y-opt-dot w-5 h-5 rounded-full border-2 border-slate-300 flex items-center justify-center flex-shrink-0 transition-all duration-200"><span class="w-2 h-2 rounded-full bg-transparent transition-all duration-200"></span></span>
+        </button>
+        <button id="a11y-mono" role="switch" aria-checked="false" aria-label="Oq-qora rejimni yoqish yoki o'chirish" class="a11y-opt-btn w-full h-11 flex items-center gap-3 px-3.5 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl transition-all duration-150">
+          <span class="a11y-opt-icon w-7 h-7 flex items-center justify-center rounded-lg bg-white border border-slate-200 flex-shrink-0 transition-all duration-200"><svg class="w-[15px] h-[15px] text-slate-500 transition-colors duration-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 010 18z" fill="currentColor" stroke="none"/></svg></span>
+          <span class="text-sm font-medium text-slate-700 text-left flex-1">Oq-qora rejim</span>
+          <span class="a11y-opt-dot w-5 h-5 rounded-full border-2 border-slate-300 flex items-center justify-center flex-shrink-0 transition-all duration-200"><span class="w-2 h-2 rounded-full bg-transparent transition-all duration-200"></span></span>
+        </button>
+        <button id="a11y-links" role="switch" aria-checked="false" aria-label="Havolalarni ajratib ko'rsatishni yoqish yoki o'chirish" class="a11y-opt-btn w-full h-11 flex items-center gap-3 px-3.5 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl transition-all duration-150">
+          <span class="a11y-opt-icon w-7 h-7 flex items-center justify-center rounded-lg bg-white border border-slate-200 flex-shrink-0 transition-all duration-200"><svg class="w-[15px] h-[15px] text-slate-500 transition-colors duration-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/></svg></span>
+          <span class="text-sm font-medium text-slate-700 text-left flex-1">Havolalarni ajratish</span>
+          <span class="a11y-opt-dot w-5 h-5 rounded-full border-2 border-slate-300 flex items-center justify-center flex-shrink-0 transition-all duration-200"><span class="w-2 h-2 rounded-full bg-transparent transition-all duration-200"></span></span>
+        </button>
+        <button id="a11y-readable" role="switch" aria-checked="false" aria-label="O'qilishi oson shriftni yoqish yoki o'chirish" class="a11y-opt-btn w-full h-11 flex items-center gap-3 px-3.5 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl transition-all duration-150">
+          <span class="a11y-opt-icon w-7 h-7 flex items-center justify-center rounded-lg bg-white border border-slate-200 flex-shrink-0 transition-all duration-200"><svg class="w-[15px] h-[15px] text-slate-500 transition-colors duration-200" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4v3h5v12h3V7h5V4H9zm-6 8h3v8h3v-8h3V9H3v3z"/></svg></span>
+          <span class="text-sm font-medium text-slate-700 text-left flex-1">O'qilishi oson shrift</span>
+          <span class="a11y-opt-dot w-5 h-5 rounded-full border-2 border-slate-300 flex items-center justify-center flex-shrink-0 transition-all duration-200"><span class="w-2 h-2 rounded-full bg-transparent transition-all duration-200"></span></span>
+        </button>
+      </div>
+      <div class="px-4 pb-4 pt-1">
+        <button id="a11y-reset" aria-label="Barcha maxsus imkoniyat sozlamalarini standartga qaytarish" class="w-full h-9 flex items-center justify-center gap-1.5 text-xs font-semibold text-slate-400 hover:text-brand-600 hover:bg-brand-50 rounded-xl transition-all duration-150">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+          Standartga qaytarish
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header id="navbar"
+    class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white/95 backdrop-blur-md border-b border-slate-100 shadow-sm">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="flex items-center justify-between h-18 py-4">
+        <a href="index.html" class="flex-shrink-0">
+          <img src="./assets/img/noroot.png" alt="Rahimov School Logo" class="h-10 w-auto object-contain">
+        </a>
+        <nav class="hidden lg:flex items-center gap-6">
+          <a href="index.html#results"
+            class="nav-link text-sm font-medium text-slate-600 hover:text-brand-600 transition-colors">Nima uchun
+            biz?</a>
+          <div class="relative nav-dropdown" id="dd-maktab">
+            <button onclick="toggleDropdown('dd-maktab')"
+              class="nav-link text-sm font-medium text-slate-600 hover:text-brand-600 transition-colors flex items-center gap-1">
+              Maktab
+              <svg class="w-3.5 h-3.5 transition-transform" id="dd-maktab-chevron" fill="none" stroke="currentColor"
+                stroke-width="2.5" viewBox="0 0 24 24">
+                <path d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div id="dd-maktab-panel"
+              class="dd-panel absolute top-full left-0 mt-2 w-48 bg-white border border-slate-100 rounded-2xl shadow-lg py-1.5 hidden z-50">
+              <a href="index.html#about"
+                class="block px-4 py-2.5 text-sm text-slate-600 hover:text-brand-600 hover:bg-brand-50 transition-colors">Maktab
+                haqida</a>
+              <a href="team.html"
+                class="block px-4 py-2.5 text-sm text-slate-600 hover:text-brand-600 hover:bg-brand-50 transition-colors">Jamoa</a>
+              <a href="articles.html"
+                class="block px-4 py-2.5 text-sm text-slate-600 hover:text-brand-600 hover:bg-brand-50 transition-colors">Maqolalar</a>
+            </div>
+          </div>
+          <a href="index.html#pricing"
+            class="nav-link text-sm font-medium text-slate-600 hover:text-brand-600 transition-colors">Stipendiyalar</a>
+          <div class="relative nav-dropdown" id="dd-filial">
+            <button onclick="toggleDropdown('dd-filial')"
+              class="nav-link text-sm font-medium text-slate-600 hover:text-brand-600 transition-colors flex items-center gap-1">
+              Filiallar
+              <svg class="w-3.5 h-3.5 transition-transform" id="dd-filial-chevron" fill="none" stroke="currentColor"
+                stroke-width="2.5" viewBox="0 0 24 24">
+                <path d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div id="dd-filial-panel"
+              class="dd-panel absolute top-full left-0 mt-2 w-56 bg-white border border-slate-100 rounded-2xl shadow-lg py-1.5 hidden z-50">
+              <a href="#filial1"
+                class="block px-4 py-2.5 text-sm text-slate-600 hover:text-brand-600 hover:bg-brand-50 transition-colors">Toshkent
+                — Lokomotiv</a>
+              <a href="#filial2"
+                class="block px-4 py-2.5 text-sm text-slate-600 hover:text-brand-600 hover:bg-brand-50 transition-colors">Toshkent
+                — Ibn Sino</a>
+              <a href="#filial3"
+                class="flex items-center justify-between px-4 py-2.5 text-sm text-slate-600 hover:text-brand-600 hover:bg-brand-50 transition-colors">Farg'ona
+                filiali <span
+                  class="text-[10px] font-bold text-brand-600 bg-brand-50 border border-brand-100 px-1.5 py-0.5 rounded-full">Yangi</span></a>
+            </div>
+          </div>
+          <a href="contact.html"
+            class="inline-flex items-center px-4 py-2 border-2 border-brand-500 text-sm font-semibold text-brand-600 rounded-xl transition-all">Ota-onalar
+            uchun</a>
+        </nav>
+        <div class="hidden lg:flex items-center gap-2.5">
+          <button id="a11y-toggle" aria-expanded="false" aria-controls="a11y-panel" aria-label="Maxsus imkoniyatlar menyusini ochish" title="Maxsus imkoniyatlar" class="w-9 h-9 flex items-center justify-center rounded-xl text-slate-500 hover:text-brand-600 bg-slate-100 hover:bg-brand-50 border border-transparent transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500">
+            <svg viewBox="0 0 24 24" fill="currentColor" class="w-[18px] h-[18px]" aria-hidden="true"><circle cx="12" cy="5" r="2.2"/><path d="M17.5 9.5h-11a.65.65 0 000 1.3H10l-.9 7.7H11l.5-5h1l.5 5h1.9L14 10.8h3.5a.65.65 0 000-1.3z"/></svg>
+          </button>
+          <div class="relative nav-dropdown">
+            <button onclick="toggleDropdown('lang')"
+              class="flex items-center gap-1.5 px-3 py-2 text-sm font-semibold text-slate-600 hover:text-brand-600 bg-slate-100 hover:bg-brand-50 rounded-xl transition-all">
+              <span id="lang-current">Uz</span>
+              <svg id="lang-chevron" class="w-3.5 h-3.5 text-slate-400 transition-transform" fill="none"
+                stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <path d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div id="lang-panel"
+              class="dd-panel hidden absolute top-full right-0 mt-2 w-32 bg-white border border-slate-200 rounded-xl shadow-lg overflow-hidden z-50">
+              <button onclick="setLang('uz')"
+                class="lang-option w-full text-left px-4 py-2.5 text-sm font-medium text-brand-600 bg-brand-50 transition-colors">O'zbekcha</button>
+              <button onclick="setLang('ru')"
+                class="lang-option w-full text-left px-4 py-2.5 text-sm font-medium text-slate-500 hover:bg-slate-50 hover:text-slate-700 transition-colors">Русский</button>
+              <button onclick="setLang('en')"
+                class="lang-option w-full text-left px-4 py-2.5 text-sm font-medium text-slate-500 hover:bg-slate-50 hover:text-slate-700 transition-colors">English</button>
+            </div>
+          </div>
+          <div class="relative group">
+            <a href="tel:+998781130005"
+              class="w-9 h-9 flex items-center justify-center bg-slate-100 hover:bg-brand-50 rounded-xl transition-colors text-slate-500 hover:text-brand-600">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path
+                  d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.02 1.18a2 2 0 012-2.18h3a2 2 0 012 1.72c.13 1 .36 1.98.7 2.91a2 2 0 01-.45 2.11L6.91 6.5a16 16 0 006.59 6.59l.77-.77a2 2 0 012.11-.45c.93.34 1.91.57 2.91.7A2 2 0 0122 16.92z" />
+              </svg>
+            </a>
+            <div
+              class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2.5 px-3 py-1.5 bg-slate-900 text-white text-xs font-medium rounded-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+              78 113 0005
+              <div class="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-slate-900">
+              </div>
+            </div>
+          </div>
+          <a href="#form"
+            class="px-5 py-2.5 bg-brand-500 hover:bg-brand-600 text-white text-sm font-semibold rounded-xl transition-colors shadow-sm">Ariza
+            topshirish</a>
+        </div>
+        <a href="#form" class="lg:hidden px-4 py-2 bg-brand-500 hover:bg-brand-600 text-white text-sm font-semibold rounded-xl transition-colors shadow-sm">Ariza</a>
+        <button id="mobileBtn" class="lg:hidden p-2 rounded-lg text-slate-600 hover:bg-slate-100 transition-colors">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+    <div id="mobileMenu" class="hidden lg:hidden border-t border-slate-100 bg-white px-6 pb-4 space-y-0.5">
+      <a href="index.html#results" class="block py-2.5 text-sm font-medium text-slate-700 hover:text-brand-600">Nima
+        uchun biz?</a>
+      <a href="index.html#about" class="block py-2.5 text-sm font-medium text-slate-700 hover:text-brand-600">Maktab
+        haqida</a>
+      <a href="team.html" class="block py-2.5 text-sm font-medium text-slate-700 hover:text-brand-600">Jamoa</a>
+      <a href="articles.html" class="block py-2.5 text-sm font-medium text-slate-700 hover:text-brand-600">Maqolalar</a>
+      <a href="index.html#pricing"
+        class="block py-2.5 text-sm font-medium text-slate-700 hover:text-brand-600">Stipendiyalar</a>
+      <div class="pt-3 border-t border-slate-100">
+        <a href="#form"
+          class="block w-full text-center px-5 py-3 bg-brand-500 hover:bg-brand-600 text-white text-sm font-semibold rounded-xl transition-colors">Ariza
+          topshirish</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="pt-32 pb-12 bg-[#F8FAFC]">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto reveal">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-brand-50 border border-brand-100 rounded-full mb-5">
+          <div class="w-2 h-2 bg-brand-500 rounded-full animate-pulse"></div>
+          <span class="text-xs font-semibold text-brand-700 tracking-wide">Ota-onalar uchun</span>
+        </div>
+        <h1 class="text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight mb-5">Bog'lanish</h1>
+        <p class="text-base text-slate-500 leading-relaxed">
+          Ariza topshirish yoki savol berish uchun forma to'ldiring — 30 daqiqa ichida menejerimiz siz bilan bog'lanadi.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT INFO + FORM -->
+  <section id="form" class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-12 items-start">
+
+        <!-- CHAP: Ma'lumotlar -->
+        <div class="space-y-8 reveal-left">
+
+          <div>
+            <p class="text-sm font-semibold text-brand-600 uppercase tracking-widest mb-3">Aloqa</p>
+            <h2 class="text-2xl font-extrabold text-slate-900 tracking-tight mb-4">Biz bilan bog'laning</h2>
+            <p class="text-sm text-slate-500 leading-relaxed">Ma'lumotlaringizni yozib qoldiring, siz bilan tezda
+              aloqaga chiqib, maktabimiz haqida yanada batafsil aytib beramiz.</p>
+          </div>
+
+          <!-- Telefon -->
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 bg-brand-50 rounded-xl flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5 text-brand-600" fill="none" stroke="currentColor" stroke-width="2"
+                viewBox="0 0 24 24">
+                <path
+                  d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.02 1.18a2 2 0 012-2.18h3a2 2 0 012 1.72c.13 1 .36 1.98.7 2.91a2 2 0 01-.45 2.11L6.91 6.5a16 16 0 006.59 6.59l.77-.77a2 2 0 012.11-.45c.93.34 1.91.57 2.91.7A2 2 0 0122 16.92z" />
+              </svg>
+            </div>
+            <div>
+              <p class="text-sm font-semibold text-slate-800">Telefon</p>
+              <a href="tel:+998781130005" class="text-sm text-brand-600 hover:text-brand-700 mt-0.5 block">+998 78 113
+                0005</a>
+              <p class="text-xs text-slate-400 mt-0.5">Du–Shan: 8:00–18:00 | Shanba: 9:00–14:00</p>
+            </div>
+          </div>
+
+          <!-- Email -->
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 bg-brand-50 rounded-xl flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5 text-brand-600" fill="none" stroke="currentColor" stroke-width="2"
+                viewBox="0 0 24 24">
+                <path
+                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+            </div>
+            <div>
+              <p class="text-sm font-semibold text-slate-800">Email</p>
+              <a href="mailto:rahimovschool@gmail.com"
+                class="text-sm text-brand-600 hover:text-brand-700 mt-0.5 block">rahimovschool@gmail.com</a>
+            </div>
+          </div>
+
+          <!-- Filiallar -->
+          <div class="space-y-4 pt-2">
+            <p class="text-sm font-bold text-slate-800">Filiallarimiz</p>
+
+            <div id="filial1" class="bg-slate-50 border border-slate-100 rounded-2xl p-5">
+              <div class="flex items-start gap-3">
+                <div class="w-8 h-8 bg-brand-500 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <span class="text-xs font-bold text-white">1</span>
+                </div>
+                <div>
+                  <p class="text-sm font-semibold text-slate-800">Lokomotiv filiali</p>
+                  <p class="text-sm text-slate-500 leading-relaxed mt-0.5">Mirzo Ulug'bek tumani, Yalang'ach 2<br><span
+                      class="text-xs text-slate-400">(Lokomotiv Park yonida)</span></p>
+                </div>
+              </div>
+            </div>
+
+            <div id="filial2" class="bg-slate-50 border border-slate-100 rounded-2xl p-5">
+              <div class="flex items-start gap-3">
+                <div class="w-8 h-8 bg-brand-500 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <span class="text-xs font-bold text-white">2</span>
+                </div>
+                <div>
+                  <p class="text-sm font-semibold text-slate-800">Ibn Sino filiali</p>
+                  <p class="text-sm text-slate-500 leading-relaxed mt-0.5">Shayxontohur tumani, Ibn Sino mavzesi
+                    1<br><span class="text-xs text-slate-400">(Taxtabozori ro'parasi)</span></p>
+                </div>
+              </div>
+            </div>
+
+            <div id="filial3" class="bg-brand-50 border border-brand-100 rounded-2xl p-5">
+              <div class="flex items-start gap-3">
+                <div class="w-8 h-8 bg-brand-500 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <span class="text-xs font-bold text-white">3</span>
+                </div>
+                <div>
+                  <div class="flex items-center gap-2 mb-0.5">
+                    <p class="text-sm font-semibold text-slate-800">Farg'ona filiali</p>
+                    <span
+                      class="text-[10px] font-bold text-brand-600 bg-white border border-brand-200 px-1.5 py-0.5 rounded-full">Yangi</span>
+                  </div>
+                  <p class="text-sm text-slate-500 leading-relaxed">Farg'ona shahri</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Ijtimoiy tarmoqlar -->
+          <div>
+            <p class="text-sm font-semibold text-slate-700 mb-3">Ijtimoiy tarmoqlar</p>
+            <div class="flex gap-3">
+              <a href="https://facebook.com/rahimovschool"
+                class="w-10 h-10 bg-slate-100 hover:bg-brand-500 rounded-xl flex items-center justify-center transition-colors group"
+                title="Facebook">
+                <svg class="w-4 h-4 text-slate-500 group-hover:text-white transition-colors" fill="currentColor"
+                  viewBox="0 0 24 24">
+                  <path
+                    d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                </svg>
+              </a>
+              <a href="https://instagram.com/rahimovschool"
+                class="w-10 h-10 bg-slate-100 hover:bg-brand-500 rounded-xl flex items-center justify-center transition-colors group"
+                title="Instagram">
+                <svg class="w-4 h-4 text-slate-500 group-hover:text-white transition-colors" fill="currentColor"
+                  viewBox="0 0 24 24">
+                  <path
+                    d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                </svg>
+              </a>
+              <a href="https://t.me/rahimovschool"
+                class="w-10 h-10 bg-slate-100 hover:bg-brand-500 rounded-xl flex items-center justify-center transition-colors group"
+                title="Telegram">
+                <svg class="w-4 h-4 text-slate-500 group-hover:text-white transition-colors" fill="currentColor"
+                  viewBox="0 0 24 24">
+                  <path
+                    d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- O'NG: Forma -->
+        <div class="bg-white border border-slate-200 rounded-2xl shadow-sm p-8 reveal-right">
+          <h3 class="text-xl font-bold text-slate-900 mb-1">Qabulga ro'yxatdan o'ting</h3>
+          <p class="text-sm text-slate-500 mb-7">Ma'lumotlaringizni yozib qoldiring, siz bilan tezda aloqaga chiqib,
+            maktabimiz haqida yanada batafsil aytib beramiz.</p>
+
+          <form onsubmit="handleForm(event)" class="space-y-5">
+
+            <div class="grid sm:grid-cols-2 gap-4">
+              <div class="space-y-1.5">
+                <label class="block text-sm font-medium text-slate-700">Ismingiz <span
+                    class="text-red-500">*</span></label>
+                <input type="text" required placeholder="Abdulloh Karimov"
+                  class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-xl text-slate-900 text-sm placeholder:text-slate-400 focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 transition-all">
+              </div>
+              <div class="space-y-1.5">
+                <label class="block text-sm font-medium text-slate-700">Telefon <span
+                    class="text-red-500">*</span></label>
+                <input type="tel" required placeholder="+998 90 000 00 00"
+                  class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-xl text-slate-900 text-sm placeholder:text-slate-400 focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 transition-all">
+              </div>
+            </div>
+
+            <div class="grid sm:grid-cols-2 gap-4">
+              <div class="space-y-1.5">
+                <label class="block text-sm font-medium text-slate-700">Farzandingiz qaysi sinfga o'tadi?</label>
+                <select
+                  class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-xl text-slate-900 text-sm focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 transition-all">
+                  <option value="" disabled selected>Tanlang</option>
+                  <option>Maktabgacha</option>
+                  <option>1–4-sinf</option>
+                  <option>5–8-sinf</option>
+                  <option>9–11-sinf</option>
+                </select>
+              </div>
+              <div class="space-y-1.5">
+                <label class="block text-sm font-medium text-slate-700">Yashash tumani</label>
+                <select
+                  class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-xl text-slate-900 text-sm focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 transition-all">
+                  <option value="" disabled selected>Tumanni tanlang</option>
+                  <option value="bektemir">Bektemir tumani</option>
+                  <option value="chilonzor">Chilonzor tumani</option>
+                  <option value="mirobod">Mirobod tumani</option>
+                  <option value="mirzo-ulugbek">Mirzo Ulug'bek tumani</option>
+                  <option value="olmazor">Olmazor tumani</option>
+                  <option value="sergeli">Sergeli tumani</option>
+                  <option value="shayxontohur">Shayxontohur tumani</option>
+                  <option value="uchtepa">Uchtepa tumani</option>
+                  <option value="vobkent">Yakkasaroy tumani</option>
+                  <option value="yashnobod">Yashnobod tumani</option>
+                  <option value="yunusobod">Yunusobod tumani</option>
+                  <option value="yangihayot">Yangihayot tumani</option>
+                </select>
+              </div>
+            </div>
+
+            <div id="successMsg" class="hidden flex gap-3 p-4 bg-green-50 border border-green-200 rounded-xl">
+              <svg class="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor"
+                stroke-width="2.5" viewBox="0 0 24 24">
+                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <div>
+                <p class="text-sm font-semibold text-green-800">Ariza qabul qilindi!</p>
+                <p class="text-sm text-green-700 mt-0.5">30 daqiqa ichida menejerimiz siz bilan bog'lanadi.</p>
+              </div>
+            </div>
+
+            <button type="submit"
+              class="w-full inline-flex items-center justify-center gap-2.5 px-6 py-3.5 bg-brand-500 hover:bg-brand-600 text-white text-sm font-semibold rounded-xl transition-colors shadow-md shadow-brand-500/20 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2">
+              Ariza yuborish
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
+              </svg>
+            </button>
+
+            <p class="text-xs text-slate-400 text-center">Arizangiz ma'lumotlari faqat maktab jamoasi tomonidan
+              ko'riladi.</p>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FILIALLARIMIZ — REDESIGNED -->
+  <section id="branches" class="py-20 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+
+      <!-- Header -->
+      <div class="text-center mb-14 reveal">
+        <p class="text-sm font-semibold text-brand-600 uppercase tracking-widest mb-3">Joylashuv</p>
+        <h2 class="text-4xl font-extrabold text-slate-900 tracking-tight mb-4">Filiallarimiz</h2>
+        <p class="text-base text-slate-500 max-w-sm mx-auto leading-relaxed">Toshkent shahridagi 2 ta filialimizdan biriga yaqiningizni tanlang.</p>
+      </div>
+
+      <!-- Branch Cards -->
+      <div class="grid md:grid-cols-2 gap-8 mb-10">
+
+        <!-- CARD 1: Lokomotiv -->
+        <div
+          class="branch-card group bg-white rounded-2xl overflow-hidden border border-slate-200 hover:border-brand-300 hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 cursor-pointer reveal-scale"
+          data-branch="0" style="transition-delay:0ms">
+          <div class="relative h-72 overflow-hidden">
+            <iframe
+              src="https://yandex.uz/map-widget/v1/?ll=69.3118,41.3311&z=16&lang=uz_UZ&l=map"
+              width="100%" height="100%" frameborder="0" allowfullscreen loading="lazy"
+              class="absolute inset-0 w-full h-full"></iframe>
+            <!-- School pin overlay — centered on coordinates -->
+            <div class="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
+              <div class="flex flex-col items-center" style="transform:translateY(-30px)">
+                <div class="w-13 h-13 rounded-full border-[3px] border-white flex items-center justify-center" style="width:52px;height:52px;background:#07CA68;box-shadow:0 6px 20px rgba(7,202,104,0.5),0 2px 6px rgba(0,0,0,0.18)">
+                  <svg width="26" height="26" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
+                  </svg>
+                </div>
+                <div style="width:0;height:0;border-left:10px solid transparent;border-right:10px solid transparent;border-top:13px solid #07CA68;margin-top:-1px;filter:drop-shadow(0 3px 3px rgba(7,202,104,0.35))"></div>
+                <div class="mt-2 bg-white rounded-lg px-2.5 py-1.5 border border-slate-100" style="box-shadow:0 4px 12px rgba(0,0,0,0.12)">
+                  <p class="text-[11px] font-bold text-slate-800 leading-none text-center">Rahimov School</p>
+                  <p class="text-[9px] text-slate-400 text-center mt-0.5">41.3311° N, 69.3118° E</p>
+                </div>
+              </div>
+            </div>
+            <div class="absolute top-0 inset-x-0 h-0.5 bg-gradient-to-r from-brand-500 to-brand-400 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300 pointer-events-none"></div>
+          </div>
+          <div class="p-5">
+            <h3
+              class="text-base font-extrabold text-slate-900 group-hover:text-brand-600 transition-colors duration-200 leading-snug mb-1">
+              Lokomotiv Filiali</h3>
+            <div class="flex items-start gap-1.5 mb-3.5">
+              <svg class="w-3.5 h-3.5 text-slate-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor"
+                stroke-width="2" viewBox="0 0 24 24">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                <circle cx="12" cy="10" r="3" />
+              </svg>
+              <p class="text-xs text-slate-500 leading-relaxed">Mirzo Ulug'bek tumani, Yalang'ach 2<br><span
+                  class="text-slate-400">Lokomotiv Park yonida</span></p>
+            </div>
+            <div class="flex flex-wrap gap-1.5 mb-4">
+              <span
+                class="inline-flex items-center gap-1 text-[10px] font-semibold text-brand-700 bg-brand-50 border border-brand-100 rounded-full px-2.5 py-1">
+                <svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                  <path d="M9 12l2 2 4-4" />
+                  <circle cx="12" cy="12" r="10" />
+                </svg>
+                SAT Markazi
+              </span>
+              <span
+                class="text-[10px] font-semibold text-slate-600 bg-slate-100 border border-slate-200 rounded-full px-2.5 py-1">Sport
+                maydon</span>
+              <span
+                class="text-[10px] font-semibold text-slate-600 bg-slate-100 border border-slate-200 rounded-full px-2.5 py-1">Keng
+                hudud</span>
+            </div>
+            <div class="flex items-center justify-between pt-3.5 border-t border-slate-100">
+              <a href="tel:+998781130005"
+                class="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-600 hover:text-brand-700 transition-colors">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path
+                    d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.02 1.18a2 2 0 012-2.18h3a2 2 0 012 1.72c.13 1 .36 1.98.7 2.91a2 2 0 01-.45 2.11L6.91 6.5a16 16 0 006.59 6.59l.77-.77a2 2 0 012.11-.45c.93.34 1.91.57 2.91.7A2 2 0 0122 16.92z" />
+                </svg>
+                78 113 0005
+              </a>
+              <a href="https://yandex.uz/maps/?text=Toshkent+Mirzo+Ulugbek+Yalangach+2" target="_blank"
+                class="inline-flex items-center gap-1 text-xs font-semibold text-slate-400 hover:text-brand-600 transition-colors">
+                Yandex Maps
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                  <path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 2: Ibn Sino -->
+        <div
+          class="branch-card group bg-white rounded-2xl overflow-hidden border border-slate-200 hover:border-brand-300 hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 cursor-pointer reveal-scale"
+          data-branch="1" style="transition-delay:120ms">
+          <div class="relative h-72 overflow-hidden">
+            <iframe
+              src="https://yandex.uz/map-widget/v1/?ll=69.2197,41.2994&z=16&lang=uz_UZ&l=map"
+              width="100%" height="100%" frameborder="0" allowfullscreen loading="lazy"
+              class="absolute inset-0 w-full h-full"></iframe>
+            <!-- School pin overlay — centered on coordinates -->
+            <div class="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
+              <div class="flex flex-col items-center" style="transform:translateY(-30px)">
+                <div class="rounded-full border-[3px] border-white flex items-center justify-center" style="width:52px;height:52px;background:#07CA68;box-shadow:0 6px 20px rgba(7,202,104,0.5),0 2px 6px rgba(0,0,0,0.18)">
+                  <svg width="26" height="26" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
+                  </svg>
+                </div>
+                <div style="width:0;height:0;border-left:10px solid transparent;border-right:10px solid transparent;border-top:13px solid #07CA68;margin-top:-1px;filter:drop-shadow(0 3px 3px rgba(7,202,104,0.35))"></div>
+                <div class="mt-2 bg-white rounded-lg px-2.5 py-1.5 border border-slate-100" style="box-shadow:0 4px 12px rgba(0,0,0,0.12)">
+                  <p class="text-[11px] font-bold text-slate-800 leading-none text-center">Rahimov School</p>
+                  <p class="text-[9px] text-slate-400 text-center mt-0.5">41.2994° N, 69.2197° E</p>
+                </div>
+              </div>
+            </div>
+            <div class="absolute top-0 inset-x-0 h-0.5 bg-gradient-to-r from-brand-500 to-brand-400 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300 pointer-events-none"></div>
+          </div>
+          <div class="p-5">
+            <h3
+              class="text-base font-extrabold text-slate-900 group-hover:text-brand-600 transition-colors duration-200 leading-snug mb-1">
+              Ibn Sino Filiali</h3>
+            <div class="flex items-start gap-1.5 mb-3.5">
+              <svg class="w-3.5 h-3.5 text-slate-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor"
+                stroke-width="2" viewBox="0 0 24 24">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                <circle cx="12" cy="10" r="3" />
+              </svg>
+              <p class="text-xs text-slate-500 leading-relaxed">Shayxontohur tumani, Ibn Sino 1<br><span
+                  class="text-slate-400">Taxtabozori ro'parasi</span></p>
+            </div>
+            <div class="flex flex-wrap gap-1.5 mb-4">
+              <span
+                class="inline-flex items-center gap-1 text-[10px] font-semibold text-brand-700 bg-brand-50 border border-brand-100 rounded-full px-2.5 py-1">
+                <svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                  <path d="M9 12l2 2 4-4" />
+                  <circle cx="12" cy="12" r="10" />
+                </svg>
+                IELTS Markazi
+              </span>
+              <span
+                class="text-[10px] font-semibold text-slate-600 bg-slate-100 border border-slate-200 rounded-full px-2.5 py-1">Estetik
+                kampus</span>
+              <span
+                class="text-[10px] font-semibold text-slate-600 bg-slate-100 border border-slate-200 rounded-full px-2.5 py-1">Qulay
+                joylashuv</span>
+            </div>
+            <div class="flex items-center justify-between pt-3.5 border-t border-slate-100">
+              <a href="tel:+998781130005"
+                class="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-600 hover:text-brand-700 transition-colors">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path
+                    d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.02 1.18a2 2 0 012-2.18h3a2 2 0 012 1.72c.13 1 .36 1.98.7 2.91a2 2 0 01-.45 2.11L6.91 6.5a16 16 0 006.59 6.59l.77-.77a2 2 0 012.11-.45c.93.34 1.91.57 2.91.7A2 2 0 0122 16.92z" />
+                </svg>
+                78 113 0005
+              </a>
+              <a href="https://yandex.uz/maps/?text=Toshkent+Shayxontohur+Ibn+Sino" target="_blank"
+                class="inline-flex items-center gap-1 text-xs font-semibold text-slate-400 hover:text-brand-600 transition-colors">
+                Yandex Maps
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                  <path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-slate-900 text-slate-400 border-t border-slate-800">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 py-10">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+        <a href="index.html">
+          <img src="./assets/img/noroot.png" alt="Rahimov School" class="h-8 w-auto object-contain brightness-0 invert">
+        </a>
+        <div class="flex gap-6">
+          <a href="index.html" class="text-sm hover:text-brand-400 transition-colors">Bosh sahifa</a>
+          <a href="team.html" class="text-sm hover:text-brand-400 transition-colors">Jamoa</a>
+          <a href="articles.html" class="text-sm hover:text-brand-400 transition-colors">Maqolalar</a>
+        </div>
+        <p class="text-xs text-slate-600">© 2026 Rahimov School | <a href="mailto:rahimovschool@gmail.com"
+            class="hover:text-brand-400">rahimovschool@gmail.com</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    window.addEventListener('scroll', () => {
+      document.getElementById('navbar').classList.toggle('shadow-md', window.scrollY > 50);
+    });
+    document.getElementById('mobileBtn').addEventListener('click', () => {
+      document.getElementById('mobileMenu').classList.toggle('hidden');
+    });
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+      link.addEventListener('click', e => {
+        const target = document.querySelector(link.getAttribute('href'));
+        if (target) { e.preventDefault(); window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - 90, behavior: 'smooth' }); }
+      });
+    });
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(el => revealObserver.observe(el));
+    function toggleDropdown(id) {
+      const panel = document.getElementById(id + '-panel');
+      const chevron = document.getElementById(id + '-chevron');
+      const isOpen = !panel.classList.contains('hidden');
+      document.querySelectorAll('.dd-panel').forEach(p => p.classList.add('hidden'));
+      document.querySelectorAll('[id$="-chevron"]').forEach(c => c.style.transform = '');
+      if (!isOpen) { panel.classList.remove('hidden'); if (chevron) chevron.style.transform = 'rotate(180deg)'; }
+    }
+    document.addEventListener('click', e => {
+      if (!e.target.closest('.nav-dropdown')) {
+        document.querySelectorAll('.dd-panel').forEach(p => p.classList.add('hidden'));
+        document.querySelectorAll('[id$="-chevron"]').forEach(c => c.style.transform = '');
+      }
+    });
+    function setLang(lang) {
+      const labels = { uz: 'Uz', ru: 'Ru', en: 'EN' };
+      const current = document.getElementById('lang-current');
+      if (current) current.textContent = labels[lang] || lang;
+      document.querySelectorAll('.lang-option').forEach((btn, i) => {
+        const isActive = ['uz', 'ru', 'en'][i] === lang;
+        btn.classList.toggle('text-brand-600', isActive); btn.classList.toggle('bg-brand-50', isActive); btn.classList.toggle('text-slate-500', !isActive);
+      });
+      const panel = document.getElementById('lang-panel');
+      if (panel) panel.classList.add('hidden');
+    }
+    function handleForm(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('button[type="submit"]');
+      btn.textContent = 'Yuborilmoqda...';
+      btn.disabled = true;
+      setTimeout(() => {
+        document.getElementById('successMsg').classList.remove('hidden');
+        btn.classList.add('hidden');
+      }, 1000);
+    }
+    // ── Accessibility Toolbar ──────────────────────────────────────
+    (function(){const STEP=0.1,MIN=0.8,MAX=1.5;const state={fontScale:parseFloat(localStorage.getItem('a11y-font')||'1'),contrast:localStorage.getItem('a11y-contrast')==='1',mono:localStorage.getItem('a11y-mono')==='1',links:localStorage.getItem('a11y-links')==='1',readable:localStorage.getItem('a11y-readable')==='1',open:false};const $=id=>document.getElementById(id);function cls(c,on){document.body.classList[on?'add':'remove'](c);}function sync(btn,active){btn.setAttribute('aria-checked',active?'true':'false');const ic=btn.querySelector('.a11y-opt-icon'),do_=btn.querySelector('.a11y-opt-dot'),di=do_&&do_.querySelector('span'),sv=ic&&ic.querySelector('svg');if(active){btn.style.borderColor='#07CA68';btn.style.backgroundColor='#f0fdf4';if(ic){ic.style.backgroundColor='#07CA68';ic.style.borderColor='transparent';}if(sv)sv.style.color='#fff';if(do_)do_.style.borderColor='#07CA68';if(di)di.style.backgroundColor='#07CA68';}else{btn.style.borderColor='';btn.style.backgroundColor='';if(ic){ic.style.backgroundColor='';ic.style.borderColor='';}if(sv)sv.style.color='';if(do_)do_.style.borderColor='';if(di)di.style.backgroundColor='';}}function applyFont(){document.documentElement.style.setProperty('--a11y-font-scale',state.fontScale);$('a11y-font-label').textContent=Math.round(state.fontScale*100)+'%';$('a11y-font-decrease').disabled=state.fontScale<=MIN;$('a11y-font-increase').disabled=state.fontScale>=MAX;$('a11y-font-decrease').style.opacity=state.fontScale<=MIN?'0.38':'';$('a11y-font-increase').style.opacity=state.fontScale>=MAX?'0.38':'';}function applyAll(){applyFont();cls('hc-mode',state.contrast);cls('mono-mode',state.mono);cls('highlight-links',state.links);cls('readable-font',state.readable);sync($('a11y-contrast'),state.contrast);sync($('a11y-mono'),state.mono);sync($('a11y-links'),state.links);sync($('a11y-readable'),state.readable);}function openP(){state.open=true;$('a11y-panel').classList.add('open');$('a11y-panel').setAttribute('aria-hidden','false');$('a11y-toggle').setAttribute('aria-expanded','true');setTimeout(()=>$('a11y-font-decrease').focus(),60);}function closeP(ret){state.open=false;$('a11y-panel').classList.remove('open');$('a11y-panel').setAttribute('aria-hidden','true');$('a11y-toggle').setAttribute('aria-expanded','false');if(ret)$('a11y-toggle').focus();}function tog(key,c,btn,sk){state[key]=!state[key];cls(c,state[key]);sync(btn,state[key]);localStorage.setItem(sk,state[key]?'1':'0');}function reset(){state.fontScale=1;state.contrast=state.mono=state.links=state.readable=false;['a11y-font','a11y-contrast','a11y-mono','a11y-links','a11y-readable'].forEach(k=>localStorage.removeItem(k));applyAll();}document.addEventListener('keydown',e=>{if(!state.open)return;const f=Array.from($('a11y-panel').querySelectorAll('button:not([disabled])')),first=f[0],last=f[f.length-1];if(e.key==='Tab'){if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}}if(e.key==='Escape')closeP(true);});document.addEventListener('click',e=>{if(state.open&&!e.target.closest('#a11y-toolbar'))closeP(false);});$('a11y-toggle').addEventListener('click',()=>state.open?closeP(false):openP());$('a11y-close').addEventListener('click',()=>closeP(true));$('a11y-font-decrease').addEventListener('click',()=>{const n=Math.round((state.fontScale-STEP)*10)/10;state.fontScale=Math.max(MIN,n);applyFont();localStorage.setItem('a11y-font',state.fontScale);});$('a11y-font-increase').addEventListener('click',()=>{const n=Math.round((state.fontScale+STEP)*10)/10;state.fontScale=Math.min(MAX,n);applyFont();localStorage.setItem('a11y-font',state.fontScale);});$('a11y-contrast').addEventListener('click',()=>tog('contrast','hc-mode',$('a11y-contrast'),'a11y-contrast'));$('a11y-mono').addEventListener('click',()=>tog('mono','mono-mode',$('a11y-mono'),'a11y-mono'));$('a11y-links').addEventListener('click',()=>tog('links','highlight-links',$('a11y-links'),'a11y-links'));$('a11y-readable').addEventListener('click',()=>tog('readable','readable-font',$('a11y-readable'),'a11y-readable'));$('a11y-reset').addEventListener('click',reset);applyAll();})();
+  </script>
+
+</body>
+
+</html>

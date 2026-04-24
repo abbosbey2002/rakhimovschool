@@ -1,0 +1,3231 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rahimov School — Xalqaro Standartdagi Ta'lim</title>
+  <link rel="icon" href="./assets/img/noroot.png" type="image/png">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            heading: ['HelveticaNeueCyr', 'Helvetica Neue', 'Arial', 'sans-serif'],
+            body: ['HelveticaNeueCyr', 'Helvetica Neue', 'Arial', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#f0fdf4',
+              100: '#dcfce7',
+              400: '#4ade80',
+              500: '#07CA68',
+              600: '#05b35b',
+              700: '#04924a',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'HelveticaNeueCyr', 'Helvetica Neue', Arial, sans-serif;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-family: 'HelveticaNeueCyr', 'Helvetica Neue', Arial, sans-serif;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+    }
+
+    /* Tipografiya qoliplari */
+
+    /* Overline — seksiya yuqorisidagi kichik yorliq */
+    .t-overline {
+      font-size: 0.75rem;
+      /* 12px */
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #05b35b;
+      font-family: 'HelveticaNeueCyr', 'Helvetica Neue', Arial, sans-serif;
+    }
+
+    /* Raqamli display (statistika) */
+    .t-display {
+      font-family: 'HelveticaNeueCyr', 'Helvetica Neue', Arial, sans-serif;
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.03em;
+    }
+
+    /* Karta sarlavhasi */
+    .t-card-title {
+      font-size: 1.125rem;
+      /* 18px */
+      font-weight: 700;
+      line-height: 1.3;
+      letter-spacing: -0.01em;
+      color: #0f172a;
+    }
+
+    /* Asosiy paragraf */
+    .t-body {
+      font-size: 1rem;
+      /* 16px */
+      line-height: 1.75;
+      color: #475569;
+    }
+
+    /* Kichik paragraf (kartalar ichida) */
+    .t-body-sm {
+      font-size: 0.875rem;
+      /* 14px */
+      line-height: 1.65;
+      color: #64748b;
+    }
+
+    .nav-link {
+      position: relative;
+      transition: color 0.2s;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #07CA68;
+      transition: width 0.25s;
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .nav-link:hover {
+      color: #07CA68;
+    }
+
+    /* Fon uchun nafis geometrik naqsh */
+    .geo-pattern {
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg stroke='%2307CA68' stroke-width='0.5' opacity='0.08'%3E%3Cpath d='M30 0 L60 30 L30 60 L0 30 Z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    .stat-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    .stat-card {
+      transition: all 0.25s ease;
+    }
+
+    .program-card:hover .program-icon {
+      background: #07CA68;
+    }
+
+    .program-card:hover .program-icon svg {
+      color: white;
+    }
+
+    .program-icon {
+      transition: background 0.2s;
+    }
+
+    .program-icon svg {
+      transition: color 0.2s;
+    }
+
+    /* Counter animatsiya */
+    @keyframes countUp {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .counter-animate {
+      animation: countUp 0.6s ease forwards;
+    }
+
+    /* Scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* Chap tomondан chiqish */
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-32px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal-left.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* O'ng tomondан chiqish */
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(32px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal-right.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* Scale chiqish (kartalar uchun) */
+    .reveal-scale {
+      opacity: 0;
+      transform: scale(0.94) translateY(16px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+
+    .reveal-scale.visible {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+
+    /* Hero badge bounce */
+    @keyframes badgePop {
+      0% {
+        opacity: 0;
+        transform: scale(0.8) translateY(-8px);
+      }
+
+      70% {
+        transform: scale(1.05) translateY(2px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    .badge-pop {
+      animation: badgePop 0.6s ease forwards;
+    }
+
+    /* Number counter odob */
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .slide-up {
+      opacity: 0;
+      animation: slideUp 0.5s ease forwards;
+    }
+
+    /* Floating card */
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0px);
+      }
+
+      50% {
+        transform: translateY(-8px);
+      }
+    }
+
+    .float-card {
+      animation: float 4s ease-in-out infinite;
+    }
+
+    /* ── LOADING SCREEN ───────────────────────────── */
+    #loader {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 28px;
+      transition: opacity 0.55s ease, visibility 0.55s ease;
+    }
+
+    #loader.hide {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    @keyframes logoPulse {
+
+      0%,
+      100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(7, 202, 104, 0.35);
+      }
+
+      50% {
+        transform: scale(1.07);
+        box-shadow: 0 0 0 16px rgba(7, 202, 104, 0);
+      }
+    }
+
+    .loader-logo {
+      animation: logoPulse 1.6s ease-in-out infinite;
+    }
+
+    .loader-track {
+      width: 160px;
+      height: 3px;
+      background: #e2e8f0;
+      border-radius: 99px;
+      overflow: hidden;
+    }
+
+    @keyframes loaderBar {
+      0% {
+        width: 0%;
+      }
+
+      60% {
+        width: 85%;
+      }
+
+      100% {
+        width: 100%;
+      }
+    }
+
+    .loader-bar {
+      height: 100%;
+      background: linear-gradient(90deg, #07CA68, #4ade80);
+      border-radius: 99px;
+      animation: loaderBar 1.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+
+    @keyframes dotBlink {
+
+      0%,
+      80%,
+      100% {
+        opacity: 0.25;
+        transform: scale(0.75);
+      }
+
+      40% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .loader-dot {
+      animation: dotBlink 1.2s ease-in-out infinite;
+    }
+
+    .loader-dot:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .loader-dot:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+
+    .scrollbar-hide {
+      scrollbar-width: none;
+    }
+
+    .scrollbar-hide::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* Video ticker — horizontal (gallery) */
+    @keyframes videoTick {
+      0% {
+        transform: translateX(0);
+      }
+
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+
+    .video-ticker {
+      animation: videoTick 28s linear infinite;
+    }
+
+    .video-ticker:hover {
+      animation-play-state: paused;
+    }
+
+    /* Video ticker — vertical (reviews) */
+    @keyframes videoTickV {
+      0% {
+        transform: translateY(0);
+      }
+
+      100% {
+        transform: translateY(-50%);
+      }
+    }
+
+    .video-ticker-v1 {
+      animation: videoTickV 24s linear infinite;
+    }
+
+    .video-ticker-v2 {
+      animation: videoTickV 30s linear infinite;
+    }
+
+    .video-ticker-v1:hover,
+    .video-ticker-v2:hover {
+      animation-play-state: paused;
+    }
+
+    /* ══════════════════════════════════════════════════════
+       ACCESSIBILITY TOOLBAR — WCAG 2.1
+    ══════════════════════════════════════════════════════ */
+
+    /* Font scaling via CSS custom property.
+       Uses 1rem so we respect the user's browser base font size. */
+    :root {
+      --a11y-font-scale: 1;
+    }
+    html {
+      font-size: calc(1rem * var(--a11y-font-scale));
+    }
+
+    /* Global focus-visible ring — WCAG 2.4.11 */
+    *:focus-visible {
+      outline: 3px solid #07CA68 !important;
+      outline-offset: 3px !important;
+      border-radius: 4px;
+    }
+
+    /* ── High Contrast — ::after overlay (body'ga filter tegmaydi,
+       shuning uchun position:fixed elementlar buzilmaydi).
+       body::after z-9990, toolbar z-9997/9998 — toolbar overlay
+       ustida bo'ladi va ta'sirlanmaydi.                    */
+    body.hc-mode::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 9990;
+      background: white;
+      mix-blend-mode: difference;
+      pointer-events: none;
+    }
+    /* Rasmlarni oldindan invert qilish — overlay ikki marta
+       invert qiladi va natijada tabiiy rang qaytadi.       */
+    body.hc-mode img,
+    body.hc-mode video,
+    body.hc-mode canvas,
+    body.hc-mode iframe {
+      filter: invert(1);
+    }
+
+    /* ── Monochrome — backdrop-filter (body'ga filter yo'q) ── */
+    body.mono-mode::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 9990;
+      pointer-events: none;
+      backdrop-filter: grayscale(1);
+      -webkit-backdrop-filter: grayscale(1);
+    }
+
+    /* ── Ikkala rejim birga ─────────────────────────────────── */
+    body.hc-mode.mono-mode::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 9990;
+      background: white;
+      mix-blend-mode: difference;
+      backdrop-filter: grayscale(1);
+      -webkit-backdrop-filter: grayscale(1);
+      pointer-events: none;
+    }
+
+    /* ── Link / Button Highlighting ───────────────────────── */
+    body.highlight-links a,
+    body.highlight-links button {
+      outline: 2px solid #07CA68 !important;
+      outline-offset: 2px !important;
+      text-decoration: underline !important;
+      text-decoration-thickness: 2px !important;
+    }
+    /* Exempt the toolbar itself from link highlighting */
+    body.highlight-links #a11y-toolbar a,
+    body.highlight-links #a11y-toolbar button {
+      outline: none !important;
+      text-decoration: none !important;
+    }
+
+    /* ── Readable Font Mode ───────────────────────────────── */
+    body.readable-font,
+    body.readable-font * {
+      font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif !important;
+      letter-spacing: 0.025em !important;
+      line-height: 1.78 !important;
+    }
+
+    /* ── Panel slide-in animation ─────────────────────────── */
+    #a11y-panel {
+      opacity: 0;
+      transform: translateY(10px) scale(0.97);
+      pointer-events: none;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+    #a11y-panel.open {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+    }
+
+    /* ── Navbar accessibility button active state ─────────── */
+    #a11y-toggle[aria-expanded="true"] {
+      background-color: #f0fdf4;
+      color: #05b35b;
+      border-color: #bbf7d0;
+    }
+  </style>
+
+  <!-- Anti-FOUC: apply saved font scale before first paint -->
+  <script>
+    (function () {
+      var s = localStorage.getItem('a11y-font');
+      if (s) document.documentElement.style.setProperty('--a11y-font-scale', s);
+    })();
+  </script>
+</head>
+
+<body class="bg-white text-slate-900 antialiased">
+
+  <!-- ═══════════════════════════════════════════════════
+     LOADING SCREEN
+════════════════════════════════════════════════════ -->
+  <div id="loader">
+
+    <!-- Logo -->
+    <div class="loader-logo">
+      <img src="./assets/img/noroot.png" alt="Rahimov School Logo" class="h-16 w-auto object-contain">
+    </div>
+
+    <!-- Progress bar -->
+    <div class="loader-track">
+      <div class="loader-bar"></div>
+    </div>
+
+    <!-- Dots -->
+    <div class="flex items-center gap-2 -mt-2">
+      <div class="loader-dot w-1.5 h-1.5 bg-brand-500 rounded-full"></div>
+      <div class="loader-dot w-1.5 h-1.5 bg-brand-500 rounded-full"></div>
+      <div class="loader-dot w-1.5 h-1.5 bg-brand-500 rounded-full"></div>
+    </div>
+
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════
+     ACCESSIBILITY TOOLBAR — navbar ichida
+════════════════════════════════════════════════════ -->
+  <!-- Panel only (button is inside navbar below) -->
+  <div id="a11y-toolbar" role="region" aria-label="Maxsus imkoniyatlar paneli" style="display:contents">
+    <div
+      id="a11y-panel"
+      role="dialog"
+      aria-modal="false"
+      aria-label="Maxsus imkoniyatlar sozlamalari"
+      aria-hidden="true"
+      class="fixed top-[68px] right-6 z-[9997] w-72 bg-white border border-slate-200 rounded-2xl shadow-2xl overflow-hidden"
+    >
+      <!-- Panel header -->
+      <div class="flex items-center justify-between px-5 py-4 border-b border-slate-100">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 bg-brand-50 border border-brand-100 rounded-lg flex items-center justify-center flex-shrink-0">
+            <svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 text-brand-600" aria-hidden="true">
+              <circle cx="12" cy="4.5" r="2.5"/>
+              <path d="M19.5 9.5h-6L12 8l-1.5 1.5h-6a.75.75 0 000 1.5h5l-.75 8.5H11v-4h2v4h1.25l-.75-8.5h5a.75.75 0 000-1.5z"/>
+            </svg>
+          </div>
+          <div>
+            <p class="text-sm font-semibold text-slate-800 leading-tight">Maxsus imkoniyatlar</p>
+            <p class="text-[10px] text-slate-400 font-medium">WCAG 2.1 AA</p>
+          </div>
+        </div>
+        <button
+          id="a11y-close"
+          aria-label="Panelni yopish"
+          class="w-8 h-8 flex items-center justify-center rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition-colors"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Font size controls -->
+      <div class="px-4 pt-4 pb-3.5 border-b border-slate-100">
+        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-[0.1em] mb-2.5" id="a11y-font-group-label">Shrift o'lchami</p>
+        <div class="flex items-center gap-2" role="group" aria-labelledby="a11y-font-group-label">
+          <button
+            id="a11y-font-decrease"
+            aria-label="Shriftni kichiklashtirish"
+            class="flex-1 h-11 flex items-center justify-center gap-1.5 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl text-slate-700 text-sm font-semibold transition-all duration-150"
+          >
+            <svg class="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" d="M5 12h14"/>
+            </svg>
+            Kichik
+          </button>
+          <span
+            id="a11y-font-label"
+            class="w-12 text-center text-sm font-bold text-slate-700 flex-shrink-0 tabular-nums"
+            aria-live="polite"
+            aria-atomic="true"
+            aria-label="Joriy shrift o'lchami"
+          >100%</span>
+          <button
+            id="a11y-font-increase"
+            aria-label="Shriftni kattalshtirish"
+            class="flex-1 h-11 flex items-center justify-center gap-1.5 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl text-slate-700 text-sm font-semibold transition-all duration-150"
+          >
+            <svg class="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" d="M12 5v14M5 12h14"/>
+            </svg>
+            Katta
+          </button>
+        </div>
+      </div>
+
+      <!-- Toggle options -->
+      <div class="px-4 py-3.5 space-y-2">
+        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-[0.1em] mb-2.5">Ko'rinish</p>
+
+        <!-- High Contrast toggle -->
+        <button
+          id="a11y-contrast"
+          role="switch"
+          aria-checked="false"
+          aria-label="Yuqori kontrastni yoqish yoki o'chirish"
+          class="a11y-opt-btn w-full h-11 flex items-center gap-3 px-3.5 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl transition-all duration-150"
+        >
+          <span class="a11y-opt-icon w-7 h-7 flex items-center justify-center rounded-lg bg-white border border-slate-200 flex-shrink-0 transition-all duration-200">
+            <svg class="w-[15px] h-[15px] text-slate-500 transition-colors duration-200" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 3a9 9 0 100 18A9 9 0 0012 3zm0 2v14a7 7 0 010-14z"/>
+            </svg>
+          </span>
+          <span class="text-sm font-medium text-slate-700 text-left flex-1">Yuqori kontrast</span>
+          <span class="a11y-opt-dot w-5 h-5 rounded-full border-2 border-slate-300 flex items-center justify-center flex-shrink-0 transition-all duration-200">
+            <span class="w-2 h-2 rounded-full bg-transparent transition-all duration-200"></span>
+          </span>
+        </button>
+
+        <!-- Monochrome toggle -->
+        <button
+          id="a11y-mono"
+          role="switch"
+          aria-checked="false"
+          aria-label="Oq-qora rejimni yoqish yoki o'chirish"
+          class="a11y-opt-btn w-full h-11 flex items-center gap-3 px-3.5 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl transition-all duration-150"
+        >
+          <span class="a11y-opt-icon w-7 h-7 flex items-center justify-center rounded-lg bg-white border border-slate-200 flex-shrink-0 transition-all duration-200">
+            <svg class="w-[15px] h-[15px] text-slate-500 transition-colors duration-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="9"/>
+              <path d="M12 3a9 9 0 010 18z" fill="currentColor" stroke="none"/>
+            </svg>
+          </span>
+          <span class="text-sm font-medium text-slate-700 text-left flex-1">Oq-qora rejim</span>
+          <span class="a11y-opt-dot w-5 h-5 rounded-full border-2 border-slate-300 flex items-center justify-center flex-shrink-0 transition-all duration-200">
+            <span class="w-2 h-2 rounded-full bg-transparent transition-all duration-200"></span>
+          </span>
+        </button>
+
+        <!-- Link highlighting toggle -->
+        <button
+          id="a11y-links"
+          role="switch"
+          aria-checked="false"
+          aria-label="Havolalarni ajratib ko'rsatishni yoqish yoki o'chirish"
+          class="a11y-opt-btn w-full h-11 flex items-center gap-3 px-3.5 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl transition-all duration-150"
+        >
+          <span class="a11y-opt-icon w-7 h-7 flex items-center justify-center rounded-lg bg-white border border-slate-200 flex-shrink-0 transition-all duration-200">
+            <svg class="w-[15px] h-[15px] text-slate-500 transition-colors duration-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/>
+            </svg>
+          </span>
+          <span class="text-sm font-medium text-slate-700 text-left flex-1">Havolalarni ajratish</span>
+          <span class="a11y-opt-dot w-5 h-5 rounded-full border-2 border-slate-300 flex items-center justify-center flex-shrink-0 transition-all duration-200">
+            <span class="w-2 h-2 rounded-full bg-transparent transition-all duration-200"></span>
+          </span>
+        </button>
+
+        <!-- Readable font toggle -->
+        <button
+          id="a11y-readable"
+          role="switch"
+          aria-checked="false"
+          aria-label="O'qilishi oson shriftni yoqish yoki o'chirish"
+          class="a11y-opt-btn w-full h-11 flex items-center gap-3 px-3.5 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl transition-all duration-150"
+        >
+          <span class="a11y-opt-icon w-7 h-7 flex items-center justify-center rounded-lg bg-white border border-slate-200 flex-shrink-0 transition-all duration-200">
+            <svg class="w-[15px] h-[15px] text-slate-500 transition-colors duration-200" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M9 4v3h5v12h3V7h5V4H9zm-6 8h3v8h3v-8h3V9H3v3z"/>
+            </svg>
+          </span>
+          <span class="text-sm font-medium text-slate-700 text-left flex-1">O'qilishi oson shrift</span>
+          <span class="a11y-opt-dot w-5 h-5 rounded-full border-2 border-slate-300 flex items-center justify-center flex-shrink-0 transition-all duration-200">
+            <span class="w-2 h-2 rounded-full bg-transparent transition-all duration-200"></span>
+          </span>
+        </button>
+      </div>
+
+      <!-- Reset footer -->
+      <div class="px-4 pb-4 pt-1">
+        <button
+          id="a11y-reset"
+          aria-label="Barcha maxsus imkoniyat sozlamalarini standartga qaytarish"
+          class="w-full h-9 flex items-center justify-center gap-1.5 text-xs font-semibold text-slate-400 hover:text-brand-600 hover:bg-brand-50 rounded-xl transition-all duration-150"
+        >
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+          </svg>
+          Standartga qaytarish
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════
+     HEADER / NAVIGATSIYA
+════════════════════════════════════════════════════ -->
+  <header id="navbar"
+    class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white/95 backdrop-blur-md border-b border-slate-100 shadow-sm">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="flex items-center justify-between h-18 py-4">
+
+        <!-- Logo -->
+        <a href="/" class="flex-shrink-0">
+          <img src="./assets/img/noroot.png" alt="Rahimov School Logo" class="h-10 w-auto object-contain">
+        </a>
+
+        <!-- Desktop Nav -->
+        <nav class="hidden lg:flex items-center gap-6">
+          <a href="#results"
+            class="nav-link text-sm font-medium text-slate-600 hover:text-brand-600 transition-colors">Nima uchun
+            biz?</a>
+
+          <!-- Maktab dropdown -->
+          <div class="relative nav-dropdown" id="dd-maktab">
+            <button onclick="toggleDropdown('dd-maktab')"
+              class="nav-link text-sm font-medium text-slate-600 hover:text-brand-600 transition-colors flex items-center gap-1">
+              Maktab
+              <svg class="w-3.5 h-3.5 transition-transform" id="dd-maktab-chevron" fill="none" stroke="currentColor"
+                stroke-width="2.5" viewBox="0 0 24 24">
+                <path d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div id="dd-maktab-panel"
+              class="dd-panel absolute top-full left-0 mt-2 w-48 bg-white border border-slate-100 rounded-2xl shadow-lg py-1.5 hidden z-50">
+              <a href="#about"
+                class="block px-4 py-2.5 text-sm text-slate-600 hover:text-brand-600 hover:bg-brand-50 transition-colors">Maktab
+                haqida</a>
+              <a href="team.html"
+                class="block px-4 py-2.5 text-sm text-slate-600 hover:text-brand-600 hover:bg-brand-50 transition-colors">Jamoa</a>
+              <a href="articles.html"
+                class="block px-4 py-2.5 text-sm text-slate-600 hover:text-brand-600 hover:bg-brand-50 transition-colors">Maqolalar</a>
+            </div>
+          </div>
+
+          <a href="#pricing"
+            class="nav-link text-sm font-medium text-slate-600 hover:text-brand-600 transition-colors">Stipendiyalar</a>
+
+          <!-- Filiallar dropdown -->
+          <div class="relative nav-dropdown" id="dd-filial">
+            <button onclick="toggleDropdown('dd-filial')"
+              class="nav-link text-sm font-medium text-slate-600 hover:text-brand-600 transition-colors flex items-center gap-1">
+              Filiallar
+              <svg class="w-3.5 h-3.5 transition-transform" id="dd-filial-chevron" fill="none" stroke="currentColor"
+                stroke-width="2.5" viewBox="0 0 24 24">
+                <path d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div id="dd-filial-panel"
+              class="dd-panel absolute top-full left-0 mt-2 w-56 bg-white border border-slate-100 rounded-2xl shadow-lg py-1.5 hidden z-50">
+              <a href="#contact"
+                class="block px-4 py-2.5 text-sm text-slate-600 hover:text-brand-600 hover:bg-brand-50 transition-colors">Toshkent
+                — Lokomotiv</a>
+              <a href="#contact"
+                class="block px-4 py-2.5 text-sm text-slate-600 hover:text-brand-600 hover:bg-brand-50 transition-colors">Toshkent
+                — Ibn Sino</a>
+              <a href="#contact"
+                class="flex items-center justify-between px-4 py-2.5 text-sm text-slate-600 hover:text-brand-600 hover:bg-brand-50 transition-colors">
+                Farg'ona filiali
+                <span
+                  class="text-[10px] font-bold text-brand-600 bg-brand-50 border border-brand-100 px-1.5 py-0.5 rounded-full">Yangi</span>
+              </a>
+            </div>
+          </div>
+
+          <a href="contact.html"
+            class="inline-flex items-center px-4 py-2 border-2 border-slate-200 hover:border-brand-500 text-sm font-semibold text-slate-600 hover:text-brand-600 rounded-xl transition-all">Ota-onalar
+            uchun</a>
+        </nav>
+
+        <!-- CTA -->
+        <div class="hidden lg:flex items-center gap-2.5">
+          <!-- Accessibility toggle — lan'dan oldin -->
+          <button
+            id="a11y-toggle"
+            aria-expanded="false"
+            aria-controls="a11y-panel"
+            aria-label="Maxsus imkoniyatlar menyusini ochish"
+            title="Maxsus imkoniyatlar"
+            class="w-9 h-9 flex items-center justify-center rounded-xl text-slate-500 hover:text-brand-600 bg-slate-100 hover:bg-brand-50 border border-transparent transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500"
+          >
+            <svg viewBox="0 0 24 24" fill="currentColor" class="w-[18px] h-[18px]" aria-hidden="true">
+              <circle cx="12" cy="5" r="2.2"/>
+              <path d="M17.5 9.5h-11a.65.65 0 000 1.3H10l-.9 7.7H11l.5-5h1l.5 5h1.9L14 10.8h3.5a.65.65 0 000-1.3z"/>
+            </svg>
+          </button>
+
+          <!-- Lang switcher dropdown -->
+          <div class="relative nav-dropdown">
+            <button onclick="toggleDropdown('lang')"
+              class="flex items-center gap-1.5 px-3 py-2 text-sm font-semibold text-slate-600 hover:text-brand-600 bg-slate-100 hover:bg-brand-50 rounded-xl transition-all">
+              <span id="lang-current">Uz</span>
+              <svg id="lang-chevron" class="w-3.5 h-3.5 text-slate-400 transition-transform" fill="none"
+                stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <path d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div id="lang-panel"
+              class="dd-panel hidden absolute top-full right-0 mt-2 w-32 bg-white border border-slate-200 rounded-xl shadow-lg shadow-slate-900/10 overflow-hidden z-50">
+              <button onclick="setLang('uz')"
+                class="lang-option w-full text-left px-4 py-2.5 text-sm font-medium text-brand-600 bg-brand-50 hover:bg-brand-50 transition-colors">O'zbekcha</button>
+              <button onclick="setLang('ru')"
+                class="lang-option w-full text-left px-4 py-2.5 text-sm font-medium text-slate-500 hover:bg-slate-50 hover:text-slate-700 transition-colors">Русский</button>
+              <button onclick="setLang('en')"
+                class="lang-option w-full text-left px-4 py-2.5 text-sm font-medium text-slate-500 hover:bg-slate-50 hover:text-slate-700 transition-colors">English</button>
+            </div>
+          </div>
+
+          <!-- Phone expanding button -->
+          <a href="tel:+998781130005"
+            class="group relative inline-flex items-center h-9 w-9 hover:w-[148px] overflow-hidden bg-slate-100 hover:bg-brand-500 rounded-xl transition-all duration-300 ease-in-out text-slate-500 hover:text-white">
+            <span class="flex-shrink-0 w-9 h-full flex items-center justify-center">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path
+                  d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.02 1.18a2 2 0 012-2.18h3a2 2 0 012 1.72c.13 1 .36 1.98.7 2.91a2 2 0 01-.45 2.11L6.91 6.5a16 16 0 006.59 6.59l.77-.77a2 2 0 012.11-.45c.93.34 1.91.57 2.91.7A2 2 0 0122 16.92z" />
+              </svg>
+            </span>
+            <span
+              class="text-xs font-semibold whitespace-nowrap pr-3 opacity-0 group-hover:opacity-100 translate-x-1 group-hover:translate-x-0 transition-all duration-200 delay-100">
+              78 113 0005
+            </span>
+          </a>
+
+          <a href="#contact"
+            class="px-5 py-2.5 bg-brand-500 hover:bg-brand-600 text-white text-sm font-semibold rounded-xl transition-colors shadow-sm">
+            Ariza topshirish
+          </a>
+        </div>
+
+        <!-- Mobile: Ariza topshirish -->
+        <a href="#contact"
+          class="lg:hidden px-4 py-2 bg-brand-500 hover:bg-brand-600 text-white text-sm font-semibold rounded-xl transition-colors shadow-sm">
+          Ariza
+        </a>
+
+        <!-- Mobile burger -->
+        <button id="mobileBtn" class="lg:hidden p-2 rounded-lg text-slate-600 hover:bg-slate-100 transition-colors">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile menu -->
+    <div id="mobileMenu" class="hidden lg:hidden border-t border-slate-100 bg-white px-6 pb-4 space-y-0.5">
+      <a href="#results" class="block py-2.5 text-sm font-medium text-slate-700 hover:text-brand-600">Nima uchun
+        biz?</a>
+
+      <!-- Mobile: Maktab -->
+      <div>
+        <button onclick="toggleMobileDD('mob-maktab')"
+          class="w-full flex items-center justify-between py-2.5 text-sm font-medium text-slate-700 hover:text-brand-600 transition-colors">
+          Maktab
+          <svg id="mob-maktab-icon" class="w-4 h-4 text-slate-400 transition-transform" fill="none"
+            stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        <div id="mob-maktab" class="hidden pl-4 space-y-0.5 pb-1">
+          <a href="#about" class="block py-2 text-sm text-slate-500 hover:text-brand-600">Maktab haqida</a>
+          <a href="team.html" class="block py-2 text-sm text-slate-500 hover:text-brand-600">Jamoa</a>
+          <a href="articles.html" class="block py-2 text-sm text-slate-500 hover:text-brand-600">Maqolalar</a>
+        </div>
+      </div>
+
+      <a href="#pricing" class="block py-2.5 text-sm font-medium text-slate-700 hover:text-brand-600">Stipendiyalar</a>
+
+      <!-- Mobile: Filiallar -->
+      <div>
+        <button onclick="toggleMobileDD('mob-filial')"
+          class="w-full flex items-center justify-between py-2.5 text-sm font-medium text-slate-700 hover:text-brand-600 transition-colors">
+          Filiallar
+          <svg id="mob-filial-icon" class="w-4 h-4 text-slate-400 transition-transform" fill="none"
+            stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        <div id="mob-filial" class="hidden pl-4 space-y-0.5 pb-1">
+          <a href="#contact" class="block py-2 text-sm text-slate-500 hover:text-brand-600">Toshkent — Lokomotiv</a>
+          <a href="#contact" class="block py-2 text-sm text-slate-500 hover:text-brand-600">Toshkent — Ibn Sino</a>
+          <a href="#contact" class="flex items-center gap-2 py-2 text-sm text-slate-500 hover:text-brand-600">
+            Farg'ona filiali
+            <span
+              class="text-[10px] font-bold text-brand-600 bg-brand-50 border border-brand-100 px-1.5 py-0.5 rounded-full">Yangi</span>
+          </a>
+        </div>
+      </div>
+
+      <a href="contact.html" class="block py-2.5 text-sm font-medium text-slate-700 hover:text-brand-600">Ota-onalar
+        uchun</a>
+      <div class="pt-3 border-t border-slate-100">
+        <a href="#contact"
+          class="block w-full text-center px-5 py-3 bg-brand-500 hover:bg-brand-600 text-white text-sm font-semibold rounded-xl transition-colors">
+          Ariza topshirish
+        </a>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- ═══════════════════════════════════════════════════
+     HERO SECTION
+════════════════════════════════════════════════════ -->
+  <section class="pt-24 pb-16 lg:pt-32 lg:pb-24 bg-[#F8FAFC] relative overflow-hidden geo-pattern">
+
+    <!-- Fon dekoratsiya (parallax) -->
+    <div data-parallax="0.18"
+      class="absolute top-16 right-0 w-96 h-96 bg-brand-500 rounded-full opacity-[0.06] blur-3xl pointer-events-none">
+    </div>
+    <div data-parallax="0.1"
+      class="absolute -bottom-20 -left-20 w-80 h-80 bg-slate-900 rounded-full opacity-[0.04] blur-3xl pointer-events-none">
+    </div>
+    <div data-parallax="0.25"
+      class="absolute top-1/2 left-1/2 w-64 h-64 bg-brand-400 rounded-full opacity-[0.03] blur-3xl pointer-events-none">
+    </div>
+
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+
+        <!-- CHAP: Matn -->
+        <div class="space-y-7 reveal-left">
+
+          <!-- Badge -->
+          <div
+            class="badge-pop inline-flex items-center gap-2 px-4 py-1.5 bg-brand-50 border border-brand-100 rounded-full">
+            <div class="w-2 h-2 bg-brand-500 rounded-full animate-pulse"></div>
+            <span class="text-xs font-semibold text-brand-700 tracking-wide">Yangi qabul 2025–2026</span>
+          </div>
+
+          <!-- Sarlavha -->
+          <h1 class="text-4xl lg:text-5xl xl:text-[54px] font-extrabold text-slate-900 leading-tight tracking-tight">
+            100% bitiruvchilarimiz
+            <span class="relative inline-block">
+              talaba
+              <svg class="absolute -bottom-1 left-0 w-full" height="6" viewBox="0 0 200 6" preserveAspectRatio="none">
+                <path d="M0 5 Q100 0 200 5" stroke="#07CA68" stroke-width="3" fill="none" stroke-linecap="round" />
+              </svg>
+            </span>
+            <br>bo'lishdi!
+          </h1>
+
+          <!-- Tavsif -->
+          <p class="text-lg text-slate-600 leading-[1.8] max-w-xl">
+            Zamonaviy o'qitish texnikasi, amaliy tajriba va innovatsion yondashuv asosida farzandingizning
+            psixologik, aqliy va jismoniy rivojlanishini ta'minlaymiz.
+          </p>
+
+          <!-- Tugmalar -->
+          <div class="flex flex-wrap gap-4 pt-1">
+            <a href="#contact"
+              class="inline-flex items-center gap-2.5 px-7 py-3.5 bg-brand-500 hover:bg-brand-600 text-white text-sm font-semibold rounded-xl transition-colors shadow-md shadow-brand-500/25">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              Ariza topshirish
+            </a>
+            <a href="#about"
+              class="inline-flex items-center gap-2.5 px-7 py-3.5 bg-white hover:bg-slate-50 border-2 border-brand-500 text-brand-600 text-sm font-semibold rounded-xl transition-colors">
+              Batafsil
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <path d="M9 18l6-6-6-6" />
+              </svg>
+            </a>
+          </div>
+
+          <!-- Kichik statistika -->
+          <div class="flex items-center gap-8 pt-3 border-t border-slate-200">
+            <div class="slide-up" style="animation-delay:0.4s">
+              <p class="text-2xl font-extrabold text-slate-900 font-heading leading-none tabular-nums" data-count="76"
+                data-suffix="+">76+</p>
+              <p class="text-xs text-slate-500 mt-0.5">IELTS 7.0–8.5</p>
+            </div>
+            <div class="w-px h-10 bg-slate-200"></div>
+            <div class="slide-up" style="animation-delay:0.55s">
+              <p class="text-2xl font-extrabold text-slate-900 font-heading leading-none tabular-nums" data-count="1340"
+                data-suffix="+">1340+</p>
+              <p class="text-xs text-slate-500 mt-0.5">Kitob topshirildi</p>
+            </div>
+            <div class="w-px h-10 bg-slate-200"></div>
+            <div class="slide-up" style="animation-delay:0.7s">
+              <p class="text-2xl font-extrabold text-slate-900 font-heading leading-none tabular-nums" data-count="21"
+                data-suffix="+">21+</p>
+              <p class="text-xs text-slate-500 mt-0.5">IELTS 2025–2026</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- O'NG: Rasm -->
+        <div class="relative reveal-right">
+          <!-- Asosiy rasm placeholder (haqiqiy rasm bilan almashtiring) -->
+          <div class="relative rounded-3xl overflow-hidden shadow-2xl shadow-slate-900/15">
+            <div class="text-center space-y-3">
+              <img src="./assets/img/DSC03244.jpeg" alt="Maktab rasm"
+                class="mx-auto rounded-lg object-cover  shadow-sm">
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════
+     YUTUQLAR / STATISTIKA
+════════════════════════════════════════════════════ -->
+  <section id="results" class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+
+      <!-- Sarlavha -->
+      <div class="text-center mb-14 reveal">
+        <p class="text-xs font-semibold text-brand-600 uppercase tracking-[0.12em] mb-3">Isbotlangan natijalar</p>
+        <h2 class="text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
+          Raqamlar bizning<br>javobimiz
+        </h2>
+        <p class="text-base text-slate-500 mt-4 max-w-xl mx-auto leading-[1.8]">Xalqaro imtihonlar va sertifikatlar
+          bilan tasdiqlangan
+          natijalar. 21+ sertifikat faqat 2025–2026 o'quv yilida.</p>
+      </div>
+
+      <!-- Statistika kartochkalari (toza, bir xil tizim) -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-5">
+
+        <!-- IELTS -->
+        <div
+          class="stat-card reveal-scale bg-white border border-slate-200 rounded-2xl p-6 text-center hover:border-brand-200"
+          style="transition-delay:0ms">
+          <div class="w-12 h-12 bg-brand-50 rounded-xl flex items-center justify-center mx-auto mb-4">
+            <svg class="w-6 h-6 text-brand-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path
+                d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
+            </svg>
+          </div>
+          <p class="text-3xl font-extrabold text-slate-900 font-heading leading-none tabular-nums" data-count="76"
+            data-suffix="+">76+</p>
+          <p class="text-sm font-semibold text-slate-700 leading-tight mt-1.5">IELTS</p>
+          <p class="text-xs text-slate-400 leading-normal mt-1.5">7.0 / 7.5 / 8.0 ball</p>
+        </div>
+
+        <!-- SAT -->
+        <div
+          class="stat-card reveal-scale bg-white border border-slate-200 rounded-2xl p-6 text-center hover:border-brand-200"
+          style="transition-delay:100ms">
+          <div class="w-12 h-12 bg-brand-50 rounded-xl flex items-center justify-center mx-auto mb-4">
+            <svg class="w-6 h-6 text-brand-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path
+                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+            </svg>
+          </div>
+          <p class="text-3xl font-extrabold text-slate-900 font-heading leading-none tabular-nums" data-count="30"
+            data-suffix="+">30+</p>
+          <p class="text-sm font-semibold text-slate-700 leading-tight mt-1.5">SAT</p>
+          <p class="text-xs text-slate-400 leading-normal mt-1.5">1510 / 1530 / 1540 natijalar</p>
+        </div>
+
+        <!-- Kitobxonlik -->
+        <div
+          class="stat-card reveal-scale bg-white border border-slate-200 rounded-2xl p-6 text-center hover:border-brand-200"
+          style="transition-delay:200ms">
+          <div class="w-12 h-12 bg-brand-50 rounded-xl flex items-center justify-center mx-auto mb-4">
+            <svg class="w-6 h-6 text-brand-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path
+                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+            </svg>
+          </div>
+          <p class="text-3xl font-extrabold text-slate-900 font-heading leading-none tabular-nums" data-count="1340"
+            data-suffix="+">1340+</p>
+          <p class="text-sm font-semibold text-slate-700 leading-tight mt-1.5">Kitob topshirildi</p>
+          <p class="text-xs text-slate-400 leading-normal mt-1.5">56% o'quvchi muntazam o'qiydi</p>
+        </div>
+
+        <!-- Olimpiada -->
+        <div
+          class="stat-card reveal-scale bg-white border border-slate-200 rounded-2xl p-6 text-center hover:border-brand-200"
+          style="transition-delay:300ms">
+          <div class="w-12 h-12 bg-brand-50 rounded-xl flex items-center justify-center mx-auto mb-4">
+            <svg class="w-6 h-6 text-brand-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path
+                d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
+            </svg>
+          </div>
+          <p class="text-3xl font-extrabold text-slate-900 font-heading leading-none tabular-nums" data-count="25"
+            data-suffix="+">25+</p>
+          <p class="text-sm font-semibold text-slate-700 leading-tight mt-1.5">Arab tili CEFR</p>
+          <p class="text-xs text-slate-400 leading-normal mt-1.5">C1 / B2 / B1 sertifikat</p>
+        </div>
+      </div>
+
+      <!-- Progress bar (qo'shimcha ma'lumot) -->
+      <div class="mt-10 bg-slate-50 border border-slate-100 rounded-2xl p-7 reveal">
+        <div class="grid md:grid-cols-3 gap-7">
+          <div>
+            <div class="flex justify-between mb-2">
+              <span class="text-sm font-semibold text-slate-700">Bitiruvchilar — talaba</span>
+              <span class="text-sm font-bold text-brand-600">100%</span>
+            </div>
+            <div class="h-2 bg-slate-200 rounded-full overflow-hidden">
+              <div class="progress-bar h-full bg-brand-500 rounded-full" style="width:0%;transition:width 1.2s ease"
+                data-width="100%"></div>
+            </div>
+            <p class="text-xs text-slate-400 leading-normal mt-1.5">Barcha bitiruvchilarimiz oliy ta'limga kirdi</p>
+          </div>
+          <div>
+            <div class="flex justify-between mb-2">
+              <span class="text-sm font-semibold text-slate-700">IELTS 7.0+ olganlar</span>
+              <span class="text-sm font-bold text-brand-600">76+</span>
+            </div>
+            <div class="h-2 bg-slate-200 rounded-full overflow-hidden">
+              <div class="progress-bar h-full bg-brand-500 rounded-full"
+                style="width:0%;transition:width 1.2s ease 0.2s" data-width="85%"></div>
+            </div>
+            <p class="text-xs text-slate-400 leading-normal mt-1.5">Shulardan 21+ sertifikat 2025–2026 yilda</p>
+          </div>
+          <div>
+            <div class="flex justify-between mb-2">
+              <span class="text-sm font-semibold text-slate-700">Muntazam kitob o'quvchilar</span>
+              <span class="text-sm font-bold text-brand-600">56%</span>
+            </div>
+            <div class="h-2 bg-slate-200 rounded-full overflow-hidden">
+              <div class="progress-bar h-full bg-brand-500 rounded-full"
+                style="width:0%;transition:width 1.2s ease 0.4s" data-width="56%"></div>
+            </div>
+            <p class="text-xs text-slate-400 leading-normal mt-1.5">O'tgan yilgi statistikaga ko'ra</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════
+     MAKTAB HAQIDA
+════════════════════════════════════════════════════ -->
+  <section id="about" class="py-20 bg-[#F8FAFC]">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-14 items-center">
+
+        <!-- Chap: Rasm bloki -->
+        <div class="relative reveal-left">
+          <img src="./assets/img/DSC03244.jpeg" alt="Maktab binosi" class="rounded-2xl shadow-xl" />
+
+          <!-- Overlap karta -->
+          <!-- <div
+            class="absolute -bottom-5 -right-5 bg-white rounded-2xl shadow-xl p-5 border border-slate-100 max-w-[200px]">
+            <div class="flex items-center gap-2 mb-3">
+              <div class="w-2 h-2 bg-brand-500 rounded-full"></div>
+              <p class="text-xs font-semibold text-slate-500">2024 yil natijasi</p>
+            </div>
+            <p class="text-sm font-medium text-slate-700 leading-snug">
+              <span class="text-xl font-extrabold text-slate-900 font-heading">12</span> nafar<br>
+              O'zbekiston olimpiadasi g'olibi
+            </p>
+          </div> -->
+        </div>
+
+        <!-- O'ng: Matn -->
+        <div class="space-y-6 reveal-right">
+          <div>
+            <p class="text-xs font-semibold text-brand-600 uppercase tracking-[0.12em] mb-3">Biz haqimizda</p>
+            <h2 class="text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
+              Har bir o'quvchida<br>yashirin iste'dod bor
+            </h2>
+          </div>
+
+          <p class="text-base text-slate-600 leading-[1.8]">
+            Maktabimiz zamonaviy o'qitish texnikasi, amaliy o'rganish tajribasi va tarbiyaviy muhitni o'z ichiga olgan
+            holda ta'limga innovatsion yondashuvni ta'minlashga qaratilgan. Rahimov School o'quvchilarga o'z
+            imkoniyatlarini to'liq ochib berish va har tomonlama barkamol shaxs bo'lib yetishishlariga yordam beradi.
+          </p>
+
+          <div class="space-y-4">
+            <div class="flex gap-4">
+              <div class="w-9 h-9 bg-brand-50 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-4 h-4 text-brand-500" fill="none" stroke="currentColor" stroke-width="2.5"
+                  viewBox="0 0 24 24">
+                  <path d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <div>
+                <p class="text-sm font-semibold text-slate-800 leading-snug">Chuqurlashtirilgan fanlar</p>
+                <p class="text-sm text-slate-500 leading-relaxed mt-0.5">Ingliz tili, Matematika.</p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="w-9 h-9 bg-brand-50 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-4 h-4 text-brand-500" fill="none" stroke="currentColor" stroke-width="2.5"
+                  viewBox="0 0 24 24">
+                  <path d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <div>
+                <p class="text-sm font-semibold text-slate-800 leading-snug">Ta'lim tili</p>
+                <ul class="text-sm text-slate-500 leading-relaxed mt-0.5 space-y-0.5">
+                  <li>Boshlang'ich sinf: O'zbek va rus tillari.</li>
+                  <li>5-sinfdan boshlab: Faqat o'zbek tili.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <a href="#contact"
+            class="inline-flex items-center gap-2.5 px-7 py-3.5 bg-brand-500 hover:bg-brand-600 text-white text-sm font-semibold rounded-xl transition-colors shadow-md shadow-brand-500/20">
+            Tanishtiruv darsiga yozilish
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+              <path d="M9 18l6-6-6-6" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════
+     DARSDAN TASHQARI FAOLIYAT
+════════════════════════════════════════════════════ -->
+  <section id="programs" class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+
+      <div class="text-center mb-14 reveal">
+        <p class="text-xs font-semibold text-brand-600 uppercase tracking-[0.12em] mb-3">Darsdan tashqari</p>
+        <h2 class="text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
+          Maktab hayoti darsdan<br>ham katta
+        </h2>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+
+        <!-- Sport to'garaklari -->
+        <div
+          class="reveal bg-white border border-slate-200 rounded-2xl p-6 hover:border-brand-200 hover:shadow-lg transition-all duration-250 group"
+          style="transition-delay:0ms">
+          <div class="w-12 h-12 bg-slate-100 rounded-xl flex items-center justify-center mb-5
+                      group-hover:bg-brand-500 transition-colors duration-200">
+            <svg class="w-6 h-6 text-slate-600 group-hover:text-white transition-colors" fill="none"
+              stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-slate-900 leading-snug mb-3">Sport to'garaklari</h3>
+          <ul class="space-y-2">
+            <li class="flex items-center gap-2.5 text-sm text-slate-500">
+              <div class="w-1.5 h-1.5 bg-brand-500 rounded-full flex-shrink-0"></div>Shaxmat
+            </li>
+            <li class="flex items-center gap-2.5 text-sm text-slate-500">
+              <div class="w-1.5 h-1.5 bg-brand-500 rounded-full flex-shrink-0"></div>Taekwondo
+            </li>
+            <li class="flex items-center gap-2.5 text-sm text-slate-500">
+              <div class="w-1.5 h-1.5 bg-brand-500 rounded-full flex-shrink-0"></div>Futbol
+            </li>
+            <li class="flex items-center gap-2.5 text-sm text-slate-500">
+              <div class="w-1.5 h-1.5 bg-brand-500 rounded-full flex-shrink-0"></div>Volleybol
+            </li>
+            <li class="flex items-center gap-2.5 text-sm text-slate-500">
+              <div class="w-1.5 h-1.5 bg-brand-500 rounded-full flex-shrink-0"></div>Stol tennisi
+            </li>
+          </ul>
+        </div>
+
+        <!-- Ota-onalar bilan aloqa -->
+        <div
+          class="reveal bg-white border border-slate-200 rounded-2xl p-6 hover:border-brand-200 hover:shadow-lg transition-all duration-250 group"
+          style="transition-delay:100ms">
+          <div class="w-12 h-12 bg-slate-100 rounded-xl flex items-center justify-center mb-5
+                      group-hover:bg-brand-500 transition-colors duration-200">
+            <svg class="w-6 h-6 text-slate-600 group-hover:text-white transition-colors" fill="none"
+              stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path
+                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-slate-900 leading-snug mb-3">Ota-onalar bilan aloqa</h3>
+          <ul class="space-y-3">
+            <li class="flex items-start gap-2.5 text-sm text-slate-500">
+              <div class="w-1.5 h-1.5 bg-brand-500 rounded-full flex-shrink-0 mt-1.5"></div>
+              Psixologimiz har oy ota-onalar bilan bog'lanib fikr almashadi
+            </li>
+            <li class="flex items-start gap-2.5 text-sm text-slate-500">
+              <div class="w-1.5 h-1.5 bg-brand-500 rounded-full flex-shrink-0 mt-1.5"></div>
+              Kurator boshlang'ich sinf ota-onalari bilan aloqada bo'ladi
+            </li>
+            <li class="flex items-start gap-2.5 text-sm text-slate-500">
+              <div class="w-1.5 h-1.5 bg-brand-500 rounded-full flex-shrink-0 mt-1.5"></div>
+              O'rta va katta sinflar uchun tarbiyachi ota-onalar bilan ishlaydi
+            </li>
+            <li class="flex items-start gap-2.5 text-sm text-slate-500">
+              <div class="w-1.5 h-1.5 bg-brand-500 rounded-full flex-shrink-0 mt-1.5"></div>
+              Yilda faqatgina <strong class="text-slate-700">2 marta</strong> ota-onalar majlisi
+            </li>
+          </ul>
+        </div>
+
+        <!-- Madaniy sayohatlar -->
+        <div
+          class="reveal bg-white border border-slate-200 rounded-2xl p-6 hover:border-brand-200 hover:shadow-lg transition-all duration-250 group"
+          style="transition-delay:200ms">
+          <div class="w-12 h-12 bg-slate-100 rounded-xl flex items-center justify-center mb-5
+                      group-hover:bg-brand-500 transition-colors duration-200">
+            <svg class="w-6 h-6 text-slate-600 group-hover:text-white transition-colors" fill="none"
+              stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path
+                d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-slate-900 leading-snug mb-3">Madaniy sayohatlar</h3>
+          <ul class="space-y-3">
+            <li class="flex items-start gap-2.5 text-sm text-slate-500">
+              <div class="w-1.5 h-1.5 bg-brand-500 rounded-full flex-shrink-0 mt-1.5"></div>
+              Muzey, tog' va ma'rifiy ko'ngil-ochar maskanlarga ekskursiyalar
+            </li>
+            <li class="flex items-start gap-2.5 text-sm text-slate-500">
+              <div class="w-1.5 h-1.5 bg-brand-500 rounded-full flex-shrink-0 mt-1.5"></div>
+              Zavod, o'quv markazlari kabi joylarga sayohatlar
+            </li>
+            <li class="flex items-start gap-2.5 text-sm text-slate-500">
+              <div class="w-1.5 h-1.5 bg-brand-500 rounded-full flex-shrink-0 mt-1.5"></div>
+              Madaniy sayohatlar
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════
+     QABUL JARAYONI
+════════════════════════════════════════════════════ -->
+  <section id="admission" class="py-20 bg-[#F8FAFC]">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+
+      <div class="text-center mb-14 reveal">
+        <p class="text-xs font-semibold text-brand-600 uppercase tracking-[0.12em] mb-3">Qabul jarayoni</p>
+        <h2 class="text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
+          Farzandingizni maktabimizga<br>qanday qabul qilamiz?
+        </h2>
+        <p class="text-base text-slate-500 mt-4 max-w-xl mx-auto leading-[1.8]">Qabul 3 bosqichda o'tadi — har bir
+          bosqich farzandingizning
+          salohiyatini yaxshiroq anglashga yordam beradi.</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8 relative">
+
+        <!-- Connecting line (desktop) -->
+        <div class="hidden md:block absolute top-16 left-1/4 right-1/4 h-0.5 bg-brand-100 z-0"></div>
+
+        <!-- Qadam 1 -->
+        <div
+          class="relative reveal-scale bg-white border border-slate-200 rounded-2xl p-8 text-center hover:border-brand-200 hover:shadow-md transition-all"
+          style="transition-delay:0ms">
+          <div
+            class="w-14 h-14 bg-brand-500 rounded-2xl flex items-center justify-center mx-auto mb-5 shadow-md shadow-brand-500/25">
+            <span class="text-xl font-extrabold text-white">01</span>
+          </div>
+          <h3 class="text-xl font-bold text-slate-900 leading-snug mb-3">Belgilangan fanlardan imtihon</h3>
+          <p class="text-sm text-slate-500 leading-[1.65]">Farzandingizni imtihon qilib, uni aqliy salohiyatini
+            sinovdan o'tkazamiz.</p>
+        </div>
+
+        <!-- Qadam 2 -->
+        <div
+          class="relative reveal-scale bg-white border border-brand-200 rounded-2xl p-8 text-center shadow-md shadow-brand-500/10"
+          style="transition-delay:120ms">
+          <div
+            class="w-14 h-14 bg-brand-500 rounded-2xl flex items-center justify-center mx-auto mb-5 shadow-md shadow-brand-500/25">
+            <span class="text-xl font-extrabold text-white">02</span>
+          </div>
+          <h3 class="text-xl font-bold text-slate-900 leading-snug mb-3">Psixolog bilan suhbat</h3>
+          <p class="text-sm text-slate-500 leading-[1.65]">Og'zaki suhbat jarayonida asosan bolaning IQ darajasi,
+            axloqi va tasavvur qobiliyatlarini tekshiramiz. Psixologimiz ota-ona bilan ham suhbat qiladi.</p>
+        </div>
+
+        <!-- Qadam 3 -->
+        <div
+          class="relative reveal-scale bg-white border border-slate-200 rounded-2xl p-8 text-center hover:border-brand-200 hover:shadow-md transition-all"
+          style="transition-delay:240ms">
+          <div
+            class="w-14 h-14 bg-brand-500 rounded-2xl flex items-center justify-center mx-auto mb-5 shadow-md shadow-brand-500/25">
+            <span class="text-xl font-extrabold text-white">03</span>
+          </div>
+          <h3 class="text-xl font-bold text-slate-900 leading-snug mb-3">Hujjat topshirish</h3>
+          <p class="text-sm text-slate-500 leading-[1.65]">Yuqoridagi bosqichlardan muvaffaqqiyatli o'tgan o'quvchilar
+            hujjat topshirish jarayoniga o'tishlari mumkin bo'ladi.</p>
+        </div>
+
+      </div>
+
+      <div class="text-center mt-10">
+        <a href="#contact"
+          class="inline-flex items-center gap-2.5 px-8 py-3.5 bg-brand-500 hover:bg-brand-600 text-white text-sm font-semibold rounded-xl transition-colors shadow-md shadow-brand-500/20">
+          Ariza topshirish
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path d="M9 18l6-6-6-6" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════
+     NARXLAR VA STIPENDIYALAR
+════════════════════════════════════════════════════ -->
+  <section id="pricing" class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+
+      <div class="text-center mb-14 reveal">
+        <p class="text-xs font-semibold text-brand-600 uppercase tracking-[0.12em] mb-3">Narxlar va stipendiyalar</p>
+        <h2 class="text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
+          Sifatli ta'lim —<br>hammabop narxda
+        </h2>
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-8 items-start">
+
+        <!-- Narx kartasi -->
+        <div class="reveal-left bg-[#F8FAFC] border border-slate-200 rounded-2xl p-8">
+          <div class="flex items-center justify-between mb-6">
+            <div>
+              <p class="text-sm font-semibold text-brand-600 uppercase tracking-wide mb-1">Oylik to'lov</p>
+              <h3 class="text-4xl font-extrabold text-slate-900 font-heading leading-none tabular-nums">6 200 000 <span
+                  class="text-xl font-semibold text-slate-500">so'm</span></h3>
+              <p class="text-sm text-slate-500 mt-1">1–11 — o'zbek sinflari uchun</p>
+            </div>
+            <div
+              class="w-14 h-14 bg-brand-50 border border-brand-100 rounded-2xl flex items-center justify-center flex-shrink-0">
+              <svg class="w-7 h-7 text-brand-500" fill="none" stroke="currentColor" stroke-width="1.8"
+                viewBox="0 0 24 24">
+                <path
+                  d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+          </div>
+          <div class="space-y-3 pt-5 border-t border-slate-200">
+            <div class="flex items-center gap-3">
+              <div class="w-5 h-5 bg-brand-100 rounded-full flex items-center justify-center flex-shrink-0">
+                <svg class="w-3 h-3 text-brand-600" fill="none" stroke="currentColor" stroke-width="3"
+                  viewBox="0 0 24 24">
+                  <path d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <p class="text-sm text-slate-600">Barcha fanlar va qo'shimcha mashg'ulotlar kiradi</p>
+            </div>
+            <div class="flex items-center gap-3">
+              <div class="w-5 h-5 bg-brand-100 rounded-full flex items-center justify-center flex-shrink-0">
+                <svg class="w-3 h-3 text-brand-600" fill="none" stroke="currentColor" stroke-width="3"
+                  viewBox="0 0 24 24">
+                  <path d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <p class="text-sm text-slate-600">Sport to'garaklari: Shaxmat, Taekwondo, Futbol, Volleybol, Stol tennis
+              </p>
+            </div>
+            <div class="flex items-center gap-3">
+              <div class="w-5 h-5 bg-brand-100 rounded-full flex items-center justify-center flex-shrink-0">
+                <svg class="w-3 h-3 text-brand-600" fill="none" stroke="currentColor" stroke-width="3"
+                  viewBox="0 0 24 24">
+                  <path d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <p class="text-sm text-slate-600">Psixolog bilan oylik ota-onalar muloqoti</p>
+            </div>
+            <div class="flex items-center gap-3">
+              <div class="w-5 h-5 bg-brand-100 rounded-full flex items-center justify-center flex-shrink-0">
+                <svg class="w-3 h-3 text-brand-600" fill="none" stroke="currentColor" stroke-width="3"
+                  viewBox="0 0 24 24">
+                  <path d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <p class="text-sm text-slate-600">Ekskursiya va madaniy sayohatlar</p>
+            </div>
+          </div>
+          <p class="text-xs text-slate-400 mt-4">* Chegirmalar ham mavjud</p>
+        </div>
+
+        <!-- Stipendiya bloki -->
+        <div class="space-y-5 reveal-right">
+          <div class="bg-brand-500 rounded-2xl p-7 text-white">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center">
+                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path
+                    d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7" />
+                </svg>
+              </div>
+              <h3 class="text-xl font-bold text-white leading-snug">Stipendiya dasturi</h3>
+            </div>
+            <p class="text-sm text-white/90 leading-relaxed mb-4">
+              Har oylik moddiy qo'llab-quvvatlov o'quvchilarning mustaqil bo'lib o'sishlariga va moliyaviy
+              savodxonliklarini oshirishlariga yordam beradi.
+            </p>
+            <div class="bg-white/15 rounded-xl p-4">
+              <p class="text-sm font-semibold text-white mb-1">Muhim fakt:</p>
+              <p class="text-sm text-white/90">IELTS va SAT sertifikatiga ega o'quvchilar <strong>deyarli
+                  bepulga</strong> o'qishadi!</p>
+            </div>
+          </div>
+
+          <div class="bg-slate-50 border border-slate-200 rounded-2xl p-6">
+            <div class="flex items-start gap-4">
+              <div
+                class="w-10 h-10 bg-amber-50 border border-amber-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5 text-amber-500" fill="none" stroke="currentColor" stroke-width="2"
+                  viewBox="0 0 24 24">
+                  <path d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                </svg>
+              </div>
+              <div>
+                <p class="text-sm font-semibold text-slate-800 mb-1">Shaxsiy kartaga o'tkaziladi</p>
+                <p class="text-sm text-slate-500 leading-[1.65]">Stipendiya o'quvchining shaxsiy kartasiga o'tkazib
+                  beriladi va uni o'quvchi o'zi xohlagancha tasarruf qilishi mumkin.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════
+     O'QITUVCHILAR
+════════════════════════════════════════════════════ -->
+  <section id="teachers" class="py-20 bg-[#F8FAFC]">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-5 mb-12 reveal">
+        <div>
+          <p class="text-xs font-semibold text-brand-600 uppercase tracking-[0.12em] mb-3">Jamoamiz</p>
+
+          <h2 class="text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
+            Eng yaxshi o'qituvchilar<br>bir joyda
+          </h2>
+        </div>
+        <a href="/team.html"
+          class="inline-flex items-center gap-2 text-sm font-semibold text-brand-600 hover:text-brand-700">
+          Barcha o'qituvchilar
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M9 18l6-6-6-6" />
+          </svg>
+        </a>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- O'qituvchi 1 -->
+        <div
+          class="reveal-scale bg-white border border-slate-200 rounded-2xl overflow-hidden hover:shadow-md transition-all group"
+          style="transition-delay:0ms">
+          <div class="aspect-square bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center">
+            <div class="w-16 h-16 bg-brand-100 rounded-full flex items-center justify-center">
+              <span class="text-2xl font-bold text-brand-700 font-heading">AN</span>
+            </div>
+          </div>
+          <div class="p-5">
+            <h4 class="text-base font-bold text-slate-900 leading-snug">Aziza Normatova</h4>
+            <p class="text-sm font-semibold text-brand-600 leading-snug mt-1">Matematika va fizika</p>
+            <p class="text-sm text-slate-500 leading-relaxed mt-2">15 yil tajriba. Oxford universiteti malaka oshirish
+              kursi bitiruvchisi.</p>
+
+          </div>
+        </div>
+
+        <!-- O'qituvchi 2 -->
+        <div
+          class="reveal-scale bg-white border border-slate-200 rounded-2xl overflow-hidden hover:shadow-md transition-all group"
+          style="transition-delay:100ms">
+          <div class="aspect-square bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center">
+            <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center">
+              <span class="text-2xl font-bold text-blue-700 font-heading">DY</span>
+            </div>
+          </div>
+          <div class="p-5">
+            <h4 class="text-base font-bold text-slate-900 leading-snug">David Yusupov</h4>
+            <p class="text-sm font-semibold text-brand-600 leading-snug mt-1">Ingliz tili (Native)</p>
+            <p class="text-sm text-slate-500 leading-relaxed mt-2">CELTA sertifikati. 8 yil O'zbekistonda faoliyat.
+              IELTS examiner.</p>
+
+          </div>
+        </div>
+
+        <!-- O'qituvchi 3 -->
+        <div
+          class="reveal-scale bg-white border border-slate-200 rounded-2xl overflow-hidden hover:shadow-md transition-all group"
+          style="transition-delay:200ms">
+          <div class="aspect-square bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center">
+            <div class="w-16 h-16 bg-violet-100 rounded-full flex items-center justify-center">
+              <span class="text-2xl font-bold text-violet-700 font-heading">MH</span>
+            </div>
+          </div>
+          <div class="p-5">
+            <h4 class="text-base font-bold text-slate-900 leading-snug">Mohira Hasanova</h4>
+            <p class="text-sm font-semibold text-brand-600 leading-snug mt-1">Kimyo va biologiya</p>
+            <p class="text-sm text-slate-500 leading-relaxed mt-2">Biokimyo fanlari nomzodi. 20 dan ortiq olimpiada
+              g'oliblarini tayyorlagan.</p>
+
+          </div>
+        </div>
+
+        <!-- O'qituvchi 4 -->
+        <div
+          class="reveal-scale bg-white border border-slate-200 rounded-2xl overflow-hidden hover:shadow-md transition-all group"
+          style="transition-delay:300ms">
+          <div class="aspect-square bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center">
+            <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center">
+              <span class="text-2xl font-bold text-green-700 font-heading">SK</span>
+            </div>
+          </div>
+          <div class="p-5">
+            <h4 class="text-base font-bold text-slate-900 leading-snug">Sardor Karimov</h4>
+            <p class="text-sm font-semibold text-brand-600 leading-snug mt-1">IT va Robototexnika</p>
+            <p class="text-sm text-slate-500 leading-relaxed mt-2">Google sertifikati. 5 yil IT sanoatida. O'quvchilarni
+              WRO ga tayyorlaydi.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════
+     MAKTAB HAYOTI — VIDEO LENTA
+════════════════════════════════════════════════════ -->
+  <section id="gallery" class="py-20 bg-[#F8FAFC] overflow-hidden">
+
+    <div class="text-center mb-12 reveal">
+      <p class="text-xs font-semibold text-brand-600 uppercase tracking-[0.12em] mb-3">Maktab hayoti</p>
+      <h2 class="text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
+        Maktabimizdan lavhalar
+      </h2>
+    </div>
+
+    <!-- YouTube Shorts ticker -->
+    <div class="relative">
+      <div
+        class="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-[#F8FAFC] to-transparent z-10 pointer-events-none">
+      </div>
+      <div
+        class="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-[#F8FAFC] to-transparent z-10 pointer-events-none">
+      </div>
+      <div class="overflow-hidden">
+        <div class="video-ticker flex gap-5 w-max" id="galleryTicker">
+
+          <!-- Karta 1 -->
+          <div class="video-card flex-shrink-0 w-52 cursor-pointer group" data-ytid="pO1k2_QQMHY"
+            onclick="openVideo(this)">
+            <div
+              class="relative rounded-2xl overflow-hidden aspect-[9/16] bg-gradient-to-br from-slate-700 to-slate-900">
+              <img src="https://img.youtube.com/vi/pO1k2_QQMHY/hqdefault.jpg" alt="Maktab hayoti 1"
+                class="absolute inset-0 w-full h-full object-cover opacity-90">
+              <div class="absolute inset-0 bg-slate-900/25 group-hover:bg-slate-900/5 transition-colors"></div>
+              <div class="absolute inset-0 flex items-center justify-center">
+                <div
+                  class="w-14 h-14 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform"
+                  style="background:rgba(255,255,255,0.15);backdrop-filter:blur(4px);border:2px solid rgba(255,255,255,0.3)">
+                  <svg class="w-6 h-6 ml-1" fill="white" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </div>
+              </div>
+              <div class="absolute top-3 left-3">
+                <div class="inline-flex items-center gap-1 bg-black/60 rounded-md px-1.5 py-0.5">
+                  <svg class="w-3 h-3" fill="white" viewBox="0 0 24 24">
+                    <path
+                      d="M19.59 6.69a4.83 4.83 0 01-3.77-2.75 12.58 12.58 0 00-2.64-.28C6.39 3.66 2 8.05 2 13.45s4.39 9.79 11.18 9.79 11.18-4.39 11.18-9.79a9.65 9.65 0 00-4.77-6.76zM10 15V9l6 3-6 3z" />
+                  </svg>
+                  <span class="text-[9px] font-bold text-white">Shorts</span>
+                </div>
+              </div>
+              <div class="absolute bottom-3 left-3 right-3">
+                <p class="text-xs font-bold text-white leading-snug drop-shadow">Maktab hayoti</p>
+                <p class="text-[10px] text-white/70 mt-0.5">Rahimov School</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Karta 2 -->
+          <div class="video-card flex-shrink-0 w-52 cursor-pointer group" data-ytid="yvsCAUaXAOM"
+            onclick="openVideo(this)">
+            <div
+              class="relative rounded-2xl overflow-hidden aspect-[9/16] bg-gradient-to-br from-brand-800 to-slate-900">
+              <img src="https://img.youtube.com/vi/yvsCAUaXAOM/hqdefault.jpg" alt="Maktab hayoti 2"
+                class="absolute inset-0 w-full h-full object-cover opacity-90">
+              <div class="absolute inset-0 bg-slate-900/25 group-hover:bg-slate-900/5 transition-colors"></div>
+              <div class="absolute inset-0 flex items-center justify-center">
+                <div
+                  class="w-14 h-14 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform"
+                  style="background:rgba(255,255,255,0.15);backdrop-filter:blur(4px);border:2px solid rgba(255,255,255,0.3)">
+                  <svg class="w-6 h-6 ml-1" fill="white" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </div>
+              </div>
+              <div class="absolute top-3 left-3">
+                <div class="inline-flex items-center gap-1 bg-black/60 rounded-md px-1.5 py-0.5">
+                  <svg class="w-3 h-3" fill="white" viewBox="0 0 24 24">
+                    <path
+                      d="M19.59 6.69a4.83 4.83 0 01-3.77-2.75 12.58 12.58 0 00-2.64-.28C6.39 3.66 2 8.05 2 13.45s4.39 9.79 11.18 9.79 11.18-4.39 11.18-9.79a9.65 9.65 0 00-4.77-6.76zM10 15V9l6 3-6 3z" />
+                  </svg>
+                  <span class="text-[9px] font-bold text-white">Shorts</span>
+                </div>
+              </div>
+              <div class="absolute bottom-3 left-3 right-3">
+                <p class="text-xs font-bold text-white leading-snug drop-shadow">Dars jarayoni</p>
+                <p class="text-[10px] text-white/70 mt-0.5">Rahimov School</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Karta 3 -->
+          <div class="video-card flex-shrink-0 w-52 cursor-pointer group" data-ytid="2E3kOqkWzIw"
+            onclick="openVideo(this)">
+            <div
+              class="relative rounded-2xl overflow-hidden aspect-[9/16] bg-gradient-to-br from-blue-900 to-slate-900">
+              <img src="https://img.youtube.com/vi/2E3kOqkWzIw/hqdefault.jpg" alt="Maktab hayoti 3"
+                class="absolute inset-0 w-full h-full object-cover opacity-90">
+              <div class="absolute inset-0 bg-slate-900/25 group-hover:bg-slate-900/5 transition-colors"></div>
+              <div class="absolute inset-0 flex items-center justify-center">
+                <div
+                  class="w-14 h-14 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform"
+                  style="background:rgba(255,255,255,0.15);backdrop-filter:blur(4px);border:2px solid rgba(255,255,255,0.3)">
+                  <svg class="w-6 h-6 ml-1" fill="white" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </div>
+              </div>
+              <div class="absolute top-3 left-3">
+                <div class="inline-flex items-center gap-1 bg-black/60 rounded-md px-1.5 py-0.5">
+                  <svg class="w-3 h-3" fill="white" viewBox="0 0 24 24">
+                    <path
+                      d="M19.59 6.69a4.83 4.83 0 01-3.77-2.75 12.58 12.58 0 00-2.64-.28C6.39 3.66 2 8.05 2 13.45s4.39 9.79 11.18 9.79 11.18-4.39 11.18-9.79a9.65 9.65 0 00-4.77-6.76zM10 15V9l6 3-6 3z" />
+                  </svg>
+                  <span class="text-[9px] font-bold text-white">Shorts</span>
+                </div>
+              </div>
+              <div class="absolute bottom-3 left-3 right-3">
+                <p class="text-xs font-bold text-white leading-snug drop-shadow">Sport mashg'uloti</p>
+                <p class="text-[10px] text-white/70 mt-0.5">Rahimov School</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Karta 4 -->
+          <div class="video-card flex-shrink-0 w-52 cursor-pointer group" data-ytid="bh92Llr84jY"
+            onclick="openVideo(this)">
+            <div
+              class="relative rounded-2xl overflow-hidden aspect-[9/16] bg-gradient-to-br from-emerald-900 to-slate-900">
+              <img src="https://img.youtube.com/vi/bh92Llr84jY/hqdefault.jpg" alt="Maktab hayoti 4"
+                class="absolute inset-0 w-full h-full object-cover opacity-90">
+              <div class="absolute inset-0 bg-slate-900/25 group-hover:bg-slate-900/5 transition-colors"></div>
+              <div class="absolute inset-0 flex items-center justify-center">
+                <div
+                  class="w-14 h-14 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform"
+                  style="background:rgba(255,255,255,0.15);backdrop-filter:blur(4px);border:2px solid rgba(255,255,255,0.3)">
+                  <svg class="w-6 h-6 ml-1" fill="white" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </div>
+              </div>
+              <div class="absolute top-3 left-3">
+                <div class="inline-flex items-center gap-1 bg-black/60 rounded-md px-1.5 py-0.5">
+                  <svg class="w-3 h-3" fill="white" viewBox="0 0 24 24">
+                    <path
+                      d="M19.59 6.69a4.83 4.83 0 01-3.77-2.75 12.58 12.58 0 00-2.64-.28C6.39 3.66 2 8.05 2 13.45s4.39 9.79 11.18 9.79 11.18-4.39 11.18-9.79a9.65 9.65 0 00-4.77-6.76zM10 15V9l6 3-6 3z" />
+                  </svg>
+                  <span class="text-[9px] font-bold text-white">Shorts</span>
+                </div>
+              </div>
+              <div class="absolute bottom-3 left-3 right-3">
+                <p class="text-xs font-bold text-white leading-snug drop-shadow">Maktab tadbiri</p>
+                <p class="text-[10px] text-white/70 mt-0.5">Rahimov School</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Karta 5 -->
+          <div class="video-card flex-shrink-0 w-52 cursor-pointer group" data-ytid="MASAJ4A93Wc"
+            onclick="openVideo(this)">
+            <div
+              class="relative rounded-2xl overflow-hidden aspect-[9/16] bg-gradient-to-br from-violet-900 to-slate-900">
+              <img src="https://img.youtube.com/vi/MASAJ4A93Wc/hqdefault.jpg" alt="Maktab hayoti 5"
+                class="absolute inset-0 w-full h-full object-cover opacity-90">
+              <div class="absolute inset-0 bg-slate-900/25 group-hover:bg-slate-900/5 transition-colors"></div>
+              <div class="absolute inset-0 flex items-center justify-center">
+                <div
+                  class="w-14 h-14 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform"
+                  style="background:rgba(255,255,255,0.15);backdrop-filter:blur(4px);border:2px solid rgba(255,255,255,0.3)">
+                  <svg class="w-6 h-6 ml-1" fill="white" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </div>
+              </div>
+              <div class="absolute top-3 left-3">
+                <div class="inline-flex items-center gap-1 bg-black/60 rounded-md px-1.5 py-0.5">
+                  <svg class="w-3 h-3" fill="white" viewBox="0 0 24 24">
+                    <path
+                      d="M19.59 6.69a4.83 4.83 0 01-3.77-2.75 12.58 12.58 0 00-2.64-.28C6.39 3.66 2 8.05 2 13.45s4.39 9.79 11.18 9.79 11.18-4.39 11.18-9.79a9.65 9.65 0 00-4.77-6.76zM10 15V9l6 3-6 3z" />
+                  </svg>
+                  <span class="text-[9px] font-bold text-white">Shorts</span>
+                </div>
+              </div>
+              <div class="absolute bottom-3 left-3 right-3">
+                <p class="text-xs font-bold text-white leading-snug drop-shadow">O'quvchilar bilan</p>
+                <p class="text-[10px] text-white/70 mt-0.5">Rahimov School</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="video-card flex-shrink-0 w-52 cursor-pointer group" data-ytid="rOXmgDgOzs4"
+            onclick="openVideo(this)">
+            <div
+              class="relative rounded-2xl overflow-hidden aspect-[9/16] bg-gradient-to-br from-slate-700 to-slate-900">
+              <img src="https://img.youtube.com/vi/rOXmgDgOzs4/hqdefault.jpg" alt="Maktab hayoti"
+                class="absolute inset-0 w-full h-full object-cover opacity-90">
+              <div class="absolute inset-0 bg-slate-900/25 group-hover:bg-slate-900/5 transition-colors"></div>
+              <div class="absolute inset-0 flex items-center justify-center">
+                <div
+                  class="w-14 h-14 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform"
+                  style="background:rgba(255,255,255,0.15);backdrop-filter:blur(4px);border:2px solid rgba(255,255,255,0.3)">
+                  <svg class="w-6 h-6 ml-1" fill="white" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </div>
+              </div>
+              <div class="absolute top-3 left-3">
+                <div class="inline-flex items-center gap-1 bg-black/60 rounded-md px-1.5 py-0.5">
+                  <svg class="w-3 h-3" fill="white" viewBox="0 0 24 24">
+                    <path
+                      d="M19.59 6.69a4.83 4.83 0 01-3.77-2.75 12.58 12.58 0 00-2.64-.28C6.39 3.66 2 8.05 2 13.45s4.39 9.79 11.18 9.79 11.18-4.39 11.18-9.79a9.65 9.65 0 00-4.77-6.76zM10 15V9l6 3-6 3z" />
+                  </svg>
+                  <span class="text-[9px] font-bold text-white">Shorts</span>
+                </div>
+              </div>
+              <div class="absolute bottom-3 left-3 right-3">
+                <p class="text-xs font-bold text-white leading-snug drop-shadow">Maktab hayoti</p>
+                <p class="text-[10px] text-white/70 mt-0.5">Rahimov School</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="video-card flex-shrink-0 w-52 cursor-pointer group" data-ytid="bh92Llr84jY"
+            onclick="openVideo(this)">
+            <div
+              class="relative rounded-2xl overflow-hidden aspect-[9/16] bg-gradient-to-br from-slate-700 to-slate-900">
+              <img src="https://img.youtube.com/vi/bh92Llr84jY/hqdefault.jpg" alt="Maktab hayoti"
+                class="absolute inset-0 w-full h-full object-cover opacity-90">
+              <div class="absolute inset-0 bg-slate-900/25 group-hover:bg-slate-900/5 transition-colors"></div>
+              <div class="absolute inset-0 flex items-center justify-center">
+                <div
+                  class="w-14 h-14 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform"
+                  style="background:rgba(255,255,255,0.15);backdrop-filter:blur(4px);border:2px solid rgba(255,255,255,0.3)">
+                  <svg class="w-6 h-6 ml-1" fill="white" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </div>
+              </div>
+              <div class="absolute top-3 left-3">
+                <div class="inline-flex items-center gap-1 bg-black/60 rounded-md px-1.5 py-0.5">
+                  <svg class="w-3 h-3" fill="white" viewBox="0 0 24 24">
+                    <path
+                      d="M19.59 6.69a4.83 4.83 0 01-3.77-2.75 12.58 12.58 0 00-2.64-.28C6.39 3.66 2 8.05 2 13.45s4.39 9.79 11.18 9.79 11.18-4.39 11.18-9.79a9.65 9.65 0 00-4.77-6.76zM10 15V9l6 3-6 3z" />
+                  </svg>
+                  <span class="text-[9px] font-bold text-white">Shorts</span>
+                </div>
+              </div>
+              <div class="absolute bottom-3 left-3 right-3">
+                <p class="text-xs font-bold text-white leading-snug drop-shadow">Maktab hayoti</p>
+                <p class="text-[10px] text-white/70 mt-0.5">Rahimov School</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════
+     GALEREYA
+════════════════════════════════════════════════════ -->
+  <section id="reviews" class="py-20 bg-white overflow-hidden">
+
+    <div class="text-center mb-12 reveal">
+      <p class="text-xs font-semibold text-brand-600 uppercase tracking-[0.12em] mb-3">Mijozlar fikri</p>
+      <h2 class="text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
+        Ota-onalar nima deydi?
+      </h2>
+    </div>
+
+    <!-- Video lenta (1 qator, gorizontal) -->
+    <div class="px-6 lg:px-8">
+      <div class="flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
+        <div class="video-card flex-shrink-0 w-[658px] cursor-pointer group" data-ytid="LFl0oFgk8i8"
+          onclick="openVideo(this)">
+          <div class="relative rounded-2xl overflow-hidden aspect-video bg-slate-900">
+            <img src="https://img.youtube.com/vi/LFl0oFgk8i8/hqdefault.jpg" alt="Mijoz fikri 1"
+              class="absolute inset-0 w-full h-full object-cover opacity-90">
+            <div class="absolute inset-0 bg-slate-900/30 group-hover:bg-slate-900/10 transition-colors"></div>
+            <div class="absolute inset-0 flex items-center justify-center">
+              <div
+                class="w-16 h-16 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform"
+                style="background:rgba(255,255,255,0.15);backdrop-filter:blur(4px);border:2px solid rgba(255,255,255,0.3)">
+                <svg class="w-7 h-7 ml-1" fill="white" viewBox="0 0 24 24">
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="video-card flex-shrink-0 w-[658px] cursor-pointer group" data-ytid="nOLnkIrsreI"
+          onclick="openVideo(this)">
+          <div class="relative rounded-2xl overflow-hidden aspect-video bg-slate-900">
+            <img src="https://img.youtube.com/vi/nOLnkIrsreI/hqdefault.jpg" alt="Mijoz fikri 2"
+              class="absolute inset-0 w-full h-full object-cover opacity-90">
+            <div class="absolute inset-0 bg-slate-900/30 group-hover:bg-slate-900/10 transition-colors"></div>
+            <div class="absolute inset-0 flex items-center justify-center">
+              <div
+                class="w-16 h-16 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform"
+                style="background:rgba(255,255,255,0.15);backdrop-filter:blur(4px);border:2px solid rgba(255,255,255,0.3)">
+                <svg class="w-7 h-7 ml-1" fill="white" viewBox="0 0 24 24">
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="video-card flex-shrink-0 w-[658px] cursor-pointer group" data-ytid="bWq9aXf58rs"
+          onclick="openVideo(this)">
+          <div class="relative rounded-2xl overflow-hidden aspect-video bg-slate-900">
+            <img src="https://img.youtube.com/vi/bWq9aXf58rs/hqdefault.jpg" alt="Mijoz fikri 3"
+              class="absolute inset-0 w-full h-full object-cover opacity-90">
+            <div class="absolute inset-0 bg-slate-900/30 group-hover:bg-slate-900/10 transition-colors"></div>
+            <div class="absolute inset-0 flex items-center justify-center">
+              <div
+                class="w-16 h-16 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform"
+                style="background:rgba(255,255,255,0.15);backdrop-filter:blur(4px);border:2px solid rgba(255,255,255,0.3)">
+                <svg class="w-7 h-7 ml-1" fill="white" viewBox="0 0 24 24">
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="video-card flex-shrink-0 w-[658px] cursor-pointer group" data-ytid="lQzVnlsWezo"
+          onclick="openVideo(this)">
+          <div class="relative rounded-2xl overflow-hidden aspect-video bg-slate-900">
+            <img src="https://img.youtube.com/vi/lQzVnlsWezo/hqdefault.jpg" alt="Mijoz fikri 4"
+              class="absolute inset-0 w-full h-full object-cover opacity-90">
+            <div class="absolute inset-0 bg-slate-900/30 group-hover:bg-slate-900/10 transition-colors"></div>
+            <div class="absolute inset-0 flex items-center justify-center">
+              <div
+                class="w-16 h-16 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform"
+                style="background:rgba(255,255,255,0.15);backdrop-filter:blur(4px);border:2px solid rgba(255,255,255,0.3)">
+                <svg class="w-7 h-7 ml-1" fill="white" viewBox="0 0 24 24">
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="video-card flex-shrink-0 w-[658px] cursor-pointer group" data-ytid="YvcO-mzbzfg"
+          onclick="openVideo(this)">
+          <div class="relative rounded-2xl overflow-hidden aspect-video bg-slate-900">
+            <img src="https://img.youtube.com/vi/YvcO-mzbzfg/hqdefault.jpg" alt="Mijoz fikri 5"
+              class="absolute inset-0 w-full h-full object-cover opacity-90">
+            <div class="absolute inset-0 bg-slate-900/30 group-hover:bg-slate-900/10 transition-colors"></div>
+            <div class="absolute inset-0 flex items-center justify-center">
+              <div
+                class="w-16 h-16 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform"
+                style="background:rgba(255,255,255,0.15);backdrop-filter:blur(4px);border:2px solid rgba(255,255,255,0.3)">
+                <svg class="w-7 h-7 ml-1" fill="white" viewBox="0 0 24 24">
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Video modal -->
+    <div id="videoModal"
+      class="fixed inset-0 z-[100] bg-slate-900/90 backdrop-blur-sm items-center justify-center hidden"
+      onclick="closeVideo(event)">
+      <div class="relative w-full max-w-3xl mx-4 aspect-video bg-black rounded-2xl overflow-hidden shadow-2xl">
+        <iframe id="videoIframe" src="" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen
+          class="absolute inset-0 w-full h-full"></iframe>
+        <button id="videoCloseBtn" onclick="closeVideo()"
+          class="absolute top-4 right-4 z-20 w-9 h-9 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center transition-colors">
+          <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════
+     CTA BANNER
+════════════════════════════════════════════════════ -->
+  <section class="py-16 bg-slate-900 relative overflow-hidden">
+    <div class="absolute inset-0 geo-pattern opacity-30"></div>
+    <div data-parallax="0.15" class="absolute right-0 top-0 w-72 h-72 bg-brand-500 rounded-full opacity-10 blur-3xl">
+    </div>
+
+    <div class="max-w-4xl mx-auto px-6 text-center relative reveal">
+      <p class="text-sm font-semibold text-brand-400 uppercase tracking-widest mb-4">2025–2026 o'quv yili</p>
+      <h2 class="text-3xl lg:text-4xl font-extrabold text-white tracking-tight leading-tight mb-5">
+        Farzandingiz uchun eng yaxshi<br>ta'limni tanlang
+      </h2>
+      <p class="text-base text-slate-400 mb-8 max-w-xl mx-auto leading-relaxed">
+        Qolgan joylar cheklangan. Hoziroq ariza topshiring va bepul sinov darsi uchun vaqt belgilang.
+      </p>
+      <div class="flex flex-wrap gap-4 justify-center">
+        <a href="#contact"
+          class="inline-flex items-center gap-2.5 px-8 py-3.5 bg-brand-500 hover:bg-brand-600 text-white text-sm font-semibold rounded-xl transition-colors shadow-lg shadow-brand-500/30">
+          Ariza topshirish
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path d="M9 18l6-6-6-6" />
+          </svg>
+        </a>
+        <a href="tel:+998781130005"
+          class="inline-flex items-center gap-2.5 px-8 py-3.5 bg-white/10 hover:bg-white/20 border border-white/20 text-white text-sm font-semibold rounded-xl transition-colors">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path
+              d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.02 1.18a2 2 0 012-2.18h3a2 2 0 012 1.72c.13 1 .36 1.98.7 2.91a2 2 0 01-.45 2.11L6.91 6.5a16 16 0 006.59 6.59l.77-.77a2 2 0 012.11-.45c.93.34 1.91.57 2.91.7A2 2 0 0122 16.92z" />
+          </svg>
+          Qo'ng'iroq qilish
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════
+     ALOQA / ARIZA
+════════════════════════════════════════════════════ -->
+  <section id="contact" class="py-20 bg-[#F8FAFC]">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-14">
+
+        <!-- Chap: Ma'lumotlar -->
+        <div class="space-y-8 reveal-left">
+          <div>
+            <p class="text-xs font-semibold text-brand-600 uppercase tracking-[0.12em] mb-3">Biz bilan bog'laning</p>
+            <h2 class="text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
+              Savolingiz bormi?<br>Javob tayyorligimiz
+            </h2>
+            <p class="text-base text-slate-500 mt-4 leading-[1.8]">
+              Ish soatlarida qo'ng'iroq qiling yoki ariza to'ldiring — menejerimiz 30 daqiqa ichida qayta aloqa qiladi.
+            </p>
+          </div>
+
+          <div class="space-y-4">
+
+            <div class="flex items-start gap-4">
+              <div class="w-11 h-11 bg-brand-50 rounded-xl flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5 text-brand-600" fill="none" stroke="currentColor" stroke-width="2"
+                  viewBox="0 0 24 24">
+                  <path
+                    d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.02 1.18a2 2 0 012-2.18h3a2 2 0 012 1.72c.13 1 .36 1.98.7 2.91a2 2 0 01-.45 2.11L6.91 6.5a16 16 0 006.59 6.59l.77-.77a2 2 0 012.11-.45c.93.34 1.91.57 2.91.7A2 2 0 0122 16.92z" />
+                </svg>
+              </div>
+              <div>
+                <p class="text-sm font-semibold text-slate-800 leading-snug">Telefon</p>
+                <a href="tel:+998781130005" class="text-sm text-brand-600 hover:text-brand-700 mt-0.5 block">+998 78 113
+                  0005</a>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-4">
+              <div class="w-11 h-11 bg-brand-50 rounded-xl flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5 text-brand-600" fill="none" stroke="currentColor" stroke-width="2"
+                  viewBox="0 0 24 24">
+                  <path
+                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <div>
+                <p class="text-sm font-semibold text-slate-800 leading-snug">Email</p>
+                <a href="mailto:rahimovschool@gmail.com"
+                  class="text-sm text-brand-600 hover:text-brand-700 mt-0.5 block">rahimovschool@gmail.com</a>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-4">
+              <div class="w-11 h-11 bg-brand-50 rounded-xl flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5 text-brand-600" fill="none" stroke="currentColor" stroke-width="2"
+                  viewBox="0 0 24 24">
+                  <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <div>
+                <p class="text-sm font-semibold text-slate-800 leading-snug">Ish vaqti</p>
+                <p class="text-sm text-slate-500 leading-relaxed mt-0.5">Du–Shan: 8:00 – 18:00<br>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- O'ng: Forma -->
+        <div class="bg-white border border-slate-200 rounded-2xl shadow-sm p-8 reveal-right">
+          <h3 class="text-xl font-bold text-slate-900 mb-1">Qabulga ro'yxatdan o'ting</h3>
+          <p class="text-sm text-slate-500 mb-7">Ma'lumotlaringizni yozib qoldiring, siz bilan tezda aloqaga chiqib,
+            maktabimiz haqida yanada batafsil aytib beramiz.</p>
+
+          <form onsubmit="handleForm(event)" class="space-y-5">
+
+            <div class="grid sm:grid-cols-2 gap-4">
+              <div class="space-y-1.5">
+                <label class="block text-sm font-medium text-slate-700">Ismingiz <span
+                    class="text-red-500">*</span></label>
+                <input type="text" required placeholder="Abdulloh Karimov"
+                  class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-xl text-slate-900 text-sm placeholder:text-slate-400 focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 transition-all">
+              </div>
+              <div class="space-y-1.5">
+                <label class="block text-sm font-medium text-slate-700">Telefon <span
+                    class="text-red-500">*</span></label>
+                <input type="tel" required placeholder="+998 90 000 00 00"
+                  class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-xl text-slate-900 text-sm placeholder:text-slate-400 focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 transition-all">
+              </div>
+            </div>
+
+            <div class="grid sm:grid-cols-2 gap-4">
+              <div class="space-y-1.5">
+                <label class="block text-sm font-medium text-slate-700">Farzandingiz qaysi sinfga o'tadi?</label>
+                <select
+                  class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-xl text-slate-900 text-sm focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 transition-all">
+                  <option value="" disabled selected>Tanlang</option>
+                  <option>Maktabgacha</option>
+                  <option>1–4-sinf</option>
+                  <option>5–8-sinf</option>
+                  <option>9–11-sinf</option>
+                </select>
+              </div>
+
+              <div class="space-y-1.5">
+                <label class="block text-sm font-medium text-slate-700">Yashash tumani</label>
+                <select
+                  class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-xl text-slate-900 text-sm focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 transition-all">
+                  <option value="" disabled selected>Tumanni tanlang</option>
+                  <option value="bektemir">Bektemir tumani</option>
+                  <option value="chilonzor">Chilonzor tumani</option>
+                  <option value="mirobod">Mirobod tumani</option>
+                  <option value="mirzo-ulugbek">Mirzo Ulug'bek tumani</option>
+                  <option value="olmazor">Olmazor tumani</option>
+                  <option value="sergeli">Sergeli tumani</option>
+                  <option value="shayxontohur">Shayxontohur tumani</option>
+                  <option value="uchtepa">Uchtepa tumani</option>
+                  <option value="vobkent">Yakkasaroy tumani</option>
+                  <option value="yashnobod">Yashnobod tumani</option>
+                  <option value="yunusobod">Yunusobod tumani</option>
+                  <option value="yangihayot">Yangihayot tumani</option>
+                </select>
+              </div>
+
+            </div>
+
+
+
+            <!-- Success message (yashirin) -->
+            <div id="successMsg" class="hidden flex gap-3 p-4 bg-green-50 border border-green-200 rounded-xl">
+              <svg class="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor"
+                stroke-width="2.5" viewBox="0 0 24 24">
+                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <div>
+                <p class="text-sm font-semibold text-green-800">Ariza qabul qilindi!</p>
+                <p class="text-sm text-green-700 mt-0.5">30 daqiqa ichida menejerimiz siz bilan bog'lanadi.</p>
+              </div>
+            </div>
+
+            <button type="submit"
+              class="w-full inline-flex items-center justify-center gap-2.5 px-6 py-3.5 bg-brand-500 hover:bg-brand-600 text-white text-sm font-semibold rounded-xl transition-colors shadow-md shadow-brand-500/20 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2">
+              Ariza yuborish
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
+              </svg>
+            </button>
+
+            <p class="text-xs text-slate-400 text-center">
+              Arizangiz ma'lumotlari faqat maktab jamoasi tomonidan ko'riladi va uchinchi shaxslarga berilmaydi.
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════
+     MAQOLALAR (Articles preview)
+════════════════════════════════════════════════════ -->
+  <section id="articles" class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+
+      <div class="text-center mb-14 reveal">
+        <p class="text-sm font-semibold text-brand-600 uppercase tracking-widest mb-3">Bilim markazi</p>
+        <h2 class="text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight">Maqolalar</h2>
+        <p class="text-slate-500 mt-4 max-w-xl mx-auto">Ta'lim, rivojlanish va maktab hayoti haqida foydali materiallar.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6 mb-10">
+
+        <!-- Maqola 1 -->
+        <article
+          class="bg-white border border-slate-200 rounded-2xl overflow-hidden hover:border-brand-200 hover:shadow-lg transition-all duration-300 group reveal"
+          style="transition-delay:0ms">
+          <div
+            class="h-48 bg-gradient-to-br from-brand-50 to-slate-100 flex items-center justify-center relative overflow-hidden">
+            <svg class="w-16 h-16 text-brand-200" fill="none" stroke="currentColor" stroke-width="1"
+              viewBox="0 0 24 24">
+              <path
+                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+            </svg>
+          </div>
+          <div class="p-6">
+            <div class="flex items-center gap-3 mb-3">
+              <span
+                class="text-xs font-semibold text-brand-600 bg-brand-50 border border-brand-100 px-2.5 py-1 rounded-full">Kitobxonlik</span>
+              <span class="text-xs text-slate-400">5 daqiqa o'qish</span>
+            </div>
+            <h3
+              class="text-base font-bold text-slate-900 leading-snug mb-2 group-hover:text-brand-600 transition-colors">
+              Nega muntazam kitob o'qish o'quvchi natijalarini yaxshilaydi?</h3>
+            <p class="text-sm text-slate-500 leading-relaxed line-clamp-2">56% o'quvchilarimiz har hafta kamida bitta
+              kitob o'qiydi. Bu odatning ularning IELTS va SAT natijalariga ta'sirini tahlil qilamiz.</p>
+            <a href="articles.html"
+              class="inline-flex items-center gap-1.5 mt-4 text-sm font-semibold text-brand-600 hover:text-brand-700 transition-colors">
+              Batafsil o'qish
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <path d="M9 18l6-6-6-6" />
+              </svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- Maqola 2 -->
+        <article
+          class="bg-white border border-slate-200 rounded-2xl overflow-hidden hover:border-brand-200 hover:shadow-lg transition-all duration-300 group reveal"
+          style="transition-delay:100ms">
+          <div
+            class="h-48 bg-gradient-to-br from-slate-100 to-blue-50 flex items-center justify-center relative overflow-hidden">
+            <svg class="w-16 h-16 text-slate-200" fill="none" stroke="currentColor" stroke-width="1"
+              viewBox="0 0 24 24">
+              <path
+                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+            </svg>
+          </div>
+          <div class="p-6">
+            <div class="flex items-center gap-3 mb-3">
+              <span
+                class="text-xs font-semibold text-brand-600 bg-brand-50 border border-brand-100 px-2.5 py-1 rounded-full">SAT</span>
+              <span class="text-xs text-slate-400">7 daqiqa o'qish</span>
+            </div>
+            <h3
+              class="text-base font-bold text-slate-900 leading-snug mb-2 group-hover:text-brand-600 transition-colors">
+              SAT 1500+ olish: Rahimov School o'quvchilarining tajribasi</h3>
+            <p class="text-sm text-slate-500 leading-relaxed line-clamp-2">30 dan ortiq o'quvchimiz 1510–1540 ball oldi.
+              Ularning tayyorlanish uslubi, foydali resurslar va maslahatlar.</p>
+            <a href="articles.html"
+              class="inline-flex items-center gap-1.5 mt-4 text-sm font-semibold text-brand-600 hover:text-brand-700 transition-colors">
+              Batafsil o'qish
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <path d="M9 18l6-6-6-6" />
+              </svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- Maqola 3 -->
+        <article
+          class="bg-white border border-slate-200 rounded-2xl overflow-hidden hover:border-brand-200 hover:shadow-lg transition-all duration-300 group reveal"
+          style="transition-delay:200ms">
+          <div
+            class="h-48 bg-gradient-to-br from-green-50 to-brand-50 flex items-center justify-center relative overflow-hidden">
+            <svg class="w-16 h-16 text-brand-200" fill="none" stroke="currentColor" stroke-width="1"
+              viewBox="0 0 24 24">
+              <path
+                d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
+            </svg>
+          </div>
+          <div class="p-6">
+            <div class="flex items-center gap-3 mb-3">
+              <span
+                class="text-xs font-semibold text-brand-600 bg-brand-50 border border-brand-100 px-2.5 py-1 rounded-full">IELTS</span>
+              <span class="text-xs text-slate-400">6 daqiqa o'qish</span>
+            </div>
+            <h3
+              class="text-base font-bold text-slate-900 leading-snug mb-2 group-hover:text-brand-600 transition-colors">
+              IELTS 7.0–8.0 olish: qaysi ko'nikmalar eng muhim?</h3>
+            <p class="text-sm text-slate-500 leading-relaxed line-clamp-2">76 dan ortiq o'quvchimiz IELTS 7.0 va undan
+              yuqori ball oldi. Speaking, Writing va Reading bo'yicha samarali mashq usullari.</p>
+            <a href="articles.html"
+              class="inline-flex items-center gap-1.5 mt-4 text-sm font-semibold text-brand-600 hover:text-brand-700 transition-colors">
+              Batafsil o'qish
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <path d="M9 18l6-6-6-6" />
+              </svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- Maqola 4 -->
+        <article
+          class="bg-white border border-slate-200 rounded-2xl overflow-hidden hover:border-brand-200 hover:shadow-lg transition-all duration-300 group reveal"
+          style="transition-delay:300ms">
+          <div
+            class="h-48 bg-gradient-to-br from-slate-100 to-purple-50 flex items-center justify-center relative overflow-hidden">
+            <svg class="w-16 h-16 text-slate-200" fill="none" stroke="currentColor" stroke-width="1"
+              viewBox="0 0 24 24">
+              <path d="M12 14l9-5-9-5-9 5 9 5z" />
+              <path
+                d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+            </svg>
+          </div>
+          <div class="p-6">
+            <div class="flex items-center gap-3 mb-3">
+              <span
+                class="text-xs font-semibold text-brand-600 bg-brand-50 border border-brand-100 px-2.5 py-1 rounded-full">Stipendiya</span>
+              <span class="text-xs text-slate-400">4 daqiqa o'qish</span>
+            </div>
+            <h3
+              class="text-base font-bold text-slate-900 leading-snug mb-2 group-hover:text-brand-600 transition-colors">
+              Stipendiya dasturi: o'quvchi qanday bepul o'qiydi?</h3>
+            <p class="text-sm text-slate-500 leading-relaxed line-clamp-2">IELTS yoki SAT sertifikatiga ega bo'lgan
+              o'quvchilar deyarli bepul ta'lim oladi. Stipendiya tizimi qanday ishlashini tushuntirамiz.</p>
+            <a href="articles.html"
+              class="inline-flex items-center gap-1.5 mt-4 text-sm font-semibold text-brand-600 hover:text-brand-700 transition-colors">
+              Batafsil o'qish
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <path d="M9 18l6-6-6-6" />
+              </svg>
+            </a>
+          </div>
+        </article>
+
+      </div>
+
+      <div class="text-center reveal">
+        <a href="articles.html"
+          class="inline-flex items-center gap-2.5 px-7 py-3.5 bg-brand-500 hover:bg-brand-600 text-white text-sm font-semibold rounded-xl transition-colors shadow-md shadow-brand-500/25">
+          Barcha maqolalar
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path d="M9 18l6-6-6-6" />
+          </svg>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════
+     FAQ
+════════════════════════════════════════════════════ -->
+  <section id="faq" class="py-20 bg-[#F8FAFC]">
+    <div class="max-w-3xl mx-auto px-6 lg:px-8">
+
+      <div class="text-center mb-12 reveal">
+        <p class="text-xs font-semibold text-brand-600 uppercase tracking-[0.12em] mb-3">Savollar</p>
+        <h2 class="text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
+          Ko'p beriladigan savollar
+        </h2>
+      </div>
+
+      <div class="space-y-3 reveal" id="faqList">
+
+        <div class="faq-item bg-white border border-slate-200 rounded-2xl overflow-hidden">
+          <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-5 text-left">
+            <span class="text-sm font-semibold text-slate-800 leading-snug">Maktab nechanchi sinflarni qabul
+              qiladi?</span>
+            <svg class="faq-icon w-5 h-5 text-slate-400 transition-transform flex-shrink-0" fill="none"
+              stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div class="faq-body hidden px-5 pb-5">
+            <p class="text-sm text-slate-500 leading-[1.65]">Maktabimiz 1-sinfdan 11-sinfgacha o'quvchilarni qabul
+              qiladi. Har yili yangi o'quv yilida qabul bo'sh o'rinlar mavjud bo'lgan sinflarda amalga oshiriladi.</p>
+          </div>
+        </div>
+
+        <div class="faq-item bg-white border border-slate-200 rounded-2xl overflow-hidden">
+          <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-5 text-left">
+            <span class="text-sm font-semibold text-slate-800 leading-snug">Ta'lim qaysi tilda olib boriladi?</span>
+            <svg class="faq-icon w-5 h-5 text-slate-400 transition-transform flex-shrink-0" fill="none"
+              stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div class="faq-body hidden px-5 pb-5">
+            <p class="text-sm text-slate-500 leading-[1.65]">Asosiy ta'lim ingliz tilida olib boriladi. Boshlang'ich
+              sinfda matematika o'zbek va rus tilida ham o'tiladi. 5-sinfdan boshlab chuqurlashtirilgan fanlar faqat
+              o'zbek tilida o'tiladi.</p>
+          </div>
+        </div>
+
+        <div class="faq-item bg-white border border-slate-200 rounded-2xl overflow-hidden">
+          <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-5 text-left">
+            <span class="text-sm font-semibold text-slate-800 leading-snug">Maktabga imtihon bilan qabul
+              qilinadimi?</span>
+            <svg class="faq-icon w-5 h-5 text-slate-400 transition-transform flex-shrink-0" fill="none"
+              stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div class="faq-body hidden px-5 pb-5">
+            <p class="text-sm text-slate-500 leading-[1.65]">Ha, qabul 3 bosqichda o'tadi: belgilangan fanlardan
+              imtihon, psixolog bilan suhbat va hujjat topshirish. Imtihon farzandingizning aqliy salohiyatini aniqlash
+              maqsadida o'tkaziladi.</p>
+          </div>
+        </div>
+
+        <div class="faq-item bg-white border border-slate-200 rounded-2xl overflow-hidden">
+          <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-5 text-left">
+            <span class="text-sm font-semibold text-slate-800 leading-snug">Maktabda qaysi fanlar chuqurlashtirib
+              o'tiladi?</span>
+            <svg class="faq-icon w-5 h-5 text-slate-400 transition-transform flex-shrink-0" fill="none"
+              stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div class="faq-body hidden px-5 pb-5">
+            <p class="text-sm text-slate-500 leading-[1.65]">Ingliz tili, matematika, va asosiy fanlar
+              chuqurlashtiriladi. O'quvchilarimiz IELTS (7.0–8.0), SAT (1510–1540) va arab tili CEFR (B1–C1)
+              imtihonlarida yuqori natijalar ko'rsatmoqda.</p>
+          </div>
+        </div>
+
+        <div class="faq-item bg-white border border-slate-200 rounded-2xl overflow-hidden">
+          <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-5 text-left">
+            <span class="text-sm font-semibold text-slate-800 leading-snug">Dars kunlari va vaqtlari qanday
+              tashkillangan?</span>
+            <svg class="faq-icon w-5 h-5 text-slate-400 transition-transform flex-shrink-0" fill="none"
+              stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div class="faq-body hidden px-5 pb-5">
+            <p class="text-sm text-slate-500 leading-[1.65]">Darslar dushanba–shanba kunlari o'tkaziladi. Dars jadvali
+              sinf darajasiga qarab farq qiladi. Batafsil ma'lumot uchun menejerimiz bilan bog'laning.</p>
+          </div>
+        </div>
+
+        <div class="faq-item bg-white border border-slate-200 rounded-2xl overflow-hidden">
+          <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-5 text-left">
+            <span class="text-sm font-semibold text-slate-800 leading-snug">Qanday sport to'garaklari bor?</span>
+            <svg class="faq-icon w-5 h-5 text-slate-400 transition-transform flex-shrink-0" fill="none"
+              stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div class="faq-body hidden px-5 pb-5">
+            <p class="text-sm text-slate-500 leading-[1.65]">Maktabimizda Shaxmat, Taekwondo, Futbol, Volleybol va Stol
+              tennis to'garaklari mavjud. Bundan tashqari madaniy sayohatlar va ekskursiyalar ham uyushtiriladi.</p>
+          </div>
+        </div>
+
+        <div class="faq-item bg-white border border-slate-200 rounded-2xl overflow-hidden">
+          <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-5 text-left">
+            <span class="text-sm font-semibold text-slate-800 leading-snug">Maktab qayerda joylashgan?</span>
+            <svg class="faq-icon w-5 h-5 text-slate-400 transition-transform flex-shrink-0" fill="none"
+              stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div class="faq-body hidden px-5 pb-5">
+            <p class="text-sm text-slate-500 leading-[1.65]">Maktabimizning 3 ta filiali mavjud:
+              <strong>1-filial</strong> — Mirzo Ulug'bek tumani, Yalang'ach 2 (Mo'ljal: Lokomotiv Park);
+              <strong>2-filial</strong> — Shayxontohur tumani, Ibn Sino mavzesi 1 (Mo'ljal: Taxtabozori ro'parasi);
+              <strong>3-filial</strong> — Farg'ona shahri filiali.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item bg-white border border-slate-200 rounded-2xl overflow-hidden">
+          <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-5 text-left">
+            <span class="text-sm font-semibold text-slate-800 leading-snug">O'quvchilar ta'limga qanday
+              qiziqtiriladi?</span>
+            <svg class="faq-icon w-5 h-5 text-slate-400 transition-transform flex-shrink-0" fill="none"
+              stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div class="faq-body hidden px-5 pb-5">
+            <p class="text-sm text-slate-500 leading-[1.65]">Har oylik moddiy qo'llab-quvvatlov (stipendiya) dasturi
+              mavjud. IELTS va SAT sertifikatiga ega o'quvchilar deyarli bepulga o'qishadi. Stipendiya
+              to'g'ridan-to'g'ri o'quvchining kartasiga o'tkaziladi.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FILIALLARIMIZ — REDESIGNED -->
+  <section id="branches" class="py-20 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+
+      <!-- Header -->
+      <div class="text-center mb-14 reveal">
+        <p class="text-sm font-semibold text-brand-600 uppercase tracking-widest mb-3">Joylashuv</p>
+        <h2 class="text-4xl font-extrabold text-slate-900 tracking-tight mb-4">Filiallarimiz</h2>
+        <p class="text-base text-slate-500 max-w-sm mx-auto leading-relaxed">Toshkent shahridagi 2 ta filialimizdan
+          biriga yaqiningizni tanlang.</p>
+      </div>
+
+      <!-- Branch Cards -->
+      <div class="grid md:grid-cols-2 gap-8 mb-10">
+
+        <!-- CARD 1: Lokomotiv -->
+        <div
+          class="branch-card group bg-white rounded-2xl overflow-hidden border border-slate-200 hover:border-brand-300 hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 cursor-pointer reveal-scale"
+          data-branch="0" style="transition-delay:0ms">
+          <div class="relative h-72 overflow-hidden">
+            <iframe src="https://yandex.uz/map-widget/v1/?ll=69.3118,41.3311&z=16&lang=uz_UZ&l=map" width="100%"
+              height="100%" frameborder="0" allowfullscreen loading="lazy"
+              class="absolute inset-0 w-full h-full"></iframe>
+            <!-- School pin overlay — centered on coordinates -->
+            <div class="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
+              <div class="flex flex-col items-center" style="transform:translateY(-30px)">
+                <div class="w-13 h-13 rounded-full border-[3px] border-white flex items-center justify-center"
+                  style="width:52px;height:52px;background:#07CA68;box-shadow:0 6px 20px rgba(7,202,104,0.5),0 2px 6px rgba(0,0,0,0.18)">
+                  <svg width="26" height="26" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round"
+                    stroke-linejoin="round" viewBox="0 0 24 24">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+                    <polyline points="9 22 9 12 15 12 15 22" />
+                  </svg>
+                </div>
+                <div
+                  style="width:0;height:0;border-left:10px solid transparent;border-right:10px solid transparent;border-top:13px solid #07CA68;margin-top:-1px;filter:drop-shadow(0 3px 3px rgba(7,202,104,0.35))">
+                </div>
+                <div class="mt-2 bg-white rounded-lg px-2.5 py-1.5 border border-slate-100"
+                  style="box-shadow:0 4px 12px rgba(0,0,0,0.12)">
+                  <p class="text-[11px] font-bold text-slate-800 leading-none text-center">Rahimov School</p>
+                  <p class="text-[9px] text-slate-400 text-center mt-0.5">41.3311° N, 69.3118° E</p>
+                </div>
+              </div>
+            </div>
+            <div
+              class="absolute top-0 inset-x-0 h-0.5 bg-gradient-to-r from-brand-500 to-brand-400 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300 pointer-events-none">
+            </div>
+          </div>
+          <div class="p-5">
+            <h3
+              class="text-base font-extrabold text-slate-900 group-hover:text-brand-600 transition-colors duration-200 leading-snug mb-1">
+              Lokomotiv Filiali</h3>
+            <div class="flex items-start gap-1.5 mb-3.5">
+              <svg class="w-3.5 h-3.5 text-slate-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor"
+                stroke-width="2" viewBox="0 0 24 24">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                <circle cx="12" cy="10" r="3" />
+              </svg>
+              <p class="text-xs text-slate-500 leading-relaxed">Mirzo Ulug'bek tumani, Yalang'ach 2<br><span
+                  class="text-slate-400">Lokomotiv Park yonida</span></p>
+            </div>
+            <div class="flex flex-wrap gap-1.5 mb-4">
+              <span
+                class="inline-flex items-center gap-1 text-[10px] font-semibold text-brand-700 bg-brand-50 border border-brand-100 rounded-full px-2.5 py-1">
+                <svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                  <path d="M9 12l2 2 4-4" />
+                  <circle cx="12" cy="12" r="10" />
+                </svg>
+                SAT Markazi
+              </span>
+              <span
+                class="text-[10px] font-semibold text-slate-600 bg-slate-100 border border-slate-200 rounded-full px-2.5 py-1">Sport
+                maydon</span>
+              <span
+                class="text-[10px] font-semibold text-slate-600 bg-slate-100 border border-slate-200 rounded-full px-2.5 py-1">Keng
+                hudud</span>
+            </div>
+            <div class="flex items-center justify-between pt-3.5 border-t border-slate-100">
+              <a href="tel:+998781130005"
+                class="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-600 hover:text-brand-700 transition-colors">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path
+                    d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.02 1.18a2 2 0 012-2.18h3a2 2 0 012 1.72c.13 1 .36 1.98.7 2.91a2 2 0 01-.45 2.11L6.91 6.5a16 16 0 006.59 6.59l.77-.77a2 2 0 012.11-.45c.93.34 1.91.57 2.91.7A2 2 0 0122 16.92z" />
+                </svg>
+                78 113 0005
+              </a>
+              <a href="https://yandex.uz/maps/?text=Toshkent+Mirzo+Ulugbek+Yalangach+2" target="_blank"
+                class="inline-flex items-center gap-1 text-xs font-semibold text-slate-400 hover:text-brand-600 transition-colors">
+                Yandex Maps
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                  <path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 2: Ibn Sino -->
+        <div
+          class="branch-card group bg-white rounded-2xl overflow-hidden border border-slate-200 hover:border-brand-300 hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 cursor-pointer reveal-scale"
+          data-branch="1" style="transition-delay:120ms">
+          <div class="relative h-72 overflow-hidden">
+            <iframe src="https://yandex.uz/map-widget/v1/?ll=69.2197,41.2994&z=16&lang=uz_UZ&l=map" width="100%"
+              height="100%" frameborder="0" allowfullscreen loading="lazy"
+              class="absolute inset-0 w-full h-full"></iframe>
+            <!-- School pin overlay — centered on coordinates -->
+            <div class="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
+              <div class="flex flex-col items-center" style="transform:translateY(-30px)">
+                <div class="rounded-full border-[3px] border-white flex items-center justify-center"
+                  style="width:52px;height:52px;background:#07CA68;box-shadow:0 6px 20px rgba(7,202,104,0.5),0 2px 6px rgba(0,0,0,0.18)">
+                  <svg width="26" height="26" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round"
+                    stroke-linejoin="round" viewBox="0 0 24 24">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+                    <polyline points="9 22 9 12 15 12 15 22" />
+                  </svg>
+                </div>
+                <div
+                  style="width:0;height:0;border-left:10px solid transparent;border-right:10px solid transparent;border-top:13px solid #07CA68;margin-top:-1px;filter:drop-shadow(0 3px 3px rgba(7,202,104,0.35))">
+                </div>
+                <div class="mt-2 bg-white rounded-lg px-2.5 py-1.5 border border-slate-100"
+                  style="box-shadow:0 4px 12px rgba(0,0,0,0.12)">
+                  <p class="text-[11px] font-bold text-slate-800 leading-none text-center">Rahimov School</p>
+                  <p class="text-[9px] text-slate-400 text-center mt-0.5">41.2994° N, 69.2197° E</p>
+                </div>
+              </div>
+            </div>
+            <div
+              class="absolute top-0 inset-x-0 h-0.5 bg-gradient-to-r from-brand-500 to-brand-400 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300 pointer-events-none">
+            </div>
+          </div>
+          <div class="p-5">
+            <h3
+              class="text-base font-extrabold text-slate-900 group-hover:text-brand-600 transition-colors duration-200 leading-snug mb-1">
+              Ibn Sino Filiali</h3>
+            <div class="flex items-start gap-1.5 mb-3.5">
+              <svg class="w-3.5 h-3.5 text-slate-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor"
+                stroke-width="2" viewBox="0 0 24 24">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                <circle cx="12" cy="10" r="3" />
+              </svg>
+              <p class="text-xs text-slate-500 leading-relaxed">Shayxontohur tumani, Ibn Sino 1<br><span
+                  class="text-slate-400">Taxtabozori ro'parasi</span></p>
+            </div>
+            <div class="flex flex-wrap gap-1.5 mb-4">
+              <span
+                class="inline-flex items-center gap-1 text-[10px] font-semibold text-brand-700 bg-brand-50 border border-brand-100 rounded-full px-2.5 py-1">
+                <svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                  <path d="M9 12l2 2 4-4" />
+                  <circle cx="12" cy="12" r="10" />
+                </svg>
+                IELTS Markazi
+              </span>
+              <span
+                class="text-[10px] font-semibold text-slate-600 bg-slate-100 border border-slate-200 rounded-full px-2.5 py-1">Estetik
+                kampus</span>
+              <span
+                class="text-[10px] font-semibold text-slate-600 bg-slate-100 border border-slate-200 rounded-full px-2.5 py-1">Qulay
+                joylashuv</span>
+            </div>
+            <div class="flex items-center justify-between pt-3.5 border-t border-slate-100">
+              <a href="tel:+998781130005"
+                class="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-600 hover:text-brand-700 transition-colors">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path
+                    d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.02 1.18a2 2 0 012-2.18h3a2 2 0 012 1.72c.13 1 .36 1.98.7 2.91a2 2 0 01-.45 2.11L6.91 6.5a16 16 0 006.59 6.59l.77-.77a2 2 0 012.11-.45c.93.34 1.91.57 2.91.7A2 2 0 0122 16.92z" />
+                </svg>
+                78 113 0005
+              </a>
+              <a href="https://yandex.uz/maps/?text=Toshkent+Shayxontohur+Ibn+Sino" target="_blank"
+                class="inline-flex items-center gap-1 text-xs font-semibold text-slate-400 hover:text-brand-600 transition-colors">
+                Yandex Maps
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                  <path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════════════ -->
+  <footer class="bg-slate-900 text-slate-400">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 py-14">
+      <div class="grid md:grid-cols-4 gap-10 pb-10 border-b border-slate-800">
+
+        <!-- Logo + tavsif -->
+        <div class="md:col-span-2">
+          <div class="mb-4">
+            <img src="./assets/img/noroot.png" alt="Rahimov School Logo"
+              class="h-9 w-auto object-contain brightness-0 invert">
+          </div>
+          <p class="text-sm leading-relaxed max-w-xs">
+            Zamonaviy o'qitish texnikasi va innovatsion yondashuv asosida farzandingizning psixologik, aqliy va jismoniy
+            rivojlanishini ta'minlaymiz.
+          </p>
+          <div class="flex gap-3 mt-5">
+            <!-- Facebook -->
+            <a href="https://facebook.com/rahimovschool"
+              class="w-9 h-9 bg-slate-800 hover:bg-brand-500 rounded-lg flex items-center justify-center transition-colors"
+              title="Facebook">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+              </svg>
+            </a>
+            <!-- Instagram -->
+            <a href="https://instagram.com/rahimovschool"
+              class="w-9 h-9 bg-slate-800 hover:bg-brand-500 rounded-lg flex items-center justify-center transition-colors"
+              title="Instagram">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+              </svg>
+            </a>
+            <!-- Telegram -->
+            <a href="https://t.me/rahimovschool"
+              class="w-9 h-9 bg-slate-800 hover:bg-brand-500 rounded-lg flex items-center justify-center transition-colors"
+              title="Telegram">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Maktab -->
+        <div>
+          <p class="text-sm font-semibold text-white mb-4">Maktab</p>
+          <ul class="space-y-2.5">
+            <li><a href="#about" class="text-sm hover:text-brand-400 transition-colors">Haqimizda</a></li>
+            <li><a href="team.html" class="text-sm hover:text-brand-400 transition-colors">O'qituvchilar</a></li>
+            <li><a href="articles.html" class="text-sm hover:text-brand-400 transition-colors">Maqolalar</a></li>
+            <li><a href="#gallery" class="text-sm hover:text-brand-400 transition-colors">Galereya</a></li>
+            <li><a href="contact.html" class="text-sm hover:text-brand-400 transition-colors">Bog'lanish</a></li>
+          </ul>
+        </div>
+
+        <!-- Aloqa -->
+        <div>
+          <p class="text-sm font-semibold text-white mb-4">Aloqa</p>
+          <ul class="space-y-3.5">
+            <li class="flex items-start gap-2.5">
+              <svg class="w-4 h-4 text-brand-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor"
+                stroke-width="2" viewBox="0 0 24 24">
+                <path
+                  d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.02 1.18a2 2 0 012-2.18h3a2 2 0 012 1.72c.13 1 .36 1.98.7 2.91a2 2 0 01-.45 2.11L6.91 6.5a16 16 0 006.59 6.59l.77-.77a2 2 0 012.11-.45c.93.34 1.91.57 2.91.7A2 2 0 0122 16.92z" />
+              </svg>
+              <a href="tel:+998781130005" class="text-sm hover:text-brand-400 transition-colors">+998 78 113 0005</a>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <svg class="w-4 h-4 text-brand-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor"
+                stroke-width="2" viewBox="0 0 24 24">
+                <path
+                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+              <a href="mailto:rahimovschool@gmail.com"
+                class="text-sm hover:text-brand-400 transition-colors">rahimovschool@gmail.com</a>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <svg class="w-4 h-4 text-brand-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor"
+                stroke-width="2" viewBox="0 0 24 24">
+                <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                <path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+              <span class="text-sm leading-snug">Toshkent (2 filial)<br>Farg'ona shahri</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <svg class="w-4 h-4 text-brand-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor"
+                stroke-width="2" viewBox="0 0 24 24">
+                <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span class="text-sm leading-snug">Du–Shan: 8:00–18:00<br>Shanba: 9:00–14:00</span>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="flex flex-col sm:flex-row justify-between items-center gap-4 pt-8">
+        <p class="text-xs text-slate-600">© 2026 Rahimov School. Barcha huquqlar himoyalangan. | <a
+            href="mailto:rahimovschool@gmail.com" class="hover:text-brand-400">rahimovschool@gmail.com</a></p>
+        <div class="flex gap-5">
+          <a href="#" class="text-xs text-slate-600 hover:text-brand-400 transition-colors">Maxfiylik siyosati</a>
+          <a href="#" class="text-xs text-slate-600 hover:text-brand-400 transition-colors">Foydalanish shartlari</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- ═══════════════════════════════════════════════════
+     JAVASCRIPT
+════════════════════════════════════════════════════ -->
+  <script>
+    // ── Loading Screen ────────────────────────────────────────────
+    const loader = document.getElementById('loader');
+    window.addEventListener('load', () => {
+      setTimeout(() => loader.classList.add('hide'), 400);
+    });
+    // Fallback — agar load eventi kechiksa
+    setTimeout(() => loader.classList.add('hide'), 3000);
+
+    // ── Scroll Reveal (IntersectionObserver) ──────────────────────
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale')
+      .forEach(el => revealObserver.observe(el));
+
+    // ── Progress Bar Animation ─────────────────────────────────────
+    const progressObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.querySelectorAll('.progress-bar').forEach(bar => {
+            const target = bar.dataset.width;
+            setTimeout(() => { bar.style.width = target; }, 100);
+          });
+          progressObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+
+    document.querySelectorAll('.progress-bar').forEach(bar => {
+      const container = bar.closest('.reveal');
+      if (container) progressObserver.observe(container);
+    });
+
+    // ── Parallax ──────────────────────────────────────────────────
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          const scrollY = window.scrollY;
+          document.querySelectorAll('[data-parallax]').forEach(el => {
+            const speed = parseFloat(el.dataset.parallax) || 0.3;
+            el.style.transform = `translateY(${scrollY * speed}px)`;
+          });
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+
+    // ── Navbar scroll effect ───────────────────────────────────────
+    window.addEventListener('scroll', () => {
+      const navbar = document.getElementById('navbar');
+      if (window.scrollY > 50) {
+        navbar.classList.add('shadow-md');
+      } else {
+        navbar.classList.remove('shadow-md');
+      }
+    });
+
+    // Mobile menu toggle
+    const mobileBtn = document.getElementById('mobileBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    mobileBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    // Smooth scroll for nav links
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+      link.addEventListener('click', e => {
+        const target = document.querySelector(link.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          mobileMenu.classList.add('hidden');
+          const offset = 80;
+          const top = target.getBoundingClientRect().top + window.scrollY - offset;
+          window.scrollTo({ top, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // FAQ accordion
+    function toggleFaq(btn) {
+      const item = btn.closest('.faq-item');
+      const body = item.querySelector('.faq-body');
+      const icon = btn.querySelector('.faq-icon');
+      const isOpen = !body.classList.contains('hidden');
+
+      // Close all
+      document.querySelectorAll('.faq-item').forEach(i => {
+        i.querySelector('.faq-body').classList.add('hidden');
+        i.querySelector('.faq-icon').style.transform = 'rotate(0deg)';
+        i.querySelector('button').closest('.faq-item').classList.remove('border-brand-200');
+      });
+
+      if (!isOpen) {
+        body.classList.remove('hidden');
+        icon.style.transform = 'rotate(180deg)';
+        item.classList.add('border-brand-200');
+      }
+    }
+
+    // ── Video Ticker — kartalarni ikki marta ko'rsatish (seamless loop) ──
+    (function () {
+      const ticker = document.getElementById('galleryTicker');
+      if (ticker) ticker.innerHTML += ticker.innerHTML;
+    })();
+
+    function openVideo(card) {
+      const ytid = card.dataset.ytid;
+      document.getElementById('videoIframe').src =
+        'https://www.youtube.com/embed/' + ytid + '?autoplay=1&rel=0&playsinline=1';
+      const modal = document.getElementById('videoModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+    function closeVideo(e) {
+      const modal = document.getElementById('videoModal');
+      const isBackdrop = e && e.target === modal;
+      const isCloseBtn = e && e.target.closest('#videoCloseBtn');
+      if (!e || isBackdrop || isCloseBtn) {
+        document.getElementById('videoIframe').src = '';
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+      }
+    }
+
+    // ── Lang Switcher ─────────────────────────────────────────────
+    function setLang(lang) {
+      const labels = { uz: 'Uz', ru: 'Ru', en: 'EN' };
+      const current = document.getElementById('lang-current');
+      if (current) current.textContent = labels[lang] || lang;
+      document.querySelectorAll('.lang-option').forEach((btn, i) => {
+        const isActive = ['uz', 'ru', 'en'][i] === lang;
+        btn.classList.toggle('text-brand-600', isActive);
+        btn.classList.toggle('bg-brand-50', isActive);
+        btn.classList.toggle('text-slate-500', !isActive);
+      });
+      const panel = document.getElementById('lang-panel');
+      if (panel) panel.classList.add('hidden');
+      const chevron = document.getElementById('lang-chevron');
+      if (chevron) chevron.style.transform = '';
+    }
+
+    // ── Count-Up Animation ────────────────────────────────────────
+    const countObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target;
+        const end = parseInt(el.dataset.count, 10);
+        const suffix = el.dataset.suffix || '';
+        const duration = 1500;
+        const steps = 60;
+        const increment = end / steps;
+        let current = 0;
+        let frame = 0;
+        const timer = setInterval(() => {
+          frame++;
+          current = Math.min(Math.round(increment * frame), end);
+          el.textContent = current + suffix;
+          if (current >= end) clearInterval(timer);
+        }, duration / steps);
+        countObserver.unobserve(el);
+      });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('[data-count]').forEach(el => countObserver.observe(el));
+
+    // ── Nav Dropdown ──────────────────────────────────────────────
+    function toggleDropdown(id) {
+      const panel = document.getElementById(id + '-panel');
+      const chevron = document.getElementById(id + '-chevron');
+      const isOpen = !panel.classList.contains('hidden');
+      document.querySelectorAll('.dd-panel').forEach(p => p.classList.add('hidden'));
+      document.querySelectorAll('[id$="-chevron"]').forEach(c => c.style.transform = '');
+      if (!isOpen) {
+        panel.classList.remove('hidden');
+        if (chevron) chevron.style.transform = 'rotate(180deg)';
+      }
+    }
+    document.addEventListener('click', e => {
+      if (!e.target.closest('.nav-dropdown')) {
+        document.querySelectorAll('.dd-panel').forEach(p => p.classList.add('hidden'));
+        document.querySelectorAll('[id$="-chevron"]').forEach(c => c.style.transform = '');
+      }
+    });
+
+    // ── Mobile Submenu ─────────────────────────────────────────────
+    function toggleMobileDD(id) {
+      const panel = document.getElementById(id);
+      const icon = document.getElementById(id + '-icon');
+      panel.classList.toggle('hidden');
+      if (icon) icon.style.transform = panel.classList.contains('hidden') ? '' : 'rotate(180deg)';
+    }
+
+    // Form yuborish
+    function handleForm(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('button[type="submit"]');
+      btn.textContent = 'Yuborilmoqda...';
+      btn.disabled = true;
+      setTimeout(() => {
+        document.getElementById('successMsg').classList.remove('hidden');
+        btn.classList.add('hidden');
+      }, 1000);
+    }
+
+    // ── Accessibility Toolbar ─────────────────────────────────────
+    (function () {
+      const FONT_STEP = 0.1;
+      const FONT_MIN  = 0.8;   // 80%
+      const FONT_MAX  = 1.5;   // 150%
+
+      // Restore state from localStorage
+      const state = {
+        fontScale: parseFloat(localStorage.getItem('a11y-font') || '1'),
+        contrast:  localStorage.getItem('a11y-contrast') === '1',
+        mono:      localStorage.getItem('a11y-mono')     === '1',
+        links:     localStorage.getItem('a11y-links')    === '1',
+        readable:  localStorage.getItem('a11y-readable') === '1',
+        panelOpen: false,
+      };
+
+      // DOM refs
+      const toggleBtn  = document.getElementById('a11y-toggle');
+      const panel      = document.getElementById('a11y-panel');
+      const closeBtn   = document.getElementById('a11y-close');
+      const fontDecBtn = document.getElementById('a11y-font-decrease');
+      const fontIncBtn = document.getElementById('a11y-font-increase');
+      const fontLabel  = document.getElementById('a11y-font-label');
+      const contrastBtn  = document.getElementById('a11y-contrast');
+      const monoBtn      = document.getElementById('a11y-mono');
+      const linksBtn     = document.getElementById('a11y-links');
+      const readableBtn  = document.getElementById('a11y-readable');
+      const resetBtn     = document.getElementById('a11y-reset');
+
+      // ── Helpers ──────────────────────────────────────────────────
+      function setBodyClass(cls, on) {
+        document.body.classList[on ? 'add' : 'remove'](cls);
+      }
+
+      // Sync a toggle button's visual state using inline styles
+      // (avoids dependency on dynamically-generated Tailwind classes)
+      function syncBtn(btn, active) {
+        btn.setAttribute('aria-checked', active ? 'true' : 'false');
+        const icon     = btn.querySelector('.a11y-opt-icon');
+        const dotOuter = btn.querySelector('.a11y-opt-dot');
+        const dotInner = dotOuter && dotOuter.querySelector('span');
+        const svg      = icon && icon.querySelector('svg');
+
+        if (active) {
+          btn.style.borderColor     = '#07CA68';
+          btn.style.backgroundColor = '#f0fdf4';
+          if (icon)     { icon.style.backgroundColor = '#07CA68'; icon.style.borderColor = 'transparent'; }
+          if (svg)      { svg.style.color = '#fff'; }
+          if (dotOuter) { dotOuter.style.borderColor = '#07CA68'; }
+          if (dotInner) { dotInner.style.backgroundColor = '#07CA68'; }
+        } else {
+          btn.style.borderColor     = '';
+          btn.style.backgroundColor = '';
+          if (icon)     { icon.style.backgroundColor = ''; icon.style.borderColor = ''; }
+          if (svg)      { svg.style.color = ''; }
+          if (dotOuter) { dotOuter.style.borderColor = ''; }
+          if (dotInner) { dotInner.style.backgroundColor = ''; }
+        }
+      }
+
+      // ── Font scaling ─────────────────────────────────────────────
+      function applyFontScale() {
+        document.documentElement.style.setProperty('--a11y-font-scale', state.fontScale);
+        fontLabel.textContent = Math.round(state.fontScale * 100) + '%';
+        // Disable buttons at limits
+        fontDecBtn.disabled      = state.fontScale <= FONT_MIN;
+        fontIncBtn.disabled      = state.fontScale >= FONT_MAX;
+        fontDecBtn.style.opacity = state.fontScale <= FONT_MIN ? '0.38' : '';
+        fontIncBtn.style.opacity = state.fontScale >= FONT_MAX ? '0.38' : '';
+      }
+
+      function changeFont(delta) {
+        const next       = Math.round((state.fontScale + delta) * 10) / 10;
+        state.fontScale  = Math.min(FONT_MAX, Math.max(FONT_MIN, next));
+        applyFontScale();
+        localStorage.setItem('a11y-font', state.fontScale);
+      }
+
+      // ── Toggle a visual feature ──────────────────────────────────
+      function toggleFeature(stateKey, cls, btn, storageKey) {
+        state[stateKey] = !state[stateKey];
+        setBodyClass(cls, state[stateKey]);
+        syncBtn(btn, state[stateKey]);
+        localStorage.setItem(storageKey, state[stateKey] ? '1' : '0');
+      }
+
+      // ── Apply full state (used on init and reset) ─────────────────
+      function applyAll() {
+        applyFontScale();
+        setBodyClass('hc-mode',        state.contrast);
+        setBodyClass('mono-mode',      state.mono);
+        setBodyClass('highlight-links', state.links);
+        setBodyClass('readable-font',  state.readable);
+        syncBtn(contrastBtn, state.contrast);
+        syncBtn(monoBtn,     state.mono);
+        syncBtn(linksBtn,    state.links);
+        syncBtn(readableBtn, state.readable);
+      }
+
+      // ── Reset all ────────────────────────────────────────────────
+      function resetAll() {
+        state.fontScale = 1;
+        state.contrast  = false;
+        state.mono      = false;
+        state.links     = false;
+        state.readable  = false;
+        ['a11y-font', 'a11y-contrast', 'a11y-mono', 'a11y-links', 'a11y-readable']
+          .forEach(k => localStorage.removeItem(k));
+        applyAll();
+      }
+
+      // ── Panel open / close ───────────────────────────────────────
+      function openPanel() {
+        state.panelOpen = true;
+        panel.classList.add('open');
+        panel.setAttribute('aria-hidden', 'false');
+        toggleBtn.setAttribute('aria-expanded', 'true');
+        // Move focus to first interactive element
+        setTimeout(() => fontDecBtn.focus(), 60);
+      }
+
+      function closePanel(returnFocus) {
+        state.panelOpen = false;
+        panel.classList.remove('open');
+        panel.setAttribute('aria-hidden', 'true');
+        toggleBtn.setAttribute('aria-expanded', 'false');
+        if (returnFocus) toggleBtn.focus();
+      }
+
+      // ── Keyboard navigation ──────────────────────────────────────
+      document.addEventListener('keydown', function (e) {
+        if (!state.panelOpen) return;
+        const focusable = panel.querySelectorAll(
+          'button:not([disabled]), [href], input, select, [tabindex]:not([tabindex="-1"])'
+        );
+        const first = focusable[0];
+        const last  = focusable[focusable.length - 1];
+
+        if (e.key === 'Tab') {
+          if (e.shiftKey && document.activeElement === first) {
+            e.preventDefault();
+            last.focus();
+          } else if (!e.shiftKey && document.activeElement === last) {
+            e.preventDefault();
+            first.focus();
+          }
+        }
+        if (e.key === 'Escape') closePanel(true);
+      });
+
+      // Close when clicking outside the toolbar
+      document.addEventListener('click', function (e) {
+        if (state.panelOpen && !e.target.closest('#a11y-toolbar')) closePanel(false);
+      });
+
+      // ── Wire up events ───────────────────────────────────────────
+      toggleBtn.addEventListener('click', function () {
+        if (state.panelOpen) closePanel(false); else openPanel();
+      });
+      closeBtn.addEventListener('click', function () { closePanel(true); });
+
+      fontDecBtn.addEventListener('click', function () { changeFont(-FONT_STEP); });
+      fontIncBtn.addEventListener('click', function () { changeFont(FONT_STEP); });
+
+      contrastBtn.addEventListener('click',  function () { toggleFeature('contrast',  'hc-mode',         contrastBtn,  'a11y-contrast'); });
+      monoBtn.addEventListener('click',      function () { toggleFeature('mono',      'mono-mode',       monoBtn,      'a11y-mono'); });
+      linksBtn.addEventListener('click',     function () { toggleFeature('links',     'highlight-links', linksBtn,     'a11y-links'); });
+      readableBtn.addEventListener('click',  function () { toggleFeature('readable',  'readable-font',   readableBtn,  'a11y-readable'); });
+      resetBtn.addEventListener('click',     resetAll);
+
+      // ── Initialize ───────────────────────────────────────────────
+      applyAll();
+    })();
+  </script>
+
+</body>
+
+</html>
